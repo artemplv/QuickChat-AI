@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messenger — Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="sign-view">
+    <form id="signInForm" class="form sign-form">
+      <h1 class="sign-form__heading sign-in-form__heading">Вход</h1>
+
+      <div class="form-fields-wrapper sign-in-form-fields-wrapper">
+        <div class="form-field">
+          <div class="form-field__control">
+            <input id="login" name="login" type="text" class="form-field__input" placeholder=" " required />
+            <label for="login" class="form-field__label">Логин</label>
+            <div class="form-field__bar"></div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="form-field__control">
+            <input id="password" name="password" type="password" class="form-field__input" placeholder=" " required />
+            <label for="password" class="form-field__label">Пароль</label>
+            <div class="form-field__bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="form__main-button">
+        Авторизоваться
+      </button>
+
+      <button type="button" class="form__additional-button">
+        Нет аккаунта?
+      </button>
+    </form>
+  </div>
+
+  <script>
+    signInForm.onsubmit = (e) => {
+      e.preventDefault();
+      const formData = new FormData(signInForm);
+      const formFields = {};
+
+      for (let [key, value] of formData) {
+        formFields[key] = value;
+      }
+
+      console.log(formFields);
+    };
+  </script>
+</body>
+
+</html>

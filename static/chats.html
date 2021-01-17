@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messenger — Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="assets/js/makeChatsList.js"></script>
+</head>
+
+<body>
+  <div class="chats-view">
+    <div class="chats">
+      <div class="chats_header">
+        <button class="profile-button">
+          <div class="button-inner-container">
+            Профиль
+            <img src="assets/images/arrow-right.svg" alt="arrow right" class="button-arrow-right-image" />
+          </div>
+        </button>
+
+        <form id="searchForm" class="search-form">
+          <input name="search" type="text" class="search__input" placeholder="Поиск" />
+        </form>
+      </div>
+
+      <nav class="chats-container">
+      </nav>
+    </div>
+
+    <div class="chat-feed-empty">
+      <p>Выберите чат чтобы отправить сообщение</p>
+    </div>
+
+  </div>
+
+  <script>
+        /**
+         * @typedef {Chat}
+         * @prop {string} title
+         * @prop {string} lastMessageTime
+         * @prop {string} lastMessageText
+         * @prop {number} unreadMessagesCount
+         * @prop {bool} isLastMessageFromUser
+         */
+         const chats = [
+           {
+             title: 'Андрей',
+             lastMessageTime: '10:49',
+             lastMessageText: 'Изображение',
+             unreadMessagesCount: 2,
+           },
+           {
+             title: 'Киноклуб',
+             lastMessageTime: '12:00',
+             lastMessageText: 'стикер',
+             isLastMessageFromUser: true,
+           },
+           {
+             title: 'Илья',
+             lastMessageTime: '15:12',
+             lastMessageText: 'Друзья, у меня для вас особенный выпуск новостей!...',
+             unreadMessagesCount: 4,
+           },
+           {
+             title: 'Вадим',
+             lastMessageTime: 'Пт',
+             lastMessageText: 'Круто!',
+             isLastMessageFromUser: true,
+           },
+           {
+             title: 'тет-а-теты',
+             lastMessageTime: 'Ср',
+             lastMessageText: 'И Human Interface Guidelines и Material Design рекомендуют...',
+           },
+           {
+             title: '1, 2, 3',
+             lastMessageTime: 'Пн',
+             lastMessageText: 'Миллионы россиян ежедневно проводят десятки часов свое...',
+           },
+           {
+             title: 'Design Destroyer',
+             lastMessageTime: 'Пн',
+             lastMessageText: 'В 2008 году художник Jon Rafman  начал собирать...',
+           },
+           {
+             title: 'Day.',
+             lastMessageTime: '1 Мая 2020',
+             lastMessageText: 'Так увлёкся работой по курсу, что совсем забыл его анонсир...',
+           },
+           {
+             title: 'Стас Рогозин',
+             lastMessageTime: '12 Апр 2020',
+             lastMessageText: 'Можно или сегодня или завтра вечером.',
+           },
+         ];
+
+        document.querySelector(".chats-container").appendChild(makeChatsList(chats));
+    </script>
+
+</body>
+
+</html>

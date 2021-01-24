@@ -54,5 +54,5 @@ function makeChatsList(chats) {
   list.classList.add("chats-container__list");
 
   fragment.appendChild(list);
-  return list;
+  return fragment;
 }

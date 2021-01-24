@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messenger — Chat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="assets/js/makeChatsList.js"></script>
+    <script src="assets/js/handleModal.js"></script>
+</head>
+
+<body>
+  <div class="chats-view">
+    <div class="chats">
+      <div class="chats_header">
+        <button class="profile-button">
+          <div class="button-inner-container">
+            <a class="button-link" href="./profile.html">Профиль</a>
+            <img src="assets/images/arrow-right.svg" alt="arrow right" class="button-arrow-right-image" />
+          </div>
+        </button>
+
+        <form id="searchForm" class="search-form">
+          <input name="search" type="text" class="search__input" placeholder="Поиск" />
+        </form>
+      </div>
+
+      <nav class="chats-container">
+      </nav>
+    </div>
+
+    <div class="chat-block">
+      <div class="chat-block__info-row">
+        <div class="avatar-with-name">
+          <div class="chat-list-item__avatar"></div>
+          <h4 class="chat-list-item__name">Вадим</h4>
+        </div>
+
+        <div class="dropdown">
+          <button class="image-button dropdown-button">
+            <img src="assets/images/options-button.svg" alt="options" width="25" height="25" />
+          </button>
+          <div class="dropdown-content">
+            <ul class="buttons-list">
+              <li>
+                <button class="button-with-image-and-text" onclick="handleModal('add-user-modal')">
+                  <img src="assets/images/add-icon.svg" class="image-inside-button" alt="add user" width="22" height="22" />
+                  Добавить пользователя
+                </button>
+              </li>
+              <li>
+                <button class="button-with-image-and-text" onclick="handleModal('remove-user-modal')">
+                  <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
+                  Удалить пользователя
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-block__create-message-row">
+        <div class="dropdown">
+          <button class="image-button dropdown-button">
+            <img src="assets/images/attachments.svg" alt="add attachments" width="32" height="32" />
+          </button>
+          <div class="dropdown-content-top">
+            <ul class="buttons-list">
+              <li>
+                <button class="button-with-image-and-text">
+                  <img src="assets/images/media-icon.svg" class="image-inside-button" alt="add media" width="22" height="22" />
+                  Фото или Видео
+                </button>
+              </li>
+              <li>
+                <button class="button-with-image-and-text">
+                  <img src="assets/images/file-icon.svg" class="image-inside-button" alt="add file" width="22" height="22" />
+                  Файл
+                </button>
+              </li>
+              <li>
+                <button class="button-with-image-and-text">
+                  <img src="assets/images/location-icon.svg" class="image-inside-button" alt="add location" width="22" height="22" />
+                  Локация
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <form id="messageForm" class="message-form">
+          <textarea class="message-textarea" name="message" placeholder="Сообщение" height="32"></textarea>
+          <button class="image-button" type="submit">
+            <img src="assets/images/send-message-icon.svg" alt="options" width="28" height="28" />
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="add-user-modal" class="modal-wrapper">
+    <div class="modal-body">
+      <h4 class="modal-body__name">Добавить пользователя</h4>
+
+      <div class="form-field">
+        <div class="form-field__control">
+          <input id="login-add" name="login" type="text" class="form-field__input" placeholder=" " required />
+          <label for="login-add" class="form-field__label">Логин</label>
+          <div class="form-field__bar"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="form__main-button">
+        Добавить
+      </button>
+    </div>
+  </div>
+
+  <div id="remove-user-modal" class="modal-wrapper">
+    <div class="modal-body">
+      <h4 class="modal-body__name">Удалить пользователя</h4>
+
+      <div class="form-field">
+        <div class="form-field__control">
+          <input id="login-remove" name="login" type="text" class="form-field__input" placeholder=" " required />
+          <label for="login-remove" class="form-field__label">Логин</label>
+          <div class="form-field__bar"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="form__main-button">
+        Удалить
+      </button>
+    </div>
+  </div>
+
+  <script>
+        /**
+         * @typedef {Chat}
+         * @prop {string} title
+         * @prop {string} lastMessageTime
+         * @prop {string} lastMessageText
+         * @prop {number} unreadMessagesCount
+         * @prop {bool} isLastMessageFromUser
+         */
+         const chats = [
+           {
+             title: 'Андрей',
+             lastMessageTime: '10:49',
+             lastMessageText: 'Изображение',
+             unreadMessagesCount: 2,
+           },
+           {
+             title: 'Киноклуб',
+             lastMessageTime: '12:00',
+             lastMessageText: 'стикер',
+             isLastMessageFromUser: true,
+           },
+           {
+             title: 'Илья',
+             lastMessageTime: '15:12',
+             lastMessageText: 'Друзья, у меня для вас особенный выпуск новостей!...',
+             unreadMessagesCount: 4,
+           },
+           {
+             title: 'Вадим',
+             lastMessageTime: 'Пт',
+             lastMessageText: 'Круто!',
+             isLastMessageFromUser: true,
+           },
+           {
+             title: 'тет-а-теты',
+             lastMessageTime: 'Ср',
+             lastMessageText: 'И Human Interface Guidelines и Material Design рекомендуют...',
+           },
+           {
+             title: '1, 2, 3',
+             lastMessageTime: 'Пн',
+             lastMessageText: 'Миллионы россиян ежедневно проводят десятки часов свое...',
+           },
+           {
+             title: 'Design Destroyer',
+             lastMessageTime: 'Пн',
+             lastMessageText: 'В 2008 году художник Jon Rafman  начал собирать...',
+           },
+           {
+             title: 'Day.',
+             lastMessageTime: '1 Мая 2020',
+             lastMessageText: 'Так увлёкся работой по курсу, что совсем забыл его анонсир...',
+           },
+           {
+             title: 'Стас Рогозин',
+             lastMessageTime: '12 Апр 2020',
+             lastMessageText: 'Можно или сегодня или завтра вечером.',
+           },
+         ];
+
+        document.querySelector(".chats-container").appendChild(makeChatsList(chats));
+    </script>
+
+</body>
+
+</html>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/style.css" rel="stylesheet">
+    <script src="assets/js/submitForm.js"></script>
 </head>
 
 <body>
@@ -43,14 +44,8 @@
   <script>
     signInForm.onsubmit = (e) => {
       e.preventDefault();
-      const formData = new FormData(signInForm);
-      const formFields = {};
-
-      for (let [key, value] of formData) {
-        formFields[key] = value;
-      }
-
-      console.log(formFields);
+      submitForm('signInForm');
+      // window.open('/chats.html', '_self');
     };
   </script>
 </body>

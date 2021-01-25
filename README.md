@@ -2,6 +2,7 @@
 Web messenger project using NodeJS.
 
 Design: https://www.figma.com/file/9JA3oJHBqXQihtb1ZDNzis/Chat-Artem-Polevoy
+
 Netlify link: https://priceless-borg-028ddb.netlify.app/login.html
 
 Getting started

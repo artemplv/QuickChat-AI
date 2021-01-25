@@ -7,6 +7,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <script src="assets/js/makeChatsList.js"></script>
     <script src="assets/js/handleModal.js"></script>
+    <script src="assets/js/textAreaAutosize.js"></script>
 </head>
 
 <body>
@@ -54,6 +55,12 @@
                   Удалить пользователя
                 </button>
               </li>
+              <li>
+                <button class="button-with-image-and-text" onclick="handleModal('delete-chat-modal')">
+                  <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
+                  Удалить чат
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -88,7 +95,7 @@
           </div>
         </div>
         <form id="messageForm" class="message-form">
-          <textarea class="message-textarea" name="message" placeholder="Сообщение" height="32"></textarea>
+          <textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>
           <button class="image-button" type="submit">
             <img src="assets/images/send-message-icon.svg" alt="options" width="28" height="28" />
           </button>
@@ -127,6 +134,16 @@
           <div class="form-field__bar"></div>
         </div>
       </div>
+
+      <button type="submit" class="form__main-button">
+        Удалить
+      </button>
+    </div>
+  </div>
+
+  <div id="delete-chat-modal" class="modal-wrapper">
+    <div class="modal-body">
+      <h4 class="modal-body__name">Удалить этот чат?</h4>
 
       <button type="submit" class="form__main-button">
         Удалить
@@ -196,6 +213,8 @@
          ];
 
         document.querySelector(".chats-container").appendChild(makeChatsList(chats));
+
+        textAreaAutosize();
     </script>
 
 </body>

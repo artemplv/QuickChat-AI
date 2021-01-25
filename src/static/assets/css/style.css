@@ -383,7 +383,7 @@ input.search__input {
   display: none;
   position: absolute;
   right: 0px;
-  /* top: 60px; */
+  top: 30px;
   z-index: 10;
 }
 
@@ -400,7 +400,7 @@ input.search__input {
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: flex;
 }
 
 .dropdown:hover .dropdown-content, .dropdown:hover .dropdown-content-top {
@@ -419,7 +419,13 @@ input.search__input {
   border-radius: 30px;
   font-size: 14px;
   color: #1E1E1E;
+  box-sizing: border-box;
+  padding-top: 14px;
+  padding-left: 25px;
   border: none;
+  resize: none;
+  outline: none;
+  -moz-appearance: none;
 }
 
 .message-textarea:placeholder {

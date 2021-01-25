@@ -20,68 +20,70 @@
       </button>
     </div>
 
-    <div class="profile-data-wrapper">
-      <div class="profile-data">
-        <div class="profile-data__avatar">
-          <button type="button" class="change-avatar-button" onclick="handleModal('uploadAvatarModal')">
-            Поменять<br>аватар
-          </button>
-        </div>
-
-        <div class="generated-user-data-placeholder"></div>
-
-        <form id="userPassword" class="form profile-data__form" hidden>
-          <div class="profile-data__form-item">
-            <label for="oldPassword" class="profile-data-form-field__label">Старый пароль</label>
-            <input id="oldPassword" name="oldPassword" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="profile-data__form-item">
-            <label for="newPassword" class="profile-data-form-field__label">Новый пароль</label>
-            <input id="newPassword" name="newPassword" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="profile-data__form-item">
-            <label for="newPasswordRepeat" class="profile-data-form-field__label">Повторите новый пароль</label>
-            <input id="newPasswordRepeat" name="newPasswordRepeat" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
-          </div>
-
-          <div class="profile-data__form-controls">
-            <button type="submit" class="form__main-button">
-              Сохранить
-            </button>
-            <button type="button" class="profile-data__additional-button" onclick="cancelPasswordChange()">
-              Отменить
+    <main>
+      <div class="profile-data-wrapper">
+        <div class="profile-data">
+          <div class="profile-data__avatar">
+            <button type="button" class="change-avatar-button" onclick="handleModal('uploadAvatarModal')">
+              Поменять<br>аватар
             </button>
           </div>
 
-        </form>
+          <div class="generated-user-data-placeholder"></div>
+
+          <form id="userPassword" class="form profile-data__form" hidden>
+            <div class="profile-data__form-item">
+              <label for="oldPassword" class="profile-data-form-field__label">Старый пароль</label>
+              <input id="oldPassword" name="oldPassword" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="profile-data__form-item">
+              <label for="newPassword" class="profile-data-form-field__label">Новый пароль</label>
+              <input id="newPassword" name="newPassword" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="profile-data__form-item">
+              <label for="newPasswordRepeat" class="profile-data-form-field__label">Повторите новый пароль</label>
+              <input id="newPasswordRepeat" name="newPasswordRepeat" type="password" class="profile-data-form-field__input" placeholder="пароль" required />
+            </div>
+
+            <div class="profile-data__form-controls">
+              <button type="submit" class="form__main-button">
+                Сохранить
+              </button>
+              <button type="button" class="profile-data__additional-button" onclick="cancelPasswordChange()">
+                Отменить
+              </button>
+            </div>
+
+          </form>
 
 
-        <div class="profile-data__control-buttons">
-          <button type="button" class="profile-data__additional-button" onclick="onChangeDetailsClick()">
-            Изменить данные
-          </button>
+          <div class="profile-data__control-buttons">
+            <button type="button" class="profile-data__additional-button" onclick="onChangeDetailsClick()">
+              Изменить данные
+            </button>
 
-          <div class="divider"></div>
+            <div class="divider"></div>
 
-          <button type="button" class="profile-data__additional-button" onclick="onChangePasswordClick()">
-            Изменить пароль
-          </button>
+            <button type="button" class="profile-data__additional-button" onclick="onChangePasswordClick()">
+              Изменить пароль
+            </button>
 
-          <div class="divider"></div>
+            <div class="divider"></div>
 
-          <button type="button" class="profile-data__additional-button logout-button">
-            <a class="button-link" href="./login.html">Выйти</a>
-          </button>
+            <button type="button" class="profile-data__additional-button logout-button">
+              <a class="button-link" href="./login.html">Выйти</a>
+            </button>
+          </div>
+
         </div>
-
       </div>
-    </div>
+    </main>
   </div>
 
   <div id="uploadAvatarModal" class="modal-wrapper">

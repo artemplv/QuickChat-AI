@@ -30,78 +30,80 @@
       </nav>
     </div>
 
-    <div class="chat-block">
-      <div class="chat-block__info-row">
-        <div class="avatar-with-name">
-          <div class="chat-list-item__avatar"></div>
-          <h4 class="chat-list-item__name">Вадим</h4>
-        </div>
+    <main>
+      <div class="chat-block">
+        <div class="chat-block__info-row">
+          <div class="avatar-with-name">
+            <div class="chat-list-item__avatar"></div>
+            <h4 class="chat-list-item__name">Вадим</h4>
+          </div>
 
-        <div class="dropdown">
-          <button class="image-button dropdown-button">
-            <img src="assets/images/options-button.svg" alt="options" width="25" height="25" />
-          </button>
-          <div class="dropdown-content">
-            <ul class="buttons-list">
-              <li>
-                <button class="button-with-image-and-text" onclick="handleModal('add-user-modal')">
-                  <img src="assets/images/add-icon.svg" class="image-inside-button" alt="add user" width="22" height="22" />
-                  Добавить пользователя
-                </button>
-              </li>
-              <li>
-                <button class="button-with-image-and-text" onclick="handleModal('remove-user-modal')">
-                  <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
-                  Удалить пользователя
-                </button>
-              </li>
-              <li>
-                <button class="button-with-image-and-text" onclick="handleModal('delete-chat-modal')">
-                  <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
-                  Удалить чат
-                </button>
-              </li>
-            </ul>
+          <div class="dropdown">
+            <button class="image-button dropdown-button">
+              <img src="assets/images/options-button.svg" alt="options" width="25" height="25" />
+            </button>
+            <div class="dropdown-content">
+              <ul class="buttons-list">
+                <li>
+                  <button class="button-with-image-and-text" onclick="handleModal('add-user-modal')">
+                    <img src="assets/images/add-icon.svg" class="image-inside-button" alt="add user" width="22" height="22" />
+                    Добавить пользователя
+                  </button>
+                </li>
+                <li>
+                  <button class="button-with-image-and-text" onclick="handleModal('remove-user-modal')">
+                    <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
+                    Удалить пользователя
+                  </button>
+                </li>
+                <li>
+                  <button class="button-with-image-and-text" onclick="handleModal('delete-chat-modal')">
+                    <img src="assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
+                    Удалить чат
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="chat-block__create-message-row">
-        <div class="dropdown">
-          <button class="image-button dropdown-button">
-            <img src="assets/images/attachments.svg" alt="add attachments" width="32" height="32" />
-          </button>
-          <div class="dropdown-content-top">
-            <ul class="buttons-list">
-              <li>
-                <button class="button-with-image-and-text">
-                  <img src="assets/images/media-icon.svg" class="image-inside-button" alt="add media" width="22" height="22" />
-                  Фото или Видео
-                </button>
-              </li>
-              <li>
-                <button class="button-with-image-and-text">
-                  <img src="assets/images/file-icon.svg" class="image-inside-button" alt="add file" width="22" height="22" />
-                  Файл
-                </button>
-              </li>
-              <li>
-                <button class="button-with-image-and-text">
-                  <img src="assets/images/location-icon.svg" class="image-inside-button" alt="add location" width="22" height="22" />
-                  Локация
-                </button>
-              </li>
-            </ul>
+        <div class="chat-block__create-message-row">
+          <div class="dropdown">
+            <button class="image-button dropdown-button">
+              <img src="assets/images/attachments.svg" alt="add attachments" width="32" height="32" />
+            </button>
+            <div class="dropdown-content-top">
+              <ul class="buttons-list">
+                <li>
+                  <button class="button-with-image-and-text">
+                    <img src="assets/images/media-icon.svg" class="image-inside-button" alt="add media" width="22" height="22" />
+                    Фото или Видео
+                  </button>
+                </li>
+                <li>
+                  <button class="button-with-image-and-text">
+                    <img src="assets/images/file-icon.svg" class="image-inside-button" alt="add file" width="22" height="22" />
+                    Файл
+                  </button>
+                </li>
+                <li>
+                  <button class="button-with-image-and-text">
+                    <img src="assets/images/location-icon.svg" class="image-inside-button" alt="add location" width="22" height="22" />
+                    Локация
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
+          <form id="messageForm" class="message-form">
+            <textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>
+            <button class="image-button" type="submit">
+              <img src="assets/images/send-message-icon.svg" alt="options" width="28" height="28" />
+            </button>
+          </form>
         </div>
-        <form id="messageForm" class="message-form">
-          <textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>
-          <button class="image-button" type="submit">
-            <img src="assets/images/send-message-icon.svg" alt="options" width="28" height="28" />
-          </button>
-        </form>
       </div>
-    </div>
+    </main>
 
   </div>
 

@@ -5,11 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/style.css" rel="stylesheet">
-    <script src="assets/js/handleModal.js"></script>
-    <script src="assets/js/handleUserDataButtons.js"></script>
-    <script src="assets/js/submitForm.js"></script>
-    <script src="assets/js/handleAvatar.js"></script>
-    <script src="assets/js/generateUser.js"></script>
 </head>
 
 <body>
@@ -108,17 +103,12 @@
     </div>
   </div>
 
+  <script src="assets/js/generateUser.js"></script>
+  <script src="assets/js/handleModal.js"></script>
+  <script src="assets/js/handleUserDataButtons.js"></script>
+  <script src="assets/js/submitForm.js"></script>
+  <script src="assets/js/handleAvatar.js"></script>
   <script>
-    const user = {
-      email: 'pochta@yandex.ru',
-      login: 'ivanivanov',
-      first_name: 'Иван',
-      second_name: 'Иванов',
-      display_name: 'Иван',
-      phone: '+7 (909) 967 30 30',
-    }
-    document.querySelector('.generated-user-data-placeholder').appendChild(generateUser(user));
-
     userDetails.onsubmit = (e) => {
       e.preventDefault();
       submitForm('userDetails');

@@ -1,7 +1,6 @@
 /**
  * Генерация HTML с данными пользователя
  * @param {object} user
- * @return {HTMLFragment}
  */
 function generateUser(user) {
   const fragment = document.createDocumentFragment();
@@ -81,5 +80,17 @@ function generateUser(user) {
   form.setAttribute('id', 'userDetails');
 
   fragment.appendChild(form);
-  return fragment;
-}
+
+  document.querySelector('.generated-user-data-placeholder').appendChild(fragment);
+};
+
+const sampleUser = {
+  email: 'pochta@yandex.ru',
+  login: 'ivanivanov',
+  first_name: 'Иван',
+  second_name: 'Иванов',
+  display_name: 'Иван',
+  phone: '+7 (909) 967 30 30',
+};
+
+generateUser(sampleUser);

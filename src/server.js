@@ -4,10 +4,10 @@ const PORT = 3001;
 
 const app = express();
 
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/static/login.html');
+  res.sendFile(__dirname + '/login.html');
 });
 
 app.listen(PORT, () => {

@@ -2,7 +2,7 @@
  * Отправка формы
  * @param {string} formId
  */
-function submitForm(formId) {
+export function submitForm(formId) {
   const form = document.getElementById(formId);
 
   const formData = new FormData(form);

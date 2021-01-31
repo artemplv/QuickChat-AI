@@ -33,7 +33,6 @@ export class Block {
   }
 
   _registerEvents(eventBus) {
-    console.log('_registerEvents');
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -89,11 +88,6 @@ export class Block {
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
-    // const self = this;
-    // this.getContent().addEventListener('click', function(event) {
-    //   event.preventDefault();
-    //   self.hide();
-    // });
   }
 
 	// Может переопределять пользователь, необязательно трогать

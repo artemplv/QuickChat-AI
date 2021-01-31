@@ -6,14 +6,6 @@ export class SignPage extends Block {
     super("div", props);
   }
 
-componentDidMount() {
-    // setTimeout(() => {
-    //   this.setProps({
-    //       name: "Login 3",
-    //   });
-    // }, 5000);
-  }
-
   render() {
     return Handlebars.compile(template)({
       form: this.props.form.render(),

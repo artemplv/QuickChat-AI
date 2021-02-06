@@ -1,11 +1,11 @@
-import { Form } from "../Form/index.js";
-import { Button } from "../Button/index.js";
-import { mainContent } from './mainContent.js';
+import { Form } from "../Form/index";
+import { Button } from "../Button/index";
+import { template } from './template';
 
 export const registerForm = new Form({
   formId: 'signUpForm',
   className: 'sign-form',
-  mainContent,
+  mainContent: template,
   buttonOk: new Button({
     children: 'Зарегистрироваться',
     className: 'form__main-button',

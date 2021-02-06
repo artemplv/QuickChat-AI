@@ -1,13 +1,14 @@
-import { Block } from '../../modules/block.js';
-import { userDataForm } from '../../components/UserDataForm/index.js';
-import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
-import { Button } from '../../components/Button/index.js';
-import { render } from '../../utils/render.js';
+import { Block } from '../../modules/block';
+import { userDataForm } from '../../components/UserDataForm/index';
+import { userPasswordForm } from '../../components/UserPasswordForm/index';
+import { Button } from '../../components/Button/index';
+import { render } from '../../utils/render';
 
-import { template } from './template.js';
+import { template } from './template';
 
 export class Profile extends Block {
-  constructor(props) {
+  public props: any;
+  constructor() {
     super("div", {
       goBackButton: new Button({
         className: 'image-button',
@@ -39,14 +40,6 @@ export class Profile extends Block {
       changeDataForm: userDataForm,
       changePasswordForm: userPasswordForm,
     });
-  }
-
-componentDidMount() {
-    // setTimeout(() => {
-    //   this.setProps({
-    //       name: "Login 3",
-    //   });
-    // }, 5000);
   }
 
   render() {

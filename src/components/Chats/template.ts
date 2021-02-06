@@ -1,8 +1,8 @@
-Handlebars.registerHelper('ifLessThanOne', function(value, options) {
+Handlebars.registerHelper('ifLessThanOne', function(value: number | undefined) {
   if (!value || value < 1) {
-    return options.fn(this);
+    return true;
   }
-  return options.inverse(this);
+  return false;
 });
 
 export const template = `

@@ -5,20 +5,13 @@ import { sampleChats } from './sampleChats.js';
 import { render } from '../../utils/render.js';
 
 export class ChatsPage extends Block {
-  constructor(props) {
+  public props: any
+  constructor(props: { chatsList: any[] }) {
     super("div", {
       chats: new Chats({
         chatsList: props.chatsList,
       }),
     });
-  }
-
-componentDidMount() {
-    // setTimeout(() => {
-    //   this.setProps({
-    //       name: "Login 3",
-    //   });
-    // }, 5000);
   }
 
   render() {

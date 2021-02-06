@@ -1,8 +1,8 @@
 import { Block } from "../../modules/block.js";
-import { template } from './template.js';
+import { template } from './template';
 
 export class Button extends Block {
-  constructor(props) {
+  constructor(props: {}) {
     super("div", props);
   }
 

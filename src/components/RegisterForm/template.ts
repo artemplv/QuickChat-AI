@@ -1,4 +1,4 @@
-export const mainContent = `
+export const template = `
   <h1 class="sign-form__heading sign-up-form__heading">Регистрация</h1>
 
   <div class="form-fields-wrapper sign-up-form-fields-wrapper">

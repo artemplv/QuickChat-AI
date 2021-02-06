@@ -1,11 +1,13 @@
-import { Block } from '../../modules/block.js';
-import { Button } from '../Button/index.js';
-import { Form } from "../Form/index.js";
+import { Block } from '../../modules/block';
+import { Button } from '../Button/index';
+import { Form } from "../Form/index";
 
-import { template } from './template.js';
+import { template } from './template';
 
 export class ChatFeed extends Block {
-  constructor(props) {
+  public props: any;
+
+  constructor(props: { chatName: string }) {
     super("div", {
       chatName: props.chatName,
       chatOptionsDropdownButton: new Button({

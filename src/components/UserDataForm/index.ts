@@ -1,6 +1,6 @@
-import { Form } from "../Form/index.js";
-import { Button } from "../Button/index.js";
-import { mainContentTemplate } from './mainContentTemplate.js';
+import { Form } from "../Form/index";
+import { Button } from "../Button/index";
+import { template } from './template';
 
 const sampleUser = {
   email: 'pochta@yandex.ru',
@@ -11,7 +11,7 @@ const sampleUser = {
   phone: '+7 (909) 967 30 30',
 };
 
-const mainContent = Handlebars.compile(mainContentTemplate)(sampleUser);
+const mainContent = Handlebars.compile(template)(sampleUser);
 
 export const userDataForm = new Form({
   formId: 'userDetails',

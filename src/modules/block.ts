@@ -1,4 +1,9 @@
-import { EventBus } from "../event-bus.js";
+import { EventBus } from "../event-bus";
+
+interface MetaType {
+  tagName: string;
+  props: {};
+}
 
 export class Block {
   static EVENTS = {
@@ -8,21 +13,18 @@ export class Block {
     FLOW_CDU: "flow:component-did-update"
   };
 
-  _element = null;
-  _meta = null;
+  private _element: any;
+  private _meta: MetaType;
 
-  /** JSDoc
-   * @param {string} tagName
-   * @param {Object} props
-   *
-   * @returns {void}
-   */
+  props: {};
+  eventBus: () => EventBus;
+
   constructor(tagName = "div", props = {}) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
-      props
-    };
+      props,
+    }
 
     this.props = this._makePropsProxy(props);
 
@@ -32,32 +34,32 @@ export class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus) {
+  private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  _createResources() {
+  private _createResources(): void {
     const { tagName } = this._meta;
     this._element = this._createDocumentElement(tagName);
   }
 
-  init() {
+  public init(): void {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidMount() {
+  private _componentDidMount(): void {
     this.componentDidMount();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	// Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps) {}
+  componentDidMount(oldProps = {}): void {}
 
-  _componentDidUpdate(oldProps, newProps) {
+  _componentDidUpdate(oldProps= {}, newProps = {}): void {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -65,11 +67,11 @@ export class Block {
   }
 
 	// Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps= {}, newProps = {}): boolean {
     return true;
   }
 
-  setProps = nextProps => {
+  setProps = (nextProps: {}): void => {
     if (!nextProps) {
       return;
     }
@@ -77,7 +79,7 @@ export class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  get element(): HTMLElement {
     return this._element;
   }
 
@@ -91,17 +93,17 @@ export class Block {
   }
 
 	// Может переопределять пользователь, необязательно трогать
-  render() {}
+  render(): any {}
 
-  getContent() {
+  getContent(): HTMLElement {
     return this._element;
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: {}) {
     const self = this;
 
     const proxyProps = new Proxy(props, {
-      set(target, prop, value) {
+      set(target: any, prop: any, value: any): boolean {
         target[prop] = value;
 
         self.eventBus().emit(Block.EVENTS.FLOW_CDU);
@@ -115,16 +117,16 @@ export class Block {
     return proxyProps;
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName: string): HTMLElement {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 
-  show() {
+  show(): void {
     this.getContent().style.display = "block";
   }
 
-  hide() {
+  hide(): void {
     this.getContent().style.display = "none";
   }
 }

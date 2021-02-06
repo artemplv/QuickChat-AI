@@ -1,9 +1,18 @@
-import { Block } from '../../modules/block.js';
-import { Button } from '../Button/index.js';
-import { template } from './template.js';
+import { Block } from '../../modules/block';
+import { Button } from '../Button/index';
+import { template } from './template';
+
+interface ChatObject {
+  title: string,
+  lastMessageTime: string,
+  isLastMessageFromUser: boolean,
+  lastMessageText: string,
+  unreadMessagesCount?: number,
+}
 
 export class Chats extends Block {
-  constructor(props) {
+  public props: any;
+  constructor(props: { chatsList: ChatObject[] }) {
     super("div", {
       chatsList: props.chatsList,
       profileButton: new Button({

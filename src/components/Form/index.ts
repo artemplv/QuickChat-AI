@@ -1,8 +1,9 @@
-import { Block } from "../../modules/block.js";
+import { Block } from "../../modules/block";
 import { template } from './template.js';
 
 export class Form extends Block {
-  constructor(props) {
+  public props: any;
+  constructor(props: {}) {
     super("div", props);
   }
 

@@ -1,6 +1,6 @@
-import { SignPage } from '../Sign/index.js';
+import { SignPage } from '../Sign/index';
 import { loginForm } from '../../components/LoginForm/index.js';
-import { render } from '../../utils/render.js';
+import { render } from '../../utils/render';
 import { submitForm } from '../../utils/submitForm.js';
 
 const loginPage = new SignPage({

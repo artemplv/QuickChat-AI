@@ -7,7 +7,7 @@ import { render } from '../../utils/render.js';
 export class ChatsPage extends Block {
   public props: any
   constructor(props: { chatsList: any[] }) {
-    super("div", {
+    super('div', {
       chats: new Chats({
         chatsList: props.chatsList,
       }),

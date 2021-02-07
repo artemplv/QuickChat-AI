@@ -17,6 +17,7 @@ export const userDataForm = new Form({
   formId: 'userDetails',
   className: 'profile-data__form',
   controlsWrapperClassName: 'profile-data__form-controls',
+  isControlsHidden: true,
   mainContent,
   buttonOk: new Button({
     children: 'Сохранить',
@@ -25,7 +26,7 @@ export const userDataForm = new Form({
   }).render(),
   buttonCancel: new Button({
     children: 'Отменить',
-    className: 'form__additional-button',
+    className: 'form__additional-button cancel-details-change-button',
     htmlType: 'button',
   }).render(),
 });

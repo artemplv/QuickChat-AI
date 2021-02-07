@@ -3,7 +3,7 @@ import { template } from './template.js';
 
 export class Button extends Block {
   constructor(props: {}) {
-    super("div", props);
+    super('div', props);
   }
 
   render() {

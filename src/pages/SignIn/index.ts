@@ -12,10 +12,10 @@ loginPage.getContent().querySelector('#signInForm').addEventListener('submit', f
   submitForm('signInForm');
 });
 
-loginPage.getContent().querySelectorAll('input').forEach((element: HTMLElement) => {
+loginPage.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
     element.addEventListener('blur', () => {
-      // element.checkValidity();
+      element.checkValidity();
     });
 });
-// app — это id дива в корне DOM
+
 render(".app", loginPage);

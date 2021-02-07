@@ -25,7 +25,7 @@ export class Block {
   props: {};
   eventBus: () => EventBus;
 
-  constructor(tagName = "div", props = {}) {
+  constructor(tagName = 'div', props = {}) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,

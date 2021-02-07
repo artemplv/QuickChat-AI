@@ -1,8 +1,8 @@
-Handlebars.registerHelper('ifLessThanOne', function(value: number | undefined) {
+Handlebars.registerHelper('ifLessThanOne', function(value: number | undefined): string {
   if (!value || value < 1) {
-    return true;
+    return 'hidden';
   }
-  return false;
+  return '';
 });
 
 export const template = `
@@ -40,8 +40,7 @@ export const template = `
                 </p>
                 <div
                   class="chat-list-item__unread-message-count"
-                  {{#ifLessThanOne unreadMessagesCount}}
-                    hidden
+                  {{#ifLessThanOne this.unreadMessagesCount}}
                   {{/ifLessThanOne}}
                 >
                   <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}<span>

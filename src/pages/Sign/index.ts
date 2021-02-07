@@ -4,7 +4,7 @@ import { template } from './template.js';
 export class SignPage extends Block {
   public props: any;
   constructor(props: {}) {
-    super("div", props);
+    super('div', props);
   }
 
   render() {

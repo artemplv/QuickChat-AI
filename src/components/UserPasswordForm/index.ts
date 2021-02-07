@@ -7,6 +7,7 @@ export const userPasswordForm = new Form({
   formId: 'userPassword',
   className: 'profile-data__form',
   controlsWrapperClassName: 'profile-data__form-controls',
+  isHidden: true,
   mainContent: template,
   buttonOk: new Button({
     children: 'Сохранить',
@@ -15,7 +16,7 @@ export const userPasswordForm = new Form({
   }).render(),
   buttonCancel: new Button({
     children: 'Отменить',
-    className: 'form__additional-button',
+    className: 'form__additional-button cancel-password-change-button',
     htmlType: 'button',
   }).render(),
 });

@@ -8,28 +8,28 @@ export class ChatFeed extends Block {
   public props: any;
 
   constructor(props: { chatName: string }) {
-    super("div", {
+    super('div', {
       chatName: props.chatName,
       chatOptionsDropdownButton: new Button({
         className: 'image-button dropdown-button',
         children: `<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />`,
       }),
       addUserButton: new Button({
-        className: 'button-with-image-and-text',
+        className: 'button-with-image-and-text add-user-button',
         children: `
           <img src="static/assets/images/add-icon.svg" class="image-inside-button" alt="add user" width="22" height="22" />
           Добавить пользователя
         `,
       }),
       deleteUserButton: new Button({
-        className: 'button-with-image-and-text',
+        className: 'button-with-image-and-text delete-user-button',
         children: `
           <img src="static/assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
           Удалить пользователя
         `,
       }),
       deleteChatButton: new Button({
-        className: 'button-with-image-and-text',
+        className: 'button-with-image-and-text delete-chat-button',
         children: `
           <img src="static/assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
           Удалить чат

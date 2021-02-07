@@ -585,6 +585,10 @@ input.search__input {
   margin: 60px auto 0 auto;
 }
 
+.form-controls-wrapper {
+  text-align: center;
+}
+
 .profile-data__control-buttons {
   width: 100%;
 }

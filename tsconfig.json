@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2019",
+      "es2020.string",
+      "dom",
+      "dom.iterable"
+    ],
+    "module": "ES2020",
+    "target": "es6",
+    "outDir": "./build",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "downlevelIteration": true,
+    "allowJs": true,
+    "noEmit": false
+  },
+  "include": [
+    "node_modules/handlebars/types",
+    "node_modules/express/types",
+    "**/*"
+  ]
+}

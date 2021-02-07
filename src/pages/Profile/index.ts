@@ -1,10 +1,10 @@
-import { Block } from '../../modules/block';
-import { userDataForm } from '../../components/UserDataForm/index';
-import { userPasswordForm } from '../../components/UserPasswordForm/index';
-import { Button } from '../../components/Button/index';
-import { render } from '../../utils/render';
+import { Block } from '../../modules/block.js';
+import { userDataForm } from '../../components/UserDataForm/index.js';
+import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
+import { Button } from '../../components/Button/index.js';
+import { render } from '../../utils/render.js';
 
-import { template } from './template';
+import { template } from './template.js';
 
 export class Profile extends Block {
   public props: any;

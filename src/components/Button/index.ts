@@ -1,5 +1,5 @@
 import { Block } from "../../modules/block.js";
-import { template } from './template';
+import { template } from './template.js';
 
 export class Button extends Block {
   constructor(props: {}) {

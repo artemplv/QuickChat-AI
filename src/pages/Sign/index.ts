@@ -1,5 +1,5 @@
-import { Block } from "../../modules/block";
-import { template } from './template';
+import { Block } from "../../modules/block.js";
+import { template } from './template.js';
 
 export class SignPage extends Block {
   public props: any;

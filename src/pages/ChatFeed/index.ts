@@ -1,9 +1,9 @@
-import { Block } from '../../modules/block';
-import { Chats } from '../../components/Chats/index';
-import { ChatFeed } from '../../components/ChatFeed/index';
-import { template } from './template';
-import { sampleChats } from './sampleChats';
-import { render } from '../../utils/render';
+import { Block } from '../../modules/block.js';
+import { Chats } from '../../components/Chats/index.js';
+import { ChatFeed } from '../../components/ChatFeed/index.js';
+import { template } from './template.js';
+import { sampleChats } from './sampleChats.js';
+import { render } from '../../utils/render.js';
 
 export class ChatFeedPage extends Block {
   public props: any

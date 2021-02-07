@@ -1,6 +1,6 @@
-import { Form } from "../Form/index";
-import { Button } from "../Button/index";
-import { template } from './template';
+import { Form } from "../Form/index.js";
+import { Button } from "../Button/index.js";
+import { template } from './template.js';
 
 
 export const userPasswordForm = new Form({

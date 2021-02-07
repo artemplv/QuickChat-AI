@@ -6,11 +6,9 @@
       "dom",
       "dom.iterable"
     ],
-    
-    "target": "es2019",
-
+    "module": "ES2020",
+    "target": "es6",
     "outDir": "./build",
-
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -21,10 +19,13 @@
     "alwaysStrict": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "allowJs": true,
+    "noEmit": false
   },
-
   "include": [
-    "node_modules/handlebars/types"
+    "node_modules/handlebars/types",
+    "node_modules/express/types",
+    "**/*"
   ]
 }

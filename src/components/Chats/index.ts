@@ -1,6 +1,6 @@
-import { Block } from '../../modules/block';
-import { Button } from '../Button/index';
-import { template } from './template';
+import { Block } from '../../modules/block.js';
+import { Button } from '../Button/index.js';
+import { template } from './template.js';
 
 interface ChatObject {
   title: string,

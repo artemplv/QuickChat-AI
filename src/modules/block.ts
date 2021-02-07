@@ -1,9 +1,15 @@
-import { EventBus } from "../event-bus";
+import { EventBus } from "../event-bus.js";
 
 interface MetaType {
   tagName: string;
   props: {};
 }
+
+interface ProxyConstructor {
+    revocable<T extends object>(target: T, handler: any): { proxy: T; revoke: () => void; };
+    new <T extends object>(target: T, handler: any): T;
+}
+declare const Proxy: ProxyConstructor;
 
 export class Block {
   static EVENTS = {
@@ -57,17 +63,14 @@ export class Block {
   }
 
 	// Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps = {}): void {}
+  componentDidMount(): void {}
 
-  _componentDidUpdate(oldProps= {}, newProps = {}): void {
-    const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
+  _componentDidUpdate(): void {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	// Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps= {}, newProps = {}): boolean {
+  componentDidUpdate(): boolean {
     return true;
   }
 
@@ -76,7 +79,7 @@ export class Block {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    (<any>Object).assign(this.props, nextProps);
   };
 
   get element(): HTMLElement {

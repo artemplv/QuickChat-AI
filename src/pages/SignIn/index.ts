@@ -1,20 +1,20 @@
-import { SignPage } from '../Sign/index';
+import { SignPage } from '../Sign/index.js';
 import { loginForm } from '../../components/LoginForm/index.js';
-import { render } from '../../utils/render';
+import { render } from '../../utils/render.js';
 import { submitForm } from '../../utils/submitForm.js';
 
-const loginPage = new SignPage({
+const loginPage: any = new SignPage({
   form: loginForm,
 });
 
-loginPage.getContent().querySelector('#signInForm').addEventListener('submit', function(event) {
+loginPage.getContent().querySelector('#signInForm').addEventListener('submit', function(event: { preventDefault: () => void; }) {
   event.preventDefault();
   submitForm('signInForm');
 });
 
-loginPage.getContent().querySelectorAll('input').forEach((element) => {
+loginPage.getContent().querySelectorAll('input').forEach((element: HTMLElement) => {
     element.addEventListener('blur', () => {
-      element.checkValidity();
+      // element.checkValidity();
     });
 });
 // app — это id дива в корне DOM

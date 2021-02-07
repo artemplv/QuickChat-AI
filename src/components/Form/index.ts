@@ -1,4 +1,4 @@
-import { Block } from "../../modules/block";
+import { Block } from "../../modules/block.js";
 import { template } from './template.js';
 
 export class Form extends Block {

@@ -1,8 +1,8 @@
-import { Block } from '../../modules/block';
-import { Button } from '../Button/index';
-import { Form } from "../Form/index";
+import { Block } from '../../modules/block.js';
+import { Button } from '../Button/index.js';
+import { Form } from "../Form/index.js";
 
-import { template } from './template';
+import { template } from './template.js';
 
 export class ChatFeed extends Block {
   public props: any;

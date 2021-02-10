@@ -23,4 +23,4 @@ export class ChatsPage extends Block {
 
 const chatsPage = new ChatsPage({ chatsList: sampleChats });
 
-render(".app", chatsPage);
+render('.app', chatsPage);

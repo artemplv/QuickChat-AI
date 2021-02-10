@@ -677,3 +677,13 @@ input.search__input {
   color: #1E1E1E;
   margin: 0 0 65px;
 }
+
+.input-error-message {
+  color: red;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.invaid-input {
+  border-bottom-color: red;
+}

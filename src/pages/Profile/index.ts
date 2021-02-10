@@ -10,6 +10,8 @@ import {
   cancelPasswordChange,
 } from '../../utils/handleUserDataButtons.js';
 import handleModal from '../../utils/handleModals.js';
+import { submitForm } from '../../utils/submitForm.js';
+import { validateInput } from '../../utils/validation.js';
 
 import { template } from './template.js';
 
@@ -89,4 +91,20 @@ profilePage.getContent().querySelector('.change-avatar-button').addEventListener
   handleModal('uploadAvatarModal');
 });
 
-render(".app", profilePage);
+profilePage.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
+  element.addEventListener('blur', () => {
+    validateInput(element);
+  });
+});
+
+profilePage.getContent().querySelector('#userPassword').addEventListener('submit', function(event: { preventDefault: () => void; }) {
+  event.preventDefault();
+  submitForm('userPassword');
+});
+
+profilePage.getContent().querySelector('#userDetails').addEventListener('submit', function(event: { preventDefault: () => void; }) {
+  event.preventDefault();
+  submitForm('userDetails');
+});
+
+render('.app', profilePage);

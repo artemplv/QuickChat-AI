@@ -44,4 +44,4 @@ chatFeedPage.getContent().querySelector('.delete-chat-button').addEventListener(
   handleModal('delete-chat-modal');
 });
 
-render(".app", chatFeedPage);
+render('.app', chatFeedPage);

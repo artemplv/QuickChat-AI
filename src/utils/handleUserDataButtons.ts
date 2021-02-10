@@ -33,6 +33,11 @@ export function cancelDetailsChange(): void {
 
   const formButtons = <HTMLElement> document.getElementsByClassName('profile-data__form-controls')[0];
   formButtons.hidden = true;
+
+  const errors: NodeListOf<Element> = detailsForm.querySelectorAll('.input-error-message');
+  for (let i = 0; i < errors.length; i++) {
+    errors[i].remove();
+  }
 }
 
 export function onChangePasswordClick(): void {
@@ -54,4 +59,9 @@ export function cancelPasswordChange() {
   passwordForm.hidden = true;
   detailsForm.hidden = false;
   controlButtons.hidden = false;
+
+  const errors: NodeListOf<Element> = passwordForm.querySelectorAll('.input-error-message');
+  for (let i = 0; i < errors.length; i++) {
+    errors[i].remove();
+  }
 }

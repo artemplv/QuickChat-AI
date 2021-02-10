@@ -52,7 +52,7 @@ export const template = `
 
       <div class="form-field">
         <div class="form-field__control">
-          <input id="login-add" name="login" type="text" class="form-field__input" placeholder=" " required />
+          <input id="login-add" name="login" type="text" class="form-field__input" placeholder=" "  />
           <label for="login-add" class="form-field__label">Логин</label>
           <div class="form-field__bar"></div>
         </div>
@@ -70,7 +70,7 @@ export const template = `
 
       <div class="form-field">
         <div class="form-field__control">
-          <input id="login-remove" name="login" type="text" class="form-field__input" placeholder=" " required />
+          <input id="login-remove" name="login" type="text" class="form-field__input" placeholder=" " />
           <label for="login-remove" class="form-field__label">Логин</label>
           <div class="form-field__bar"></div>
         </div>

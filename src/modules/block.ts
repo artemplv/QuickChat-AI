@@ -6,8 +6,8 @@ interface MetaType {
 }
 
 interface ProxyConstructor {
-    revocable<T extends object>(target: T, handler: any): { proxy: T; revoke: () => void; };
-    new <T extends object>(target: T, handler: any): T;
+  revocable<T extends object>(target: T, handler: any): { proxy: T; revoke: () => void; };
+  new <T extends object>(target: T, handler: any): T;
 }
 declare const Proxy: ProxyConstructor;
 

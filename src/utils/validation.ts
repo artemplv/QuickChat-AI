@@ -3,7 +3,7 @@ interface regexpsObject {
 }
 
 const inputsRegexp: regexpsObject = {
-  email: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+  email: `^[a-z0-9._%+-]+@([a-z0-9]+[\.])+[a-z]{2,4}$`,
   phone: `^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`,
   first_name: `^[A-Za-zА-Яа-яЁё ,.'-]+$`,
   last_name: `^[A-Za-zА-Яа-яЁё ,.'-]+$`,
@@ -22,7 +22,7 @@ const makeError = (element: HTMLInputElement, text: string): void => {
   }
 }
 
-const removeError = (element: HTMLInputElement): void => {
+export const removeError = (element: HTMLInputElement): void => {
   const oldError: any = element?.parentElement?.querySelector('.input-error-message');
   if (oldError) {
     oldError.remove();

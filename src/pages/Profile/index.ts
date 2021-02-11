@@ -11,7 +11,10 @@ import {
 } from '../../utils/handleUserDataButtons.js';
 import handleModal from '../../utils/handleModals.js';
 import { submitForm } from '../../utils/submitForm.js';
-import { validateInput } from '../../utils/validation.js';
+import {
+  validateInput,
+  removeError,
+} from '../../utils/validation.js';
 
 import { template } from './template.js';
 
@@ -92,6 +95,10 @@ profilePage.getContent().querySelector('.change-avatar-button').addEventListener
 });
 
 profilePage.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
+  element.addEventListener('focus', () => {
+    removeError(element);
+  });
+
   element.addEventListener('blur', () => {
     validateInput(element);
   });

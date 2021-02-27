@@ -1,5 +1,5 @@
-import { Form } from "../Form/index.js";
-import { Button } from "../Button/index.js";
+import Form from "../Form/index.js";
+import Button from "../Button/index.js";
 import { template } from './template.js';
 
 export const registerForm = new Form({

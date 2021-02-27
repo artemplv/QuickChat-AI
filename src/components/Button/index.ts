@@ -1,7 +1,7 @@
-import { Block } from "../../modules/block.js";
+import Block from "../../modules/block.js";
 import { template } from './template.js';
 
-export class Button extends Block {
+export default class Button extends Block {
   constructor(props: {}) {
     super('div', props);
   }

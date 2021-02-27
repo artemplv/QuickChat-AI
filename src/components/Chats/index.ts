@@ -1,5 +1,5 @@
-import { Block } from '../../modules/block.js';
-import { Button } from '../Button/index.js';
+import Block from '../../modules/block.js';
+import Button from '../Button/index.js';
 import { template } from './template.js';
 
 interface ChatObject {
@@ -10,7 +10,7 @@ interface ChatObject {
   unreadMessagesCount?: number,
 }
 
-export class Chats extends Block {
+export default class Chats extends Block {
   public props: any;
   constructor(props: { chatsList: ChatObject[] }) {
     super('div', {

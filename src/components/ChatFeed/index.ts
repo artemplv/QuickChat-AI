@@ -1,10 +1,10 @@
-import { Block } from '../../modules/block.js';
-import { Button } from '../Button/index.js';
-import { Form } from "../Form/index.js";
+import Block from '../../modules/block.js';
+import Button from '../Button/index.js';
+import Form from "../Form/index.js";
 
 import { template } from './template.js';
 
-export class ChatFeed extends Block {
+export default class ChatFeed extends Block {
   public props: any;
 
   constructor(props: { chatName: string }) {

@@ -1,16 +1,17 @@
-import { Block } from "../../modules/block.js";
-import { template } from './template.js';
-import { submitForm } from '../../utils/submitForm.js';
+import Block from "../../modules/block.js";
+import submitForm from '../../utils/submitForm.js';
 import {
   validateInput,
   removeError,
 } from '../../utils/validation.js';
 
+import { template } from './template.js';
+
 interface clickEvent {
   preventDefault: () => void;
 }
 
-export class SignPage extends Block {
+export default class SignPage extends Block {
   public props: any;
   constructor(props: {}) {
     super('div', props);

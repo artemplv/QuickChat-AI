@@ -3,7 +3,7 @@ import { validateInput } from './validation.js';
 /**
  * Отправка формы
  */
-export function submitForm(formId: string): void {
+export default function submitForm(formId: string): void {
   const form: any = document.getElementById(formId);
 
   let hasError: boolean = false;

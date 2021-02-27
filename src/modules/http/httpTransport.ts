@@ -45,7 +45,7 @@ function queryStringify(data: requestDataObject): string {
   return `?${paramsString}`;
 }
 
-class HTTPTransport {
+export default class HTTPTransport {
   baseUrl: string;
 
   constructor(baseUrl = '') {

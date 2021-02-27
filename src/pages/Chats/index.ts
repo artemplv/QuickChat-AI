@@ -1,10 +1,8 @@
-import { Block } from '../../modules/block.js';
-import { Chats } from '../../components/Chats/index.js';
+import Block from '../../modules/block.js';
+import Chats from '../../components/Chats/index.js';
 import { template } from './template.js';
-// import { sampleChats } from './sampleChats.js';
-// import { render } from '../../utils/render.js';
 
-export class ChatsPage extends Block {
+export default class ChatsPage extends Block {
   public props: any
   constructor(props: { chatsList: any[] }) {
     super('div', {

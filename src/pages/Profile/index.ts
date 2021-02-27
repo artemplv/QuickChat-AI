@@ -1,15 +1,19 @@
-import { Block } from '../../modules/block.js';
+import Block from '../../modules/block.js';
+import Button from '../../components/Button/index.js';
+
 import { userDataForm } from '../../components/UserDataForm/index.js';
 import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
-import { Button } from '../../components/Button/index.js';
+
 import {
   onChangeDetailsClick,
   onChangePasswordClick,
   cancelDetailsChange,
   cancelPasswordChange,
 } from '../../utils/handleUserDataButtons.js';
+
 import handleModal from '../../utils/handleModals.js';
-import { submitForm } from '../../utils/submitForm.js';
+import submitForm from '../../utils/submitForm.js';
+
 import {
   validateInput,
   removeError,
@@ -21,7 +25,7 @@ interface clickEvent {
   preventDefault: () => void;
 }
 
-export class Profile extends Block {
+export default class Profile extends Block {
   public props: any;
   constructor() {
     super('div', {

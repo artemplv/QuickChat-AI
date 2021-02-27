@@ -39,7 +39,7 @@
 // }
 
 import Route from "./Route.js";
-import { Block } from "../modules/block.js";
+import Block from "../modules/block.js";
 
 // interface ComponentConstructor {
 //     new (): InstanceType<typeof Block>;

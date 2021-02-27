@@ -1,4 +1,4 @@
-import { Block } from "../modules/block.js";
+import Block from "../modules/block.js";
 import { render } from '../utils/render.js';
 
 // interface ComponentConstructor {

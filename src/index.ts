@@ -1,10 +1,9 @@
 import Router from './router/Router.js';
-// import { SignPage } from './pages/Sign/index.js';
-// import { Profile } from './pages/Profile/index.js';
-import { ChatsPage } from './pages/Chats/index.js';
-import { ChatFeedPage } from './pages/ChatFeed/index.js';
-import { Profile } from './pages/Profile/index.js';
-import { SignPage } from './pages/Sign/index.js';
+
+import ChatsPage from './pages/Chats/index.js';
+import ChatFeedPage from './pages/ChatFeed/index.js';
+import Profile from './pages/Profile/index.js';
+import SignPage from './pages/Sign/index.js';
 
 import { sampleChats } from './pages/Chats/sampleChats.js';
 import { registerForm } from './components/RegisterForm/index.js';
@@ -25,19 +24,3 @@ interface CustomEventData extends Event {
 }
 
 window.addEventListener('_pushstate', (event: CustomEventData) => router.go(event.detail));
-
-// setTimeout(() => {
-//   router.go("/chat-feed");
-// }, 3000);
-//
-// setTimeout(() => {
-//   router.go("/signup");
-// }, 6000);
-//
-// setTimeout(() => {
-//   router.back();
-// }, 9000);
-//
-// setTimeout(() => {
-//   router.forward();
-// }, 11000);

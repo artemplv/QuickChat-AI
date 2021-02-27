@@ -1,16 +1,14 @@
-import { Block } from '../../modules/block.js';
-import { Chats } from '../../components/Chats/index.js';
-import { ChatFeed } from '../../components/ChatFeed/index.js';
+import Block from '../../modules/block.js';
+import Chats from '../../components/Chats/index.js';
+import ChatFeed from '../../components/ChatFeed/index.js';
 import { template } from './template.js';
-// import { sampleChats } from './sampleChats.js';
-// import { render } from '../../utils/render.js';
 import handleModal from '../../utils/handleModals.js';
 
 interface clickEvent {
   preventDefault: () => void;
 }
 
-export class ChatFeedPage extends Block {
+export default class ChatFeedPage extends Block {
   public props: any
   constructor(props: { chatsList: any[] }) {
     super('div', {

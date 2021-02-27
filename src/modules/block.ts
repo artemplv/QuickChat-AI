@@ -1,4 +1,4 @@
-import { EventBus } from "../event-bus.js";
+import EventBus from "../event-bus.js";
 
 interface MetaType {
   tagName: string;
@@ -11,7 +11,7 @@ interface ProxyConstructor {
 }
 declare const Proxy: ProxyConstructor;
 
-export class Block {
+export default class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",

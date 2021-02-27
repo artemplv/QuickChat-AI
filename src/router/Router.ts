@@ -1,45 +1,5 @@
-// class Block {
-//   getContent() { }
-//
-//   show() {
-//     console.log('show');
-//   }
-//
-//   hide() {
-//     console.log('hide');
-//   }
-// }
-//
-// class Chats extends Block {
-//   getContent() {
-//     return 'chats';
-//   }
-//
-//   show() {
-//     console.log('show chats');
-//   }
-//
-//   hide() {
-//     console.log('hide chats');
-//   }
-// }
-//
-// class Users extends Block {
-//   getContent() {
-//     return 'users';
-//   }
-//
-//   show() {
-//     console.log('show users');
-//   }
-//
-//   hide() {
-//     console.log('hide users');
-//   }
-// }
-
-import Route from "./Route.js";
-import Block from "../modules/block.js";
+import Route from './Route.js';
+import Block from '../modules/block.js';
 
 // interface ComponentConstructor {
 //     new (): InstanceType<typeof Block>;
@@ -53,20 +13,20 @@ export default class Router {
   static __instance: Router;
 
   constructor(rootQuery: string) {
-      if (Router.__instance) {
-          return Router.__instance;
-      }
+    if (Router.__instance) {
+      return Router.__instance;
+    }
 
-      this.routes = [];
-      this.history = window.history;
-      this._currentRoute = null;
-      this._rootQuery = rootQuery;
+    this.routes = [];
+    this.history = window.history;
+    this._currentRoute = null;
+    this._rootQuery = rootQuery;
 
-      Router.__instance = this;
+    Router.__instance = this;
   }
 
   use(pathname: string, block: InstanceType<typeof Block>) {
-    const route = new Route(pathname, block, {rootQuery: this._rootQuery});
+    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
@@ -82,7 +42,7 @@ export default class Router {
   _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
-      return;
+      return this.go('/404');
     }
 
     if (this._currentRoute) {
@@ -94,7 +54,7 @@ export default class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
@@ -110,22 +70,3 @@ export default class Router {
     return this.routes.find((route) => route.match(pathname));
   }
 }
-
-// const router = new Router(".app");
-//
-// router
-//   .use("/", Chats)
-//   .use("/users", Users)
-//   .start();
-//
-// setTimeout(() => {
-//   router.go("/users");
-// }, 1000);
-//
-// setTimeout(() => {
-//   router.back();
-// }, 3000);
-//
-// setTimeout(() => {
-//   router.forward();
-// }, 5000);

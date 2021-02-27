@@ -15,7 +15,7 @@ const router = new Router('.app');
 router
   .use('/chats', new ChatsPage({ chatsList: sampleChats }))
   .use('/chat-feed', new ChatFeedPage({ chatsList: sampleChats }))
-  .use('/profile', new Profile())
+  .use('/profile', new Profile({}))
   .use('/login', new SignPage({ form: loginForm }))
   .use('/signup', new SignPage({ form: registerForm }))
   .use('/404', new NotFoundError())

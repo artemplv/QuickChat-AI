@@ -5,6 +5,10 @@ import {
   removeError,
 } from '../../utils/validation.js';
 
+import AuthAPI from '../../api/auth/index.js';
+
+const authApi = new AuthAPI();
+
 import { template } from './template.js';
 
 interface clickEvent {
@@ -17,14 +21,41 @@ export default class SignPage extends Block {
     super('div', props);
   }
 
-  handleSubmitSignInForm(event: clickEvent) {
+  async handleSubmitSignInForm(event: clickEvent) {
     event.preventDefault();
-    submitForm('signInForm');
+    const data = submitForm('signInForm');
+
+    if (data) {
+      try {
+        const response: any = await authApi.signin(data);
+        console.log(response);
+        if (response.status === 200) {
+          const response2 = await authApi.getUser();
+          console.log(response2);
+          navigate('/chats');
+        }
+      } catch(error) {
+        console.error(error);
+      }
+    }
   }
 
-  handleSubmitSignUpForm(event: clickEvent) {
+  async handleSubmitSignUpForm(event: clickEvent) {
     event.preventDefault();
-    submitForm('signUpForm');
+    const data = submitForm('signUpForm');
+
+    if (data) {
+      try {
+        const response: any = await authApi.signup(data);
+        console.log(response);
+        if (response.status === 200) {
+          const response2 = await authApi.getUser();
+          console.log(response2);
+        }
+      } catch(error) {
+        console.error(error);
+      }
+    }
   }
 
   addListeners() {

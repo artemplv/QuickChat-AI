@@ -54,12 +54,12 @@ export default class Block {
 
   public init(): void {
     this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    // this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	// Может переопределять пользователь, необязательно трогать
@@ -92,8 +92,7 @@ export default class Block {
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+    this.getContent().innerHTML = block;
   }
 
 	// Может переопределять пользователь, необязательно трогать

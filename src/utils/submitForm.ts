@@ -1,9 +1,27 @@
 import { validateInput } from './validation.js';
 
+interface PlainObject {
+  [key: string]: string;
+}
+
+// interface SignupData extends PlainObject {
+//   first_name: string;
+//   second_name: string;
+//   login: string;
+//   email: string;
+//   password: string;
+//   phone: string;
+// }
+//
+// interface SignInData extends PlainObject {
+//   login: string;
+//   password: string;
+// }
+
 /**
  * Отправка формы
  */
-export default function submitForm(formId: string): void {
+export default function submitForm(formId: string): PlainObject | undefined {
   const form: any = document.getElementById(formId);
 
   let hasError: boolean = false;
@@ -21,13 +39,12 @@ export default function submitForm(formId: string): void {
   }
 
   const formData: any = new FormData(form);
-  const formFields: { [key: string]: string } = {};
+  const formFields: PlainObject = {};
 
   for (let [key, value] of formData) {
     formFields[key] = value;
   }
 
-  console.log(formFields);
-
   form.reset();
+  return formFields;
 }

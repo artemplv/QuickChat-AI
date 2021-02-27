@@ -17,6 +17,7 @@ interface optionsObject {
   data?: requestDataObject;
   timeout?: number;
   headers?: headersObject;
+  withCredentials?: boolean;
 }
 
 interface requestPreparedOptions extends optionsObject {
@@ -84,18 +85,34 @@ export default class HTTPTransport {
       method,
       data,
       headers = {},
+      withCredentials,
     } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.timeout = timeout;
+
+      if (withCredentials) {
+        xhr.withCredentials = true;
+      }
+
       for (const key in headers) {
         xhr.setRequestHeader(key, headers[key]);
       }
 
       xhr.onload = function() {
-        resolve(xhr);
+        console.log(xhr);
+        let data;
+        try {
+          data = JSON.parse(xhr.response);
+        } catch {
+          data = xhr.response;
+        }
+        resolve({
+          status: xhr.status,
+          data,
+        });
       };
 
       xhr.onabort = function() {

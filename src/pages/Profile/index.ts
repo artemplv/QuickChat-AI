@@ -1,7 +1,7 @@
 import Block from '../../modules/block.js';
 import Button from '../../components/Button/index.js';
 
-import { userDataForm } from '../../components/UserDataForm/index.js';
+import UserDataForm from '../../components/UserDataForm/index.js';
 import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
 
 import {
@@ -19,6 +19,10 @@ import {
   removeError,
 } from '../../utils/validation.js';
 
+import AuthAPI from '../../api/auth/index.js';
+
+const authApi = new AuthAPI();
+
 import { template } from './template.js';
 
 interface clickEvent {
@@ -27,7 +31,7 @@ interface clickEvent {
 
 export default class Profile extends Block {
   public props: any;
-  constructor() {
+  constructor(props: any) {
     super('div', {
       goBackButton: new Button({
         className: 'image-button',
@@ -55,11 +59,10 @@ export default class Profile extends Block {
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        onClick: `navigate('/login')`,
         children: `<a class="button-link">Выйти</a>`,
       }),
-      changeDataForm: userDataForm,
       changePasswordForm: userPasswordForm,
+      props,
     });
   }
 
@@ -76,6 +79,17 @@ export default class Profile extends Block {
   handleSubmitPassword(event: clickEvent) {
     event.preventDefault();
     submitForm('userPassword');
+  }
+
+  async handleLogout(event: clickEvent) {
+    event.preventDefault();
+    await authApi.logout();
+    navigate('/login');
+  }
+
+  async getData() {
+    const response: any = await authApi.getUser();
+    this.setProps({ userData: response.data || null });
   }
 
   addListeners() {
@@ -96,9 +110,12 @@ export default class Profile extends Block {
 
     this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails);
     this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
+
+    this.getContent().querySelector('.logout-button')?.addEventListener('click', this.handleLogout);
   }
 
   componentDidMount() {
+    this.getData();
     this.addListeners();
   }
 
@@ -109,7 +126,9 @@ export default class Profile extends Block {
       changeDataButton: this.props.changeDataButton.render(),
       changePasswordButton: this.props.changePasswordButton.render(),
       logoutButton: this.props.logoutButton.render(),
-      changeDataForm: this.props.changeDataForm.render(),
+      changeDataForm: new UserDataForm({
+        userData: this.props?.userData,
+      }).render(),
       changePasswordForm: this.props.changePasswordForm.render(),
     });
   }

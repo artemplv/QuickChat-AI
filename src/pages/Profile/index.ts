@@ -51,7 +51,8 @@ export class Profile extends Block {
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: `<a class="button-link" href="/login">Выйти</a>`,
+        onClick: `navigate('/login')`,
+        children: `<a class="button-link">Выйти</a>`,
       }),
       changeDataForm: userDataForm,
       changePasswordForm: userPasswordForm,

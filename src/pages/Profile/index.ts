@@ -1,7 +1,7 @@
 import Block from '../../modules/block.js';
 import Button from '../../components/Button/index.js';
 
-import UserDataForm from '../../components/UserDataForm/index.js';
+import { userDataForm } from '../../components/UserDataForm/index.js';
 import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
 
 import {
@@ -116,6 +116,9 @@ export default class Profile extends Block {
 
   componentDidMount() {
     this.getData();
+  }
+
+  componentDidRender() {
     this.addListeners();
   }
 
@@ -126,9 +129,7 @@ export default class Profile extends Block {
       changeDataButton: this.props.changeDataButton.render(),
       changePasswordButton: this.props.changePasswordButton.render(),
       logoutButton: this.props.logoutButton.render(),
-      changeDataForm: new UserDataForm({
-        userData: this.props?.userData,
-      }).render(),
+      changeDataForm: userDataForm(this.props.userData).render(),
       changePasswordForm: this.props.changePasswordForm.render(),
     });
   }

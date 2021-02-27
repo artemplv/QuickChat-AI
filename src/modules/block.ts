@@ -1,4 +1,4 @@
-import EventBus from "../event-bus.js";
+import EventBus from '../event-bus.js';
 
 interface MetaType {
   tagName: string;
@@ -13,10 +13,11 @@ declare const Proxy: ProxyConstructor;
 
 export default class Block {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_RENDER: "flow:render",
-    FLOW_CDU: "flow:component-did-update"
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_RENDER: 'flow:render',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_CDR: 'flow:component-did-render',
   };
 
   private _element: any;
@@ -45,6 +46,7 @@ export default class Block {
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDR, this._componentDidRender.bind(this));
   }
 
   private _createResources(): void {
@@ -62,14 +64,20 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-	// Может переопределять пользователь, необязательно трогать
   componentDidMount(): void {}
 
-  _componentDidUpdate(): void {
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  private _componentDidRender(): void {
+    this.componentDidRender();
   }
 
-	// Может переопределять пользователь, необязательно трогать
+  componentDidRender(): void {}
+
+  _componentDidUpdate(): void {
+    if (this.componentDidUpdate()) {
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    }
+  }
+
   componentDidUpdate(): boolean {
     return true;
   }
@@ -92,7 +100,8 @@ export default class Block {
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this.getContent().innerHTML = block;
+    this.element.innerHTML = block;
+    this.eventBus().emit(Block.EVENTS.FLOW_CDR);
   }
 
 	// Может переопределять пользователь, необязательно трогать
@@ -126,10 +135,10 @@ export default class Block {
   }
 
   show(): void {
-    this.getContent().style.display = "block";
+    this.getContent().style.display = 'block';
   }
 
   hide(): void {
-    this.getContent().style.display = "none";
+    this.getContent().style.display = 'none';
   }
 }

@@ -12,7 +12,8 @@ export const loginForm = new Form({
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
-    children: `<a class="button-link" href="./signup.html">Нет аккаунта?</a>`,
+    onClick: `navigate('/signup')`,
+    children: `<a class="button-link">Нет аккаунта?</a>`,
     className: 'form__additional-button',
     htmlType: 'button',
   }).render(),

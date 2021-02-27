@@ -1,8 +1,8 @@
 import { Block } from '../../modules/block.js';
 import { Chats } from '../../components/Chats/index.js';
 import { template } from './template.js';
-import { sampleChats } from './sampleChats.js';
-import { render } from '../../utils/render.js';
+// import { sampleChats } from './sampleChats.js';
+// import { render } from '../../utils/render.js';
 
 export class ChatsPage extends Block {
   public props: any
@@ -20,7 +20,3 @@ export class ChatsPage extends Block {
     });
   }
 }
-
-const chatsPage = new ChatsPage({ chatsList: sampleChats });
-
-render('.app', chatsPage);

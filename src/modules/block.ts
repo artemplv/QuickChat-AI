@@ -54,12 +54,12 @@ export class Block {
 
   public init(): void {
     this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    // this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
 	// Может переопределять пользователь, необязательно трогать
@@ -93,6 +93,7 @@ export class Block {
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
 	// Может переопределять пользователь, необязательно трогать

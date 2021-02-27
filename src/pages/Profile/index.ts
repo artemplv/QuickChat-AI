@@ -2,7 +2,6 @@ import { Block } from '../../modules/block.js';
 import { userDataForm } from '../../components/UserDataForm/index.js';
 import { userPasswordForm } from '../../components/UserPasswordForm/index.js';
 import { Button } from '../../components/Button/index.js';
-import { render } from '../../utils/render.js';
 import {
   onChangeDetailsClick,
   onChangePasswordClick,
@@ -18,6 +17,10 @@ import {
 
 import { template } from './template.js';
 
+interface clickEvent {
+  preventDefault: () => void;
+}
+
 export class Profile extends Block {
   public props: any;
   constructor() {
@@ -25,8 +28,9 @@ export class Profile extends Block {
       goBackButton: new Button({
         className: 'image-button',
         htmlType: 'submit',
+        onClick: `navigate('/chats')`,
         children: `
-          <a href="./chats.html"><img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" style="transform: rotate(180deg)" /></a>
+          <img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" style="transform: rotate(180deg)" />
         `,
       }),
       changeAvatarButton: new Button({
@@ -47,11 +51,50 @@ export class Profile extends Block {
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: `<a class="button-link" href="./login.html">Выйти</a>`,
+        children: `<a class="button-link" href="/login">Выйти</a>`,
       }),
       changeDataForm: userDataForm,
       changePasswordForm: userPasswordForm,
     });
+  }
+
+  handleAvatarModal(event: clickEvent) {
+    event.preventDefault();
+    handleModal('uploadAvatarModal');
+  }
+
+  handleSubmitDetails(event: clickEvent) {
+    event.preventDefault();
+    submitForm('userDetails');
+  }
+
+  handleSubmitPassword(event: clickEvent) {
+    event.preventDefault();
+    submitForm('userPassword');
+  }
+
+  addListeners() {
+    this.getContent().querySelector('.change-data-intention-button')?.addEventListener('click', onChangeDetailsClick);
+    this.getContent().querySelector('.change-password-intention-button')?.addEventListener('click', onChangePasswordClick);
+    this.getContent().querySelector('.cancel-details-change-button')?.addEventListener('click', cancelDetailsChange);
+    this.getContent().querySelector('.cancel-password-change-button')?.addEventListener('click', cancelPasswordChange);
+    this.getContent().querySelector('.change-avatar-button')?.addEventListener('click', this.handleAvatarModal);
+
+    this.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
+      element.addEventListener('focus', () => {
+        removeError(element);
+      });
+      element.addEventListener('blur', () => {
+        validateInput(element);
+      });
+    });
+
+    this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails);
+    this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
+  }
+
+  componentDidMount() {
+    this.addListeners();
   }
 
   render() {
@@ -66,52 +109,3 @@ export class Profile extends Block {
     });
   }
 }
-
-const profilePage: any = new Profile();
-
-profilePage.getContent().querySelector('.change-data-intention-button').addEventListener('click', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  onChangeDetailsClick();
-});
-
-profilePage.getContent().querySelector('.change-password-intention-button').addEventListener('click', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  onChangePasswordClick();
-});
-
-profilePage.getContent().querySelector('.cancel-details-change-button').addEventListener('click', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  cancelDetailsChange();
-});
-
-profilePage.getContent().querySelector('.cancel-password-change-button').addEventListener('click', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  cancelPasswordChange();
-});
-
-profilePage.getContent().querySelector('.change-avatar-button').addEventListener('click', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  handleModal('uploadAvatarModal');
-});
-
-profilePage.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
-  element.addEventListener('focus', () => {
-    removeError(element);
-  });
-
-  element.addEventListener('blur', () => {
-    validateInput(element);
-  });
-});
-
-profilePage.getContent().querySelector('#userPassword').addEventListener('submit', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  submitForm('userPassword');
-});
-
-profilePage.getContent().querySelector('#userDetails').addEventListener('submit', function(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-  submitForm('userDetails');
-});
-
-render('.app', profilePage);

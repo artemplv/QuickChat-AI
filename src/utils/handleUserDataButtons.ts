@@ -1,7 +1,13 @@
 /**
  * Управление кнопками для изменений в профиле
- */
-export function onChangeDetailsClick(): void {
+*/
+
+interface clickEvent {
+ preventDefault: () => void;
+}
+
+export function onChangeDetailsClick(event: clickEvent): void {
+  event.preventDefault();
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
 
   const inputs: HTMLCollectionOf<HTMLInputElement> = detailsForm.getElementsByTagName('input');
@@ -17,7 +23,8 @@ export function onChangeDetailsClick(): void {
   formButtons.hidden = false;
 }
 
-export function cancelDetailsChange(): void {
+export function cancelDetailsChange(event: clickEvent): void {
+  event.preventDefault();
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
 
   detailsForm.reset();
@@ -40,7 +47,8 @@ export function cancelDetailsChange(): void {
   }
 }
 
-export function onChangePasswordClick(): void {
+export function onChangePasswordClick(event: clickEvent): void {
+  event.preventDefault();
   const passwordForm = <HTMLFormElement> document.getElementById('userPassword');
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
   const controlButtons = <HTMLElement> document.getElementsByClassName('profile-data__control-buttons')[0];
@@ -50,7 +58,8 @@ export function onChangePasswordClick(): void {
   controlButtons.hidden = true;
 }
 
-export function cancelPasswordChange() {
+export function cancelPasswordChange(event: clickEvent) {
+  event.preventDefault();
   const passwordForm = <HTMLFormElement> document.getElementById('userPassword');
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
   const controlButtons = <HTMLElement> document.getElementsByClassName('profile-data__control-buttons')[0];

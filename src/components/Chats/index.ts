@@ -17,9 +17,10 @@ export class Chats extends Block {
       chatsList: props.chatsList,
       profileButton: new Button({
         className: 'profile-button',
+        onClick: `navigate('/profile')`,
         children: `
           <div class="button-inner-container">
-            <a class="button-link" href="./profile.html">Профиль</a>
+            <a class="button-link">Профиль</a>
             <img src="static/assets/images/arrow-right.svg" alt="arrow right" class="button-arrow-right-image" />
           </div>
         `,

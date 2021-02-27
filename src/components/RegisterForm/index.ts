@@ -12,7 +12,8 @@ export const registerForm = new Form({
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
-    children: `<a class="button-link" href="./login.html">Войти</a>`,
+    onClick: `navigate('/login')`,
+    children: `<a class="button-link">Войти</a>`,
     className: 'form__additional-button',
     htmlType: 'button',
   }).render(),

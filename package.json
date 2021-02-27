@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "scripts": {
     "build": "tsc",
-    "postbuild": "cp -r ./src/static ./src/chat-feed.html ./src/chats.html ./src/login.html ./src/signup.html ./src/profile.html ./build",
+    "postbuild": "cp -r ./src/static ./src/index.html ./build",
     "start": "node ./build/server.js",
     "tsc": "tsc"
   },

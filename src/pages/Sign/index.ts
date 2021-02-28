@@ -11,13 +11,14 @@ const authApi = new AuthAPI();
 
 import { template } from './template.js';
 
-interface clickEvent {
-  preventDefault: () => void;
+interface Props extends PlainObject {
+  form?: InstanceType<typeof Block>;
 }
 
+
 export default class SignPage extends Block {
-  public props: any;
-  constructor(props: {}) {
+  public props: Props;
+  constructor(props?: Props) {
     super('div', props);
   }
 
@@ -74,7 +75,7 @@ export default class SignPage extends Block {
 
   render() {
     return Handlebars.compile(template)({
-      form: this.props.form.render(),
+      form: this.props?.form?.render(),
     });
   }
 }

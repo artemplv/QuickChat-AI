@@ -2,10 +2,6 @@
  * Управление кнопками для изменений в профиле
 */
 
-interface clickEvent {
- preventDefault: () => void;
-}
-
 export function onChangeDetailsClick(event: clickEvent): void {
   event.preventDefault();
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');

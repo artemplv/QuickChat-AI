@@ -1,9 +1,5 @@
 import { validateInput } from './validation.js';
 
-interface PlainObject {
-  [key: string]: string;
-}
-
 // interface SignupData extends PlainObject {
 //   first_name: string;
 //   second_name: string;

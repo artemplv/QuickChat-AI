@@ -4,16 +4,16 @@ import ChatFeed from '../../components/ChatFeed/index.js';
 import { template } from './template.js';
 import handleModal from '../../utils/handleModals.js';
 
-interface clickEvent {
-  preventDefault: () => void;
+interface Props extends PlainObject {
+  chatsList?: ChatObject[];
 }
 
 export default class ChatFeedPage extends Block {
-  public props: any
-  constructor(props: { chatsList: any[] }) {
+  public props: Props;
+  constructor(props?: Props) {
     super('div', {
       chats: new Chats({
-        chatsList: props.chatsList,
+        chatsList: props?.chatsList,
       }),
       feed: new ChatFeed({
         chatName: 'Вадим',

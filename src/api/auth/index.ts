@@ -17,10 +17,6 @@ import {
 //   password: string;
 // }
 
-interface PlainObject {
-  [key: string]: string;
-}
-
 const host = 'https://ya-praktikum.tech';
 
 const authAPIInstance = new HTTPTransport(`${host}/api/v2/auth`);

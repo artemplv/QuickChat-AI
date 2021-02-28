@@ -1,9 +1,13 @@
 import Route from './Route.js';
-// import Block from '../modules/block.js';
+import Block from '../modules/block.js';
 
-// interface ComponentConstructor {
-//     new (): InstanceType<typeof Block>;
-// }
+interface ComponentConstructor {
+    new (props?: Props): InstanceType<typeof Block>;
+}
+
+interface Props extends PlainObject {
+  rootQuery: string;
+}
 
 export default class Router {
   routes: InstanceType<typeof Route>[];
@@ -25,7 +29,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: any, blockProps: any = {}) {
+  use(pathname: string, block: ComponentConstructor, blockProps: PlainObject = {}) {
     const route = new Route(pathname, block, { ...blockProps, rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;

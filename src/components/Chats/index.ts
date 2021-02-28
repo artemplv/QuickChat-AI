@@ -2,19 +2,16 @@ import Block from '../../modules/block.js';
 import Button from '../Button/index.js';
 import { template } from './template.js';
 
-interface ChatObject {
-  title: string,
-  lastMessageTime: string,
-  isLastMessageFromUser: boolean,
-  lastMessageText: string,
-  unreadMessagesCount?: number,
+interface Props extends PlainObject {
+  chatsList?: ChatObject[];
 }
 
+
 export default class Chats extends Block {
-  public props: any;
-  constructor(props: { chatsList: ChatObject[] }) {
+  public props: Props;
+  constructor(props?: Props) {
     super('div', {
-      chatsList: props.chatsList,
+      chatsList: props?.chatsList,
       profileButton: new Button({
         className: 'profile-button',
         onClick: `navigate('/profile')`,

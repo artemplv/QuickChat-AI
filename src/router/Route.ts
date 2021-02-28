@@ -1,22 +1,21 @@
 import Block from '../modules/block.js';
 import { render } from '../utils/render.js';
 
-// interface ComponentConstructor {
-//     new (): InstanceType<typeof Block>;
-// }
+interface ComponentConstructor {
+    new (props?: Props): InstanceType<typeof Block>;
+}
 
-interface Props {
-  [key: string]: any;
+interface Props extends PlainObject {
   rootQuery: string;
 }
 
 export default class Route {
   private _pathname: string;
-  private _blockClass: any;
+  private _blockClass: ComponentConstructor;
   private _block: InstanceType<typeof Block> | null;
   private _props: Props;
 
-  constructor(pathname: string, view: any, props: Props) {
+  constructor(pathname: string, view: ComponentConstructor, props: Props) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;

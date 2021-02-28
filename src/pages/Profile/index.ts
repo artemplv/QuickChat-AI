@@ -27,9 +27,6 @@ const usersApi = new UsersAPI();
 
 import { template } from './template.js';
 
-interface clickEvent {
-  preventDefault: () => void;
-}
 
 export default class Profile extends Block {
   public props: any;

@@ -21,8 +21,4 @@ router
   .use('/404', NotFoundError, {})
   .start();
 
-interface CustomEventData extends Event {
-  detail: string;
-}
-
 window.addEventListener('_pushstate', (event: CustomEventData) => router.go(event.detail));

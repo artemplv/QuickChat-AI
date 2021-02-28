@@ -35,7 +35,7 @@ export default class ChatFeedPage extends Block {
     this.getContent().querySelector('.delete-chat-button')?.addEventListener('click', this.handleDeleteChatModal);
   }
 
-  componentDidMount() {
+  componentDidRender() {
     this.addListeners();
   }
 
@@ -45,7 +45,7 @@ export default class ChatFeedPage extends Block {
         chatsList: this.props?.chatsList,
       }).render(),
       feed: new ChatFeed({
-        chatName: 'Вадим',
+        chatName: this.props?.chatId,
       }).render(),
     });
   }

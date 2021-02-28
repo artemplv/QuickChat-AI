@@ -22,6 +22,10 @@ export default class Route {
     this._props = props;
   }
 
+  setProps(props: PlainObject) {
+    this._props = { ...this._props, ...props };
+  }
+
   navigate(pathname: string) {
     if (this.match(pathname)) {
       this._pathname = pathname;
@@ -36,7 +40,28 @@ export default class Route {
   }
 
   match(pathname: string) {
-    return pathname === this._pathname;
+    const paramNames: string[] = [];
+
+    const regexPath = this._pathname.replace(/([:*])(\w+)/g, (_full, _colon, name) => {
+      paramNames.push(name);
+      return '([^/]+)';
+    }) + '(?:/|$)';
+
+    let pathParams;
+
+    const routeMatch = pathname.match(new RegExp(regexPath));
+
+    if (routeMatch !== null) {
+      pathParams = routeMatch.slice(1).reduce((params, value, index) => {
+        params[paramNames[index]] = value;
+        return params;
+      }, <PlainObject>{});
+
+      this.setProps(pathParams);
+      return true;
+    }
+
+    return false;
   }
 
   render() {

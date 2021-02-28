@@ -14,7 +14,7 @@ const router = new Router('.app');
 
 router
   .use('/chats', ChatsPage, { chatsList: sampleChats })
-  .use('/chat-feed', ChatFeedPage, { chatsList: sampleChats })
+  .use('/chat/:chatId', ChatFeedPage, { chatsList: sampleChats })
   .use('/profile', Profile, {})
   .use('/login', SignPage, { form: LoginForm })
   .use('/signup', SignPage, { form: RegisterForm })

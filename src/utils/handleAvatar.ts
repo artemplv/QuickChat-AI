@@ -1,4 +1,7 @@
-function handleAvatarUpload(): void {
+
+export function handleAvatarUpload(event: clickEvent): void {
+  event.preventDefault();
+
   const avatarInput = <HTMLInputElement> document.getElementById('avatar');
   const errorMsg = <HTMLElement> document.getElementsByClassName('modal-body__error-msg')[0];
 
@@ -16,7 +19,7 @@ function handleAvatarUpload(): void {
   }
 }
 
-function resetAvatarForm(): void {
+export function resetAvatarForm(): void {
   const avatarForm = <HTMLFormElement> document.getElementById('avatarForm');
   avatarForm.reset();
 
@@ -30,18 +33,21 @@ function resetAvatarForm(): void {
   uploadControl.hidden = false;
 }
 
-function submitAvatar(): void {
+export function submitAvatar(): FormData | undefined {
+
   const avatarInput = <HTMLInputElement> document.getElementById('avatar');
   const modal = <HTMLElement> document.getElementById('uploadAvatarModal');
 
   const files = <FileList> avatarInput.files;
 
+  const avatarForm = <HTMLFormElement> document.getElementById('avatarForm');
+  const data = new FormData(avatarForm);
+
   if (files.length === 0) {
     const errorMsg = <HTMLElement> document.getElementsByClassName('modal-body__error-msg')[0];
     errorMsg.style.display = 'block';
   } else {
-    console.log(files[0]);
     modal.style.display = 'none';
-    resetAvatarForm();
+    return data;
   }
 }

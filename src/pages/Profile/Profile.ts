@@ -11,6 +11,12 @@ import {
   cancelPasswordChange,
 } from '../../utils/handleUserDataButtons.js';
 
+import {
+  handleAvatarUpload,
+  resetAvatarForm,
+  submitAvatar,
+} from '../../utils/handleAvatar.js';
+
 import handleModal from '../../utils/handleModals.js';
 import submitForm from '../../utils/submitForm.js';
 
@@ -100,6 +106,27 @@ export default class Profile extends Block {
     }
   }
 
+  handleSubmitAvatar() {
+    const self = this;
+
+    return async function(event: clickEvent) {
+      event.preventDefault();
+      const data = submitAvatar();
+
+      if (data) {
+        try {
+          const response: any = await usersApi.changeAvatar(data);
+          if (response.status === 200) {
+            self.getData();
+            resetAvatarForm();
+          }
+        } catch(error) {
+          console.error(error);
+        }
+      }
+    }
+  }
+
   async handleSubmitPassword(event: clickEvent) {
     event.preventDefault();
     const data = submitForm('userPassword');
@@ -134,6 +161,9 @@ export default class Profile extends Block {
 
     this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails());
     this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
+
+    this.getContent().querySelector('.avatar-upload-input')?.addEventListener('change', handleAvatarUpload);
+    this.getContent().querySelector('#avatarForm')?.addEventListener('submit', this.handleSubmitAvatar());
 
     this.getContent().querySelector('.logout-button')?.addEventListener('click', this.handleLogout);
   }

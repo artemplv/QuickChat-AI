@@ -44,7 +44,7 @@ export const template = `
           <p class="file-name"></p>
         </div>
 
-        <button type="button" class="form__main-button" onclick="submitAvatar()">
+        <button type="submit" class="form__main-button">
           Поменять
         </button>
       </form>

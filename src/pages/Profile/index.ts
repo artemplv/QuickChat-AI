@@ -20,8 +20,10 @@ import {
 } from '../../utils/validation.js';
 
 import AuthAPI from '../../api/auth/index.js';
+import UsersAPI from '../../api/users/index.js';
 
 const authApi = new AuthAPI();
+const usersApi = new UsersAPI();
 
 import { template } from './template.js';
 
@@ -71,16 +73,6 @@ export default class Profile extends Block {
     handleModal('uploadAvatarModal');
   }
 
-  handleSubmitDetails(event: clickEvent) {
-    event.preventDefault();
-    submitForm('userDetails');
-  }
-
-  handleSubmitPassword(event: clickEvent) {
-    event.preventDefault();
-    submitForm('userPassword');
-  }
-
   async handleLogout(event: clickEvent) {
     event.preventDefault();
     await authApi.logout();
@@ -90,6 +82,42 @@ export default class Profile extends Block {
   async getData() {
     const response: any = await authApi.getUser();
     this.setProps({ userData: response.data || null });
+  }
+
+  handleSubmitDetails() {
+    const self = this;
+
+    return async function(event: clickEvent) {
+      event.preventDefault();
+      const data = submitForm('userDetails');
+
+      if (data) {
+        try {
+          const response: any = await usersApi.changeProfile(data);
+          if (response.status === 200) {
+            self.getData();
+          }
+        } catch(error) {
+          console.error(error);
+        }
+      }
+    }
+  }
+
+  async handleSubmitPassword(event: clickEvent) {
+    event.preventDefault();
+    const data = submitForm('userPassword');
+
+    if (data) {
+      try {
+        const response: any = await usersApi.changePassword(data);
+        if (response.status === 200) {
+          cancelPasswordChange({ preventDefault: () => {} });
+        }
+      } catch(error) {
+        console.error(error);
+      }
+    }
   }
 
   addListeners() {
@@ -108,7 +136,7 @@ export default class Profile extends Block {
       });
     });
 
-    this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails);
+    this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails());
     this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
 
     this.getContent().querySelector('.logout-button')?.addEventListener('click', this.handleLogout);

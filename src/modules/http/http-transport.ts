@@ -15,6 +15,7 @@ interface headersObject {
 
 interface optionsObject {
   data?: requestDataObject;
+  file?: FormData;
   timeout?: number;
   headers?: headersObject;
   withCredentials?: boolean;
@@ -86,6 +87,7 @@ export default class HTTPTransport {
       data,
       headers = {},
       withCredentials,
+      file,
     } = options;
 
     return new Promise((resolve, reject) => {
@@ -127,6 +129,8 @@ export default class HTTPTransport {
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (file) {
+        xhr.send(file);
       } else {
         xhr.send(JSON.stringify(data));
       }

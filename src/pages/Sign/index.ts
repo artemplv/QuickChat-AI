@@ -28,10 +28,7 @@ export default class SignPage extends Block {
     if (data) {
       try {
         const response: any = await authApi.signin(data);
-        console.log(response);
         if (response.status === 200) {
-          const response2 = await authApi.getUser();
-          console.log(response2);
           navigate('/chats');
         }
       } catch(error) {
@@ -47,10 +44,8 @@ export default class SignPage extends Block {
     if (data) {
       try {
         const response: any = await authApi.signup(data);
-        console.log(response);
         if (response.status === 200) {
-          const response2 = await authApi.getUser();
-          console.log(response2);
+          navigate('/chats');
         }
       } catch(error) {
         console.error(error);
@@ -73,7 +68,7 @@ export default class SignPage extends Block {
     });
   }
 
-  componentDidMount() {
+  componentDidRender() {
     this.addListeners();
   }
 

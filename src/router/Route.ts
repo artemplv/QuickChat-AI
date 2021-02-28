@@ -12,11 +12,11 @@ interface Props {
 
 export default class Route {
   private _pathname: string;
-  private _blockClass: InstanceType<typeof Block>;
+  private _blockClass: any;
   private _block: InstanceType<typeof Block> | null;
   private _props: Props;
 
-  constructor(pathname: string, view: InstanceType<typeof Block>, props: Props) {
+  constructor(pathname: string, view: any, props: Props) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -42,7 +42,7 @@ export default class Route {
 
   render() {
     if (!this._block) {
-      this._block = this._blockClass;
+      this._block = new this._blockClass(this._props);
       render(this._props.rootQuery, this._block);
       return;
     }

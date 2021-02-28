@@ -13,12 +13,12 @@ import { loginForm } from './components/LoginForm/index.js';
 const router = new Router('.app');
 
 router
-  .use('/chats', new ChatsPage({ chatsList: sampleChats }))
-  .use('/chat-feed', new ChatFeedPage({ chatsList: sampleChats }))
-  .use('/profile', new Profile({}))
-  .use('/login', new SignPage({ form: loginForm }))
-  .use('/signup', new SignPage({ form: registerForm }))
-  .use('/404', new NotFoundError())
+  .use('/chats', ChatsPage, { chatsList: sampleChats })
+  .use('/chat-feed', ChatFeedPage, { chatsList: sampleChats })
+  .use('/profile', Profile, {})
+  .use('/login', SignPage, { form: loginForm })
+  .use('/signup', SignPage, { form: registerForm })
+  .use('/404', NotFoundError, {})
   .start();
 
 interface CustomEventData extends Event {

@@ -1,5 +1,5 @@
 import Route from './Route.js';
-import Block from '../modules/block.js';
+// import Block from '../modules/block.js';
 
 // interface ComponentConstructor {
 //     new (): InstanceType<typeof Block>;
@@ -25,8 +25,8 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: InstanceType<typeof Block>) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, block: any, blockProps: any = {}) {
+    const route = new Route(pathname, block, { ...blockProps, rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }

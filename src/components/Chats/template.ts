@@ -19,7 +19,10 @@ export const template = `
       <ul class="chats-container__list">
         {{#each chatsList}}
           <li class="chat-list-item">
-            <div class="chat-list-item__avatar"></div>
+            <div
+              class="chat-list-item__avatar"
+              style="background-image: url({{ this.avatar }}"
+            ></div>
             <div class="chat-list-item__info">
               <div class="chat-list-item__name-container">
                 <h4 class="chat-list-item__name">{{ this.title }}</h4>

@@ -9,7 +9,7 @@ export default class ChatFeed extends Block {
 
   constructor(props: { chatName: string }) {
     super('div', {
-      chatName: props.chatName,
+      props,
       chatOptionsDropdownButton: new Button({
         className: 'image-button dropdown-button',
         children: `<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />`,
@@ -75,7 +75,8 @@ export default class ChatFeed extends Block {
 
   render() {
     return Handlebars.compile(template)({
-      chatName: this.props.chatName,
+      chatName: this.props?.chatName,
+      avatarUrl: this.props?.avatar,
       chatOptionsDropdownButton: this.props.chatOptionsDropdownButton.render(),
       addUserButton: this.props.addUserButton.render(),
       deleteUserButton: this.props.deleteUserButton.render(),

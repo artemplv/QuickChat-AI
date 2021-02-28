@@ -8,7 +8,10 @@ export const template = `
   <main>
     <div class="profile-data-wrapper">
       <div class="profile-data">
-        <div class="profile-data__avatar">
+        <div
+          class="profile-data__avatar"
+          style="background-image: url({{ avatarUrl }})"
+        >
           {{{ changeAvatarButton }}}
         </div>
 

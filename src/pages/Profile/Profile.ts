@@ -31,6 +31,8 @@ import UsersAPI from '../../api/users/index.js';
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
 
+const host = 'https://ya-praktikum.tech';
+
 import { template } from './template.js';
 
 
@@ -185,6 +187,7 @@ export default class Profile extends Block {
       logoutButton: this.props.logoutButton.render(),
       changeDataForm: UserDataForm(this.props.userData).render(),
       changePasswordForm: UserPasswordForm.render(),
+      avatarUrl: this.props.userData?.avatar ? `${host}${this.props.userData.avatar}` : '../images/media-icon-grey.svg',
     });
   }
 }

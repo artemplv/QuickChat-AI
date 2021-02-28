@@ -237,6 +237,9 @@ input.search__input {
   width: 47px;
   height: 47px;
   background: #EFEFEF;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -537,7 +540,7 @@ input.search__input {
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
-  /* background-size: cover; */
+  background-size: cover;
   background-image: url("../images/media-icon-grey.svg");
   overflow: hidden;
   margin-bottom: 20px;

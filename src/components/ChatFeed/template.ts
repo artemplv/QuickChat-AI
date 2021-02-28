@@ -2,7 +2,11 @@ export const template = `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
-        <div class="chat-list-item__avatar"></div>
+        <div
+          class="chat-list-item__avatar"
+          style="background-image: url({{ avatar }})"
+        >
+        </div>
         <h4 class="chat-list-item__name">{{ chatName }}</h4>
       </div>
 

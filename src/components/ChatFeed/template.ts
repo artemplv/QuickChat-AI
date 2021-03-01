@@ -3,7 +3,7 @@ export const template = `
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
         <div
-          class="chat-list-item__avatar"
+          class="avatar"
           style="background-image: url({{ avatar }})"
         >
         </div>
@@ -14,13 +14,13 @@ export const template = `
         <div class="dropdown">
           {{{ chatMembersDropdownButton }}}
 
-          <div class="dropdown-content" style="width: 320px;">
-            <ul class="buttons-list">
+          <div class="dropdown-content dropdown-content_bottom dropdown-content_wide">
+            <ul class="base-list">
               {{#each chatMembers}}
                 <li style="padding: 5px 10px;">
                   <div class="avatar-with-name">
                     <div
-                      class="chat-list-item__avatar"
+                      class="avatar"
                       style="background-image: url({{ this.avatar }})"
                     >
                     </div>
@@ -35,8 +35,8 @@ export const template = `
         <div class="dropdown">
           {{{ chatOptionsDropdownButton }}}
 
-          <div class="dropdown-content">
-            <ul class="buttons-list">
+          <div class="dropdown-content dropdown-content_bottom">
+            <ul class="base-list">
               <li>
                 {{{ addUserButton }}}
               </li>
@@ -56,8 +56,8 @@ export const template = `
       <div class="dropdown">
         {{{ messageOptionsButton }}}
 
-        <div class="dropdown-content-top">
-          <ul class="buttons-list">
+        <div class="dropdown-content dropdown-content_top">
+          <ul class="base-list">
             <li>
               {{{ addMediaButton }}}
             </li>
@@ -85,7 +85,7 @@ export const template = `
         </div>
       </div>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Добавить
       </button>
     </form>
@@ -103,7 +103,7 @@ export const template = `
         </div>
       </div>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Удалить
       </button>
     </form>
@@ -113,7 +113,7 @@ export const template = `
     <div class="modal-body">
       <h4 class="modal-body__name">Удалить этот чат?</h4>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Удалить
       </button>
     </div>

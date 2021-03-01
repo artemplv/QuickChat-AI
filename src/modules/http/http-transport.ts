@@ -104,7 +104,6 @@ export default class HTTPTransport {
       }
 
       xhr.onload = function() {
-        console.log(xhr);
         let data;
         try {
           data = JSON.parse(xhr.response);

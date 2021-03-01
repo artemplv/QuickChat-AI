@@ -8,13 +8,13 @@ export const RegisterForm = new Form({
   mainContent: template,
   buttonOk: new Button({
     children: 'Зарегистрироваться',
-    className: 'form__main-button',
+    className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
     onClick: `navigate('/login')`,
     children: `<a class="button-link">Войти</a>`,
-    className: 'form__additional-button',
+    className: 'button_additional',
     htmlType: 'button',
   }).render(),
 });

@@ -136,10 +136,8 @@ export default class ChatFeedPage extends Block {
   }
 
   componentDidRender() {
-    console.log('render');
     this.addListeners();
     if (!this.props?.chatTitle && this.props?.chatId && this.props?.chatsList && this.props.chatsList.length > 0) {
-      console.log('searching');
       const currentChat = this.props.chatsList.find((chat: ChatObject) => chat.id === Number(this.props.chatId));
       this.setProps({ chatTitle: currentChat?.title || 'Unknown' });
     }
@@ -148,7 +146,6 @@ export default class ChatFeedPage extends Block {
   componentDidMount() {
     this.getChats();
     this.getChatUsers();
-    console.log(this.props?.chatId);
   }
 
   render() {

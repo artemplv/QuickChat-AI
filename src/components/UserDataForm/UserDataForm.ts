@@ -11,12 +11,12 @@ export const UserDataForm = (userData: any = {}) => new Form({
   mainContent: Handlebars.compile(template)(userData),
   buttonOk: new Button({
     children: 'Сохранить',
-    className: 'form__main-button',
+    className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
     children: 'Отменить',
-    className: 'form__additional-button cancel-details-change-button',
+    className: 'button_additional cancel-details-change-button',
     htmlType: 'button',
   }).render(),
 });

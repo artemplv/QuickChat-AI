@@ -47,7 +47,7 @@ export const template = `
           <p class="file-name"></p>
         </div>
 
-        <button type="submit" class="form__main-button">
+        <button type="submit" class="button button_main">
           Поменять
         </button>
       </form>

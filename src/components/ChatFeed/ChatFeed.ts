@@ -18,11 +18,11 @@ export default class ChatFeed extends Block {
       chatMembers: this.props?.chatMembers,
 
       chatMembersDropdownButton: new Button({
-        className: 'form__additional-button dropdown-button',
+        className: 'button_additional dropdown-button',
         children: 'Участники чата',
       }).render(),
       chatOptionsDropdownButton: new Button({
-        className: 'image-button dropdown-button',
+        className: 'dropdown-button',
         children: `<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />`,
       }).render(),
       addUserButton: new Button({
@@ -47,7 +47,7 @@ export default class ChatFeed extends Block {
         `,
       }).render(),
       messageOptionsButton: new Button({
-        className: 'image-button dropdown-button',
+        className: 'dropdown-button',
         children: `<img src="static/assets/images/attachments.svg" alt="add attachments" width="32" height="32" />`,
       }).render(),
       addMediaButton: new Button({
@@ -77,7 +77,6 @@ export default class ChatFeed extends Block {
         mainContent: `<textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>`,
         buttonOk: new Button({
           children: `<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />`,
-          className: 'image-button',
           htmlType: 'submit',
         }).render(),
       }).render(),

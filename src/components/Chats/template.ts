@@ -17,7 +17,7 @@ export const template = `
 
     <nav class="chats-container">
 
-      <div style="text-align: center; margin-bottom: 5px;">
+      <div style="text-align: center; margin-bottom: 10px;">
         {{{ createChatButton }}}
       </div>
 
@@ -25,7 +25,7 @@ export const template = `
         {{#each chatsList}}
           <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chat/{{ this.id }}')">
             <div
-              class="chat-list-item__avatar"
+              class="avatar"
               style="background-image: url({{ this.avatar }}"
             ></div>
             <div class="chat-list-item__info">
@@ -72,7 +72,7 @@ export const template = `
           </div>
         </div>
 
-        <button type="submit" class="form__main-button">
+        <button type="submit" class="button button_main">
           Создать
         </button>
       </form>

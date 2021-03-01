@@ -11,7 +11,7 @@ export default class NotFoundError extends Block {
   render() {
     return Handlebars.compile(template)({
       button: new Button({
-        className: 'form__additional-button',
+        className: 'button_additional',
         children: `<a class="button-link">Назад к чатам</a>`,
         onClick: `navigate('/chats')`,
       }).render(),

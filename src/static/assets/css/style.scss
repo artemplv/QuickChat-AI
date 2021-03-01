@@ -1,23 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+@import './variables';
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0;
 }
 
-.sign-view {
+%full-screen {
   width: 100vw;
   height: 100vh;
   display: flex;
+}
+
+%shadow {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+}
+
+%button {
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+}
+
+
+.sign-view {
+  @extend %full-screen;
   justify-content: center;
   align-items: center;
   background-color: white;
 }
 
 .chats-view {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
+  @extend %full-screen;
 }
 
 .form {
@@ -25,20 +42,20 @@ body {
 }
 
 .sign-form {
+  @extend %shadow;
   width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
 }
 
 .sign-form__heading {
   font-size: 20px;
   font-weight: 500;
-  color: #1E1E1E;
+  color: $main-text-color;
 }
 
 .sign-in-form__heading {
@@ -57,7 +74,7 @@ body {
 
 .form-field__label {
   font-size: 9px;
-  color: #999999;
+  color: $additional-text-color;
   transform: translateY(-14px);
   display: block;
   font-weight: normal;
@@ -79,7 +96,7 @@ body {
 }
 
 .form-field__bar {
-  border-bottom: 1px solid #3369F3;
+  border-bottom: 1px solid $accent-color;
   bottom: 0;
   content: "";
   display: block;
@@ -96,8 +113,8 @@ body {
   appearance: none;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #3369F3;
-  color: #1E1E1E;
+  border-bottom: 1px solid $accent-color;
+  color: $main-text-color;
   display: block;
   font-size: 13px;
   margin-top: 15px;
@@ -126,39 +143,78 @@ body {
   width: 100%;
 }
 
-.form__main-button {
-  border: none;
-  background: #3369F3;
-  border-radius: 8px;
-  width: 100%;
-  padding: 11px 0;
-  font-weight: 500;
-  font-size: 13px;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 15px;
+.button {
+  @extend %button;
+
+  &_main {
+    background: $accent-color;
+    width: 100%;
+    padding: 11px 0;
+    font-size: 13px;
+    color: white;
+    margin-bottom: 15px;
+  }
+
+  &_additional {
+    background: transparent;
+    font-size: 11px;
+    color: $accent-color;
+  }
+
+  &.profile-button {
+    font-size: 12px;
+    color: $additional-text-color;
+    float: right;
+    margin-bottom: 15px;
+  }
+
+  &.button-with-image-and-text {
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    font-size: 12px;
+    color: $main-text-color;
+    width: 100%;
+    white-space: nowrap;
+
+    &:hover {
+      background: #E4EDFD;
+    }
+  }
+
+  &.logout-button {
+    color: #FF0000;
+  }
+
+  .image-inside-button {
+    margin-right: 15px;
+  }
+
+  .button-link {
+    font-size: inherit;
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  .button-inner-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .button-arrow-right-image {
+    width: 7px;
+    height: 11px;
+    margin-left: 5px;
+  }
 }
 
-.form__additional-button {
-  border: none;
-  background: transparent;
-  font-weight: 500;
-  font-size: 11px;
-  color: #3369F3;
-  cursor: pointer;
-}
-
-.button-link {
-  font-size: inherit;
-  text-decoration: inherit;
-  color: inherit;
-}
 
 .chats {
   width: 310px;
   height: 100%;
-  background: #FBFBFB;
-  border-right: 1px solid #EAEAEA;
+  background: $light-grey;
+  border-right: 1px solid $border-color;
   box-sizing: border-box;
 }
 
@@ -167,47 +223,25 @@ body {
   padding: 20px 10px 0 10px;
 }
 
-.profile-button {
-  font-weight: 500;
-  font-size: 12px;
-  color: #999999;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  float: right;
-  margin-bottom: 15px;
-}
-
-.button-inner-container {
-  display: flex;
-  align-items: center;
-}
-
-.button-arrow-right-image {
-  width: 7px;
-  height: 11px;
-  margin-left: 5px;
-}
-
 .search__input {
   width: 100%;
   height: 32px;
   border: none;
-  background: #EFEFEF;
+  background: $background-grey;
   border-radius: 5px;
   background-image: url("../images/search-icon.svg");
   background-repeat: no-repeat;
   background-position: 40% center;
 }
 
-input.search__input:focus {
-  background-image: none;
-}
-
 input.search__input {
   font-size: 12px;
   font-weight: 500;
   text-align: center;
+
+  &:focus {
+    background-image: none;
+  }
 }
 
 .chats-container {
@@ -225,18 +259,18 @@ input.search__input {
   display: flex;
   align-items: center;
   padding: 12px 10px;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid $border-color;
   cursor: pointer;
+
+  &:hover {
+    background: aliceblue;
+  }
 }
 
-.chat-list-item:hover {
-  background: aliceblue;
-}
-
-.chat-list-item__avatar {
+.avatar {
   width: 47px;
   height: 47px;
-  background: #EFEFEF;
+  background: $background-grey;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -259,14 +293,14 @@ input.search__input {
   margin: 0;
   font-weight: 600;
   font-size: 13px;
-  color: #1E1E1E;
+  color: $main-text-color;
 }
 
 .chat-list-item__last-message-time {
   margin: 0;
   font-weight: 500;
   font-size: 9px;
-  color: #999999;
+  color: $additional-text-color;
 }
 
 .chat-list-item__last-message-container {
@@ -279,21 +313,21 @@ input.search__input {
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  color: #999999;
+  color: $additional-text-color;
   max-width: 195px;
   max-height: 30px;
   overflow: hidden;
 }
 
 .last-message-from-user-label {
-  color: #1E1E1E;
+  color: $main-text-color;
 }
 
 .chat-list-item__unread-message-count {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #3369F3;
+  background: $accent-color;
   text-align: center;
   font-weight: 500;
   font-size: 11px;
@@ -314,7 +348,7 @@ input.search__input {
   align-items: center;
   font-weight: 500;
   font-size: 12px;
-  color: #999999;
+  color: $additional-text-color;
 }
 
 .chat-block {
@@ -330,13 +364,13 @@ input.search__input {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid $border-color;
 }
 
 .chat-block__create-message-row {
   display: flex;
   padding: 10px 20px;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid $border-color;
 }
 
 .avatar-with-name {
@@ -344,61 +378,33 @@ input.search__input {
   align-items: center;
 }
 
-.image-button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.button-with-image-and-text {
-  border: none;
-  background: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 8px 15px;
-  font-weight: 500;
-  font-size: 12px;
-  color: #1E1E1E;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.button-with-image-and-text:hover {
-  background: #E4EDFD;
-}
-
-.image-inside-button {
-  margin-right: 15px;
-}
-
-.buttons-list {
+.base-list {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
 .dropdown-content {
+  @extend %shadow;
   background: white;
   padding: 7px 0;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
   display: none;
   position: absolute;
-  right: 0px;
-  top: 25px;
   z-index: 10;
-}
 
-.dropdown-content-top {
-  background: white;
-  padding: 7px 0;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-  border-radius: 12px;
-  display: none;
-  position: absolute;
-  bottom: 35px;
-  z-index: 10;
+  &_bottom {
+    right: 0px;
+    top: 25px;
+  }
+
+  &_top {
+    bottom: 45px;
+  }
+
+  &_wide {
+    width: 320px;
+  }
 }
 
 .dropdown {
@@ -406,7 +412,7 @@ input.search__input {
   display: flex;
 }
 
-.dropdown:hover .dropdown-content, .dropdown:hover .dropdown-content-top {
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
@@ -418,10 +424,10 @@ input.search__input {
 .message-textarea {
   margin: 0 10px;
   width: 100%;
-  background: #EFEFEF;
+  background: $background-grey;
   border-radius: 30px;
   font-size: 14px;
-  color: #1E1E1E;
+  color: $main-text-color;
   box-sizing: border-box;
   padding-top: 14px;
   padding-left: 25px;
@@ -429,17 +435,17 @@ input.search__input {
   resize: none;
   outline: none;
   -moz-appearance: none;
+
+  &:placeholder {
+    font-weight: 500;
+    font-size: 12px;
+    color: $additional-text-color;
+  }
 }
 
-.message-textarea:placeholder {
-  font-weight: 500;
-  font-size: 12px;
-  color: #999999;
-}
 
 .modal-wrapper {
-  height: 100vh;
-  width: 100vw;
+  @extend %full-screen;
   display: none;
   justify-content: center;
   align-items: center;
@@ -450,6 +456,7 @@ input.search__input {
 }
 
 .modal-body {
+  @extend %shadow;
   width: 340px;
   box-sizing: border-box;
   display: flex;
@@ -457,21 +464,20 @@ input.search__input {
   align-items: center;
   background: white;
   opacity: 1;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
   padding: 20px 30px;
+
+  .form-field {
+    margin-bottom: 30px;
+  }
 }
 
 .modal-body__name {
   font-weight: 500;
   font-size: 15px;
   line-height: 20px;
-  color: #1E1E1E;
+  color: $main-text-color;
   margin-bottom: 50px;
-}
-
-.modal-body .form-field {
-  margin-bottom: 30px;
 }
 
 .modal-body__error-msg {
@@ -495,7 +501,7 @@ input.search__input {
   align-items: center;
   height: 100vh;
   width: 64px;
-  background: #FBFBFB;
+  background: $light-grey;
   position: absolute;
   top: 0;
   left: 0;
@@ -536,7 +542,7 @@ input.search__input {
   width: 130px;
   height: 130px;
   left: 575px;
-  background: #EFEFEF;
+  background: $background-grey;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
@@ -554,7 +560,7 @@ input.search__input {
   font-weight: 600;
   font-size: 16px;
   line-height: 16px;
-  color: #1E1E1E;
+  color: $main-text-color;
   margin: 0;
 }
 
@@ -571,7 +577,7 @@ input.search__input {
 .profile-data-form-field__label {
   font-weight: 500;
   font-size: 13px;
-  color: #1E1E1E;
+  color: $main-text-color;
 }
 
 .profile-data-form-field__input {
@@ -579,7 +585,7 @@ input.search__input {
   font-weight: 500;
   font-size: 13px;
   text-align: right;
-  color: #999999;
+  color: $additional-text-color;
   background: none;
 }
 
@@ -601,18 +607,15 @@ input.search__input {
   background: transparent;
   font-weight: 500;
   font-size: 13px;
-  color: #3369F3;
+  color: $accent-color;
   cursor: pointer;
 }
 
-.logout-button {
-  color: #FF0000;
-}
 
 .divider {
   width: 100%;
   height: 1px;
-  background: #EAEAEA;
+  background: $border-color;
   margin: 10px 0;
 }
 
@@ -639,7 +642,7 @@ input.search__input {
   line-height: 16px;
   text-align: center;
   text-decoration-line: underline;
-  color: #3369F3;
+  color: $accent-color;
   cursor: pointer;
 }
 
@@ -657,19 +660,17 @@ input.search__input {
 }
 
 .error-view {
-  display: flex;
+  @extend %full-screen;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
 }
 
 .error-code {
   font-weight: 500;
   font-size: 40px;
   line-height: 40px;
-  color: #1E1E1E;
+  color: $main-text-color;
   margin: 0 0 20px;
 }
 
@@ -677,7 +678,7 @@ input.search__input {
   font-weight: 500;
   font-size: 20px;
   line-height: 20px;
-  color: #1E1E1E;
+  color: $main-text-color;
   margin: 0 0 65px;
 }
 

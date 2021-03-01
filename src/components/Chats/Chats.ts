@@ -19,7 +19,7 @@ export default class Chats extends Block {
     return Handlebars.compile(template)({
       chatsList: this.props?.chatsList,
       createChatButton: new Button({
-        className: 'form__additional-button create-chat',
+        className: 'button_additional create-chat',
         children: 'Новый чат',
         htmlType: 'button',
       }).render(),

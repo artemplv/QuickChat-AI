@@ -41,7 +41,6 @@ export default class Profile extends Block {
   constructor(props: any) {
     super('div', {
       goBackButton: new Button({
-        className: 'image-button',
         htmlType: 'submit',
         onClick: `navigate('/chats')`,
         children: `

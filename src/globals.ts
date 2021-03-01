@@ -3,11 +3,13 @@ interface PlainObject {
 }
 
 interface ChatObject extends PlainObject {
-  title: string,
-  lastMessageTime: string,
-  isLastMessageFromUser: boolean,
-  lastMessageText: string,
-  unreadMessagesCount?: number,
+  id: number;
+  title: string;
+  avatar: string;
+  lastMessageTime?: string;
+  isLastMessageFromUser?: boolean;
+  lastMessageText?: string;
+  unreadMessagesCount?: number;
 }
 
 interface clickEvent {

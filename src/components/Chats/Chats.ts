@@ -2,6 +2,7 @@ import Block from '../../modules/block.js';
 import Button from '../Button/index.js';
 import { template } from './template.js';
 
+
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
 }
@@ -10,8 +11,18 @@ interface Props extends PlainObject {
 export default class Chats extends Block {
   public props: Props;
   constructor(props?: Props) {
-    super('div', {
-      chatsList: props?.chatsList,
+    super('div', props);
+  }
+
+
+  render() {
+    return Handlebars.compile(template)({
+      chatsList: this.props?.chatsList,
+      createChatButton: new Button({
+        className: 'form__additional-button create-chat',
+        children: 'Новый чат',
+        htmlType: 'button',
+      }).render(),
       profileButton: new Button({
         className: 'profile-button',
         onClick: `navigate('/profile')`,
@@ -21,14 +32,7 @@ export default class Chats extends Block {
             <img src="static/assets/images/arrow-right.svg" alt="arrow right" class="button-arrow-right-image" />
           </div>
         `,
-      }),
-    });
-  }
-
-  render() {
-    return Handlebars.compile(template)({
-      chatsList: this.props.chatsList,
-      profileButton: this.props.profileButton.render(),
+      }).render(),
     });
   }
 }

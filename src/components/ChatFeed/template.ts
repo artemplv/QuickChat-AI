@@ -51,7 +51,7 @@ export const template = `
     </div>
 
     <div id="add-user-modal" class="modal-wrapper">
-    <div class="modal-body">
+    <form id="addUser" class="modal-body">
       <h4 class="modal-body__name">Добавить пользователя</h4>
 
       <div class="form-field">
@@ -65,11 +65,11 @@ export const template = `
       <button type="submit" class="form__main-button">
         Добавить
       </button>
-    </div>
+    </form>
   </div>
 
   <div id="remove-user-modal" class="modal-wrapper">
-    <div class="modal-body">
+    <form id="removeUser" class="modal-body">
       <h4 class="modal-body__name">Удалить пользователя</h4>
 
       <div class="form-field">
@@ -83,7 +83,7 @@ export const template = `
       <button type="submit" class="form__main-button">
         Удалить
       </button>
-    </div>
+    </form>
   </div>
 
   <div id="delete-chat-modal" class="modal-wrapper">

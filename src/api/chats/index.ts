@@ -19,36 +19,42 @@ import {
 
 const host = 'https://ya-praktikum.tech';
 
-const usersAPIInstance = new HTTPTransport(`${host}/api/v2/user`);
+const chatsAPIInstance = new HTTPTransport(`${host}/api/v2/chats`);
 
-export default class UsersAPI extends BaseAPI {
-  changeProfile(data: PlainObject) {
-    return usersAPIInstance.put('/profile', {
+export default class ChatsAPI extends BaseAPI {
+  getChats() {
+    return chatsAPIInstance.get('/', {
+      withCredentials: true,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+
+  createChat(data: PlainObject) {
+    return chatsAPIInstance.post('/', {
       data,
       withCredentials: true,
       headers: { 'content-type': 'application/json' },
     });
   }
 
-  changeAvatar(data: FormData) {
-    return usersAPIInstance.put('/profile/avatar', {
-      data: {},
-      file: data,
-      withCredentials: true,
-    });
-  }
-
-  changePassword(data: PlainObject) {
-    return usersAPIInstance.put('/password', {
+  addUsers(data: PlainObject) {
+    return chatsAPIInstance.put('/users', {
       data,
       withCredentials: true,
       headers: { 'content-type': 'application/json' },
     });
   }
 
-  getUsersByLogin(data: PlainObject) {
-    return usersAPIInstance.post('/search', {
+  deleteUsers(data: PlainObject) {
+    return chatsAPIInstance.delete('/users', {
       data,
+      withCredentials: true,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+
+  getChatUsers(chatId: number | string) {
+    return chatsAPIInstance.get(`/${chatId}/users`, {
       withCredentials: true,
       headers: { 'content-type': 'application/json' },
     });

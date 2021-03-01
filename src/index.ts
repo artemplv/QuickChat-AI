@@ -6,15 +6,15 @@ import Profile from './pages/Profile/index.js';
 import SignPage from './pages/Sign/index.js';
 import NotFoundError from './pages/NotFoundError/index.js';
 
-import { sampleChats } from './pages/Chats/sampleChats.js';
+// import { sampleChats } from './pages/Chats/sampleChats.js';
 import RegisterForm from './components/RegisterForm/index.js';
 import LoginForm from './components/LoginForm/index.js';
 
 const router = new Router('.app');
 
 router
-  .use('/chats', ChatsPage, { chatsList: sampleChats })
-  .use('/chat/:chatId', ChatFeedPage, { chatsList: sampleChats })
+  .use('/chats', ChatsPage, {})
+  .use('/chat/:chatId', ChatFeedPage, {})
   .use('/profile', Profile, {})
   .use('/login', SignPage, { form: LoginForm })
   .use('/signup', SignPage, { form: RegisterForm })

@@ -16,9 +16,14 @@ export const template = `
     </div>
 
     <nav class="chats-container">
+
+      <div style="text-align: center; margin-bottom: 5px;">
+        {{{ createChatButton }}}
+      </div>
+
       <ul class="chats-container__list">
         {{#each chatsList}}
-          <li class="chat-list-item">
+          <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chat/{{ this.id }}')">
             <div
               class="chat-list-item__avatar"
               style="background-image: url({{ this.avatar }}"
@@ -54,5 +59,23 @@ export const template = `
         {{/each}}
       </ul>
     </nav>
+
+    <div id="create-chat-modal" class="modal-wrapper">
+      <form id="newChat" class="modal-body">
+        <h4 class="modal-body__name">Создать новый чат</h4>
+
+        <div class="form-field">
+          <div class="form-field__control">
+            <input id="chat-add-title" name="title" type="text" class="form-field__input" placeholder=" "  />
+            <label for="chat-add-title" class="form-field__label">Название чата</label>
+            <div class="form-field__bar"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="form__main-button">
+          Создать
+        </button>
+      </form>
+    </div>
   </div>
 `;

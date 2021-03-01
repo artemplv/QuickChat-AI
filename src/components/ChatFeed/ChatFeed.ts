@@ -15,7 +15,12 @@ export default class ChatFeed extends Block {
     return Handlebars.compile(template)({
       chatName: this.props?.chatName,
       avatarUrl: this.props?.avatar,
+      chatMembers: this.props?.chatMembers,
 
+      chatMembersDropdownButton: new Button({
+        className: 'form__additional-button dropdown-button',
+        children: 'Участники чата',
+      }).render(),
       chatOptionsDropdownButton: new Button({
         className: 'image-button dropdown-button',
         children: `<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />`,

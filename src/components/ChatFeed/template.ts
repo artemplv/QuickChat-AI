@@ -10,21 +10,44 @@ export const template = `
         <h4 class="chat-list-item__name">{{ chatName }}</h4>
       </div>
 
-      <div class="dropdown">
-        {{{ chatOptionsDropdownButton }}}
+      <div style="display: flex;">
+        <div class="dropdown">
+          {{{ chatMembersDropdownButton }}}
 
-        <div class="dropdown-content">
-          <ul class="buttons-list">
-            <li>
-              {{{ addUserButton }}}
-            </li>
-            <li>
-              {{{ deleteUserButton }}}
-            </li>
-            <li>
-              {{{ deleteChatButton }}}
-            </li>
-          </ul>
+          <div class="dropdown-content" style="width: 320px;">
+            <ul class="buttons-list">
+              {{#each chatMembers}}
+                <li style="padding: 5px 10px;">
+                  <div class="avatar-with-name">
+                    <div
+                      class="chat-list-item__avatar"
+                      style="background-image: url({{ this.avatar }})"
+                    >
+                    </div>
+                    <h4 class="chat-list-item__name">{{ this.first_name }} {{ this.second_name }} ({{ this.login }})</h4>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          {{{ chatOptionsDropdownButton }}}
+
+          <div class="dropdown-content">
+            <ul class="buttons-list">
+              <li>
+                {{{ addUserButton }}}
+              </li>
+              <li>
+                {{{ deleteUserButton }}}
+              </li>
+              <li>
+                {{{ deleteChatButton }}}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

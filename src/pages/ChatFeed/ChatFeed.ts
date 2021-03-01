@@ -16,6 +16,8 @@ import UsersAPI from '../../api/users/index.js';
 const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
+const host = 'https://ya-praktikum.tech';
+
 
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
@@ -52,6 +54,24 @@ export default class ChatFeedPage extends Block {
     this.setProps({ chatsList: response.data || null });
   }
 
+  async getChatUsers() {
+    const usersResponse: any = await chatsApi.getChatUsers(this.props?.chatId);
+    if (Array.isArray(usersResponse?.data)) {
+      const membersPrepared = usersResponse.data.map((user: PlainObject) => {
+        const userAvatar = user.avatar;
+        if (userAvatar) {
+          return {
+            ...user,
+            avatar: `${host}${userAvatar}`,
+          }
+        }
+        return user;
+      });
+
+      this.setProps({ chatMembers: membersPrepared });
+    }
+  }
+
   handleAddUser() {
     const self = this;
 
@@ -64,6 +84,7 @@ export default class ChatFeedPage extends Block {
           const usersResponse: any = await usersApi.getUsersByLogin(data);
           if (usersResponse?.data && usersResponse.data[0]?.id) {
             await chatsApi.addUsers({ users: [usersResponse.data[0].id], chatId: Number(self.props?.chatId) });
+            self.getChatUsers();
           }
         } catch(error) {
           console.error(error);
@@ -81,11 +102,12 @@ export default class ChatFeedPage extends Block {
 
       if (data) {
         try {
-          const usersResponse: any = await chatsApi.getChatUsers(self.props?.chatId);
-          if (usersResponse?.data && usersResponse.data[0]) {
-            const userToDelete = usersResponse.data.find((user: PlainObject) => user.login === data.login);
+          const users = self.props?.chatMembers;
+          if (users && users[0]) {
+            const userToDelete = users.find((user: PlainObject) => user.login === data.login);
             if (userToDelete) {
               await chatsApi.deleteUsers({ users: [userToDelete.id], chatId: Number(self.props?.chatId) });
+              self.getChatUsers();
             }
           }
         } catch(error) {
@@ -125,6 +147,7 @@ export default class ChatFeedPage extends Block {
 
   componentDidMount() {
     this.getChats();
+    this.getChatUsers();
     console.log(this.props?.chatId);
   }
 
@@ -135,6 +158,7 @@ export default class ChatFeedPage extends Block {
       }).render(),
       feed: new ChatFeed({
         chatName: this.props?.chatTitle,
+        chatMembers: this.props?.chatMembers,
       }).render(),
     });
   }

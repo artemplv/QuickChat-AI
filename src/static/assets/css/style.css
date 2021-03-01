@@ -386,7 +386,7 @@ input.search__input {
   display: none;
   position: absolute;
   right: 0px;
-  top: 30px;
+  top: 25px;
   z-index: 10;
 }
 

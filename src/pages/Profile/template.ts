@@ -8,7 +8,10 @@ export const template = `
   <main>
     <div class="profile-data-wrapper">
       <div class="profile-data">
-        <div class="profile-data__avatar">
+        <div
+          class="profile-data__avatar"
+          style="background-image: url({{ avatarUrl }})"
+        >
           {{{ changeAvatarButton }}}
         </div>
 
@@ -44,7 +47,7 @@ export const template = `
           <p class="file-name"></p>
         </div>
 
-        <button type="button" class="form__main-button" onclick="submitAvatar()">
+        <button type="submit" class="button button_main">
           Поменять
         </button>
       </form>

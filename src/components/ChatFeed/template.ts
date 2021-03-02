@@ -2,25 +2,52 @@ export const template = `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
-        <div class="chat-list-item__avatar"></div>
+        <div
+          class="avatar"
+          style="background-image: url({{ avatar }})"
+        >
+        </div>
         <h4 class="chat-list-item__name">{{ chatName }}</h4>
       </div>
 
-      <div class="dropdown">
-        {{{ chatOptionsDropdownButton }}}
+      <div style="display: flex;">
+        <div class="dropdown">
+          {{{ chatMembersDropdownButton }}}
 
-        <div class="dropdown-content">
-          <ul class="buttons-list">
-            <li>
-              {{{ addUserButton }}}
-            </li>
-            <li>
-              {{{ deleteUserButton }}}
-            </li>
-            <li>
-              {{{ deleteChatButton }}}
-            </li>
-          </ul>
+          <div class="dropdown-content dropdown-content_bottom dropdown-content_wide">
+            <ul class="base-list">
+              {{#each chatMembers}}
+                <li style="padding: 5px 10px;">
+                  <div class="avatar-with-name">
+                    <div
+                      class="avatar"
+                      style="background-image: url({{ this.avatar }})"
+                    >
+                    </div>
+                    <h4 class="chat-list-item__name">{{ this.first_name }} {{ this.second_name }} ({{ this.login }})</h4>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          {{{ chatOptionsDropdownButton }}}
+
+          <div class="dropdown-content dropdown-content_bottom">
+            <ul class="base-list">
+              <li>
+                {{{ addUserButton }}}
+              </li>
+              <li>
+                {{{ deleteUserButton }}}
+              </li>
+              <li>
+                {{{ deleteChatButton }}}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -29,8 +56,8 @@ export const template = `
       <div class="dropdown">
         {{{ messageOptionsButton }}}
 
-        <div class="dropdown-content-top">
-          <ul class="buttons-list">
+        <div class="dropdown-content dropdown-content_top">
+          <ul class="base-list">
             <li>
               {{{ addMediaButton }}}
             </li>
@@ -47,7 +74,7 @@ export const template = `
     </div>
 
     <div id="add-user-modal" class="modal-wrapper">
-    <div class="modal-body">
+    <form id="addUser" class="modal-body">
       <h4 class="modal-body__name">Добавить пользователя</h4>
 
       <div class="form-field">
@@ -58,14 +85,14 @@ export const template = `
         </div>
       </div>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Добавить
       </button>
-    </div>
+    </form>
   </div>
 
   <div id="remove-user-modal" class="modal-wrapper">
-    <div class="modal-body">
+    <form id="removeUser" class="modal-body">
       <h4 class="modal-body__name">Удалить пользователя</h4>
 
       <div class="form-field">
@@ -76,17 +103,17 @@ export const template = `
         </div>
       </div>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Удалить
       </button>
-    </div>
+    </form>
   </div>
 
   <div id="delete-chat-modal" class="modal-wrapper">
     <div class="modal-body">
       <h4 class="modal-body__name">Удалить этот чат?</h4>
 
-      <button type="submit" class="form__main-button">
+      <button type="submit" class="button button_main">
         Удалить
       </button>
     </div>

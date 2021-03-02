@@ -1,7 +1,7 @@
 export const template = `
 <button
   type="{{ htmlType }}"
-  class="{{ className }}"
+  class="button {{ className }}"
   onclick="{{ onClick }}"
 >
   {{{ children }}}

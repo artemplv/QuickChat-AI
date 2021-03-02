@@ -6,7 +6,6 @@ import Profile from './pages/Profile/index.js';
 import SignPage from './pages/Sign/index.js';
 import NotFoundError from './pages/NotFoundError/index.js';
 
-// import { sampleChats } from './pages/Chats/sampleChats.js';
 import RegisterForm from './components/RegisterForm/index.js';
 import LoginForm from './components/LoginForm/index.js';
 

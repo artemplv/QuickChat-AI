@@ -1,7 +1,9 @@
 # Web messenger
 
 Web messenger project using NodeJS and TypeScript.
+
 The stack uses HTML, SCSS, TypeScript and Express.
+
 Jest and Sinon are used for testing.
 
 Design: https://www.figma.com/file/9JA3oJHBqXQihtb1ZDNzis/Chat-Artem-Polevoy

@@ -16,6 +16,8 @@ export default class ChatFeed extends Block {
       chatName: this.props?.chatName,
       avatarUrl: this.props?.avatar,
       chatMembers: this.props?.chatMembers,
+      loggedUserId: this.props?.loggedUserId,
+      messages: this.props?.messages,
 
       chatMembersDropdownButton: new Button({
         className: 'button_additional dropdown-button',

@@ -45,4 +45,11 @@ export default class ChatsAPI extends BaseAPI {
       headers: { 'content-type': 'application/json' },
     });
   }
+
+  getChatToken(chatId: number | string) {
+    return chatsAPIInstance.post(`/token/${chatId}`, {
+      withCredentials: true,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
 }

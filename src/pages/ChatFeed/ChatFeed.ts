@@ -12,7 +12,11 @@ import {
 
 import ChatsAPI from '../../api/chats/index.js';
 import UsersAPI from '../../api/users/index.js';
+import AuthAPI from '../../api/auth/index.js';
 
+import WebSocketService from '../../modules/socket/socket-service.js';
+
+const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
@@ -25,13 +29,12 @@ interface Props extends PlainObject {
 
 export default class ChatFeedPage extends Block {
   public props: Props;
-  // private _chatId: number | undefined;
-  // private _chatTitle: string | undefined;
+  private _socket: WebSocketService | null;
+
   constructor(props?: Props) {
     super('div', props);
 
-    // this._chatId = Number(this.props?.chatId);
-    // this._chatTitle = this.props?.chatTitle;
+    this._socket = null;
   }
 
   handleAddUserModal(event: clickEvent) {
@@ -70,6 +73,48 @@ export default class ChatFeedPage extends Block {
 
       this.setProps({ chatMembers: membersPrepared });
     }
+  }
+
+  async addSocketConnection() {
+    const userResponse: any = await authApi.getUser();
+    const tokenResponse: any = await chatsApi.getChatToken(this.props?.chatId);
+
+    const userId = userResponse?.data?.id;
+    const token = tokenResponse?.data?.token;
+
+    if (userId && token) {
+      const self = this;
+      this._socket = new WebSocketService(userId, this.props?.chatId, token);
+
+      this._socket.subscribe('open', () => {
+        self._socket?.send({
+          content: '0',
+          type: 'get old',
+        });
+      });
+
+      this._socket.subscribe('message', (event: any) => {
+        const dataRaw = event?.data;
+        const data = JSON.parse(dataRaw);
+
+        if (data) {
+          if (Array.isArray(data)) {
+            this.setProps({
+              messages: data,
+            });
+          } else {
+            this.setProps({
+              messages: [{
+                content: data?.content,
+                user_id: data?.userId,
+              }, ...this.props?.messages],
+            });
+          }
+        }
+      });
+    }
+
+    this.setProps({ userId });
   }
 
   handleAddUser() {
@@ -117,6 +162,24 @@ export default class ChatFeedPage extends Block {
     }
   }
 
+  handleSendMessage() {
+    const self = this;
+
+    return async function(event: clickEvent) {
+      event.preventDefault();
+      const data = submitForm('messageForm');
+      console.log(data);
+
+      if (data?.message) {
+        console.log('here');
+        self._socket?.send({
+          content: data.message,
+          type: 'message',
+        });
+      }
+    }
+  }
+
   addListeners() {
     this.getContent().querySelector('.add-user-button')?.addEventListener('click', this.handleAddUserModal);
     this.getContent().querySelector('.delete-user-button')?.addEventListener('click', this.handleDeleteUserModal);
@@ -133,6 +196,7 @@ export default class ChatFeedPage extends Block {
 
     this.getContent().querySelector('#addUser')?.addEventListener('submit', this.handleAddUser());
     this.getContent().querySelector('#removeUser')?.addEventListener('submit', this.handleRemoveUser());
+    this.getContent().querySelector('#messageForm')?.addEventListener('submit', this.handleSendMessage());
   }
 
   componentDidRender() {
@@ -146,6 +210,7 @@ export default class ChatFeedPage extends Block {
   componentDidMount() {
     this.getChats();
     this.getChatUsers();
+    this.addSocketConnection();
   }
 
   render() {
@@ -156,6 +221,8 @@ export default class ChatFeedPage extends Block {
       feed: new ChatFeed({
         chatName: this.props?.chatTitle,
         chatMembers: this.props?.chatMembers,
+        loggedUserId: this.props?.userId,
+        messages: this.props?.messages,
       }).render(),
     });
   }

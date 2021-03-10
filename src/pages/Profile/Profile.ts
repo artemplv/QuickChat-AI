@@ -30,21 +30,21 @@ import {
 import AuthAPI from '../../api/auth';
 import UsersAPI from '../../api/users';
 
+import template from './template';
+
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
 
 const host = 'https://ya-praktikum.tech';
 
-import { template } from './template';
-
-
 export default class Profile extends Block {
   public props: any;
+
   constructor(props: any) {
     super('div', {
       goBackButton: new Button({
         htmlType: 'submit',
-        onClick: `navigate('/chats')`,
+        onClick: 'navigate(\'/chats\')',
         children: `
           <img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" style="transform: rotate(180deg)" />
         `,
@@ -67,18 +67,18 @@ export default class Profile extends Block {
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: `<a class="button-link">Выйти</a>`,
+        children: '<a class="button-link">Выйти</a>',
       }),
       props,
     });
   }
 
-  handleAvatarModal(event: clickEvent) {
+  handleAvatarModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('uploadAvatarModal');
   }
 
-  async handleLogout(event: clickEvent) {
+  async handleLogout(event: ClickEvent) {
     event.preventDefault();
     await authApi.logout();
     navigate('/login');
@@ -92,7 +92,7 @@ export default class Profile extends Block {
   handleSubmitDetails() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
       const data = submitForm('userDetails');
 
@@ -102,17 +102,17 @@ export default class Profile extends Block {
           if (response.status === 200) {
             self.getData();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
   handleSubmitAvatar() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
       const data = submitAvatar();
 
@@ -123,14 +123,14 @@ export default class Profile extends Block {
             self.getData();
             resetAvatarForm();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
-  async handleSubmitPassword(event: clickEvent) {
+  async handleSubmitPassword(event: ClickEvent) {
     event.preventDefault();
     const data = submitForm('userPassword');
 
@@ -140,7 +140,7 @@ export default class Profile extends Block {
         if (response.status === 200) {
           cancelPasswordChange({ preventDefault: () => {} });
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }

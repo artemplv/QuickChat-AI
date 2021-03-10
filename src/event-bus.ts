@@ -1,11 +1,11 @@
 export default class EventBus {
-  listeners: { [key: string]: Function[] };
+  listeners: { [key: string]: Function[] }; // eslint-disable-line @typescript-eslint/ban-types
 
   constructor() {
     this.listeners = {};
   }
 
-  on(event: string, callback: Function): void {
+  on(event: string, callback: Function): void { // eslint-disable-line @typescript-eslint/ban-types
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -13,22 +13,22 @@ export default class EventBus {
     this.listeners[event].push(callback);
   }
 
-  off(event: string, callback: Function): void {
-		if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
-    }
-
-    this.listeners[event] = this.listeners[event].filter(
-      listener => listener !== callback
-    );
-  }
-
-	emit(event: string, ...args: any): void {
+  off(event: string, callback: Function): void { // eslint-disable-line @typescript-eslint/ban-types
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event].forEach(function(listener) {
+    this.listeners[event] = this.listeners[event].filter(
+      (listener) => listener !== callback,
+    );
+  }
+
+  emit(event: string, ...args: any): void {
+    if (!this.listeners[event]) {
+      throw new Error(`Нет события: ${event}`);
+    }
+
+    this.listeners[event].forEach((listener) => {
       listener(...args);
     });
   }

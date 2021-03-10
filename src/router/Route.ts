@@ -1,8 +1,8 @@
 import Block from '../modules/block';
-import { render } from '../utils/render';
+import render from '../utils/render';
 
 interface ComponentConstructor {
-    new (props?: Props): InstanceType<typeof Block>;
+  new (props?: Props): InstanceType<typeof Block>;
 }
 
 interface Props extends PlainObject {
@@ -11,8 +11,11 @@ interface Props extends PlainObject {
 
 export default class Route {
   private _pathname: string;
+
   private _blockClass: ComponentConstructor;
+
   private _block: InstanceType<typeof Block> | null;
+
   private _props: Props;
 
   constructor(pathname: string, view: ComponentConstructor, props: Props) {
@@ -42,10 +45,10 @@ export default class Route {
   match(pathname: string) {
     const paramNames: string[] = [];
 
-    const regexPath = this._pathname.replace(/([:*])(\w+)/g, (_full, _colon, name) => {
+    const regexPath = `${this._pathname.replace(/([:*])(\w+)/g, (_full, _colon, name) => {
       paramNames.push(name);
       return '([^/]+)';
-    }) + '(?:/|$)';
+    })}(?:/|$)`;
 
     let pathParams;
 
@@ -53,7 +56,7 @@ export default class Route {
 
     if (routeMatch !== null) {
       pathParams = routeMatch.slice(1).reduce((params, value, index) => {
-        params[paramNames[index]] = value;
+        params[paramNames[index]] = value; // eslint-disable-line no-param-reassign
         return params;
       }, <PlainObject>{});
 

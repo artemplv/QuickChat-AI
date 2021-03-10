@@ -1,5 +1,7 @@
-export function render(query: string, block: any): HTMLElement {
+export default function render(query: string, block: any): HTMLElement {
   const root: any = document.querySelector(query);
-  root.appendChild(block.getContent());
+  if (root) {
+    root.appendChild(block.getContent());
+  }
   return root;
 }

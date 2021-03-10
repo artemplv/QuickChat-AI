@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import Block from "../../modules/block";
+import Block from '../../modules/block';
 import submitForm from '../../utils/submitForm';
 import {
   validateInput,
@@ -9,22 +9,22 @@ import { navigate } from '../../router/navigate';
 
 import AuthAPI from '../../api/auth';
 
-const authApi = new AuthAPI();
+import template from './template';
 
-import { template } from './template';
+const authApi = new AuthAPI();
 
 interface Props extends PlainObject {
   form?: InstanceType<typeof Block>;
 }
 
-
 export default class SignPage extends Block {
   public props: Props;
+
   constructor(props?: Props) {
     super('div', props);
   }
 
-  async handleSubmitSignInForm(event: clickEvent) {
+  async handleSubmitSignInForm(event: ClickEvent) {
     event.preventDefault();
     const data = submitForm('signInForm');
 
@@ -34,13 +34,13 @@ export default class SignPage extends Block {
         if (response.status === 200) {
           navigate('/chats');
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }
   }
 
-  async handleSubmitSignUpForm(event: clickEvent) {
+  async handleSubmitSignUpForm(event: ClickEvent) {
     event.preventDefault();
     const data = submitForm('signUpForm');
 
@@ -50,7 +50,7 @@ export default class SignPage extends Block {
         if (response.status === 200) {
           navigate('/chats');
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }

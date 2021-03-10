@@ -1,13 +1,13 @@
-interface regexpsObject {
+interface RegexpsObject {
   [key: string]: string;
 }
 
-const inputsRegexp: regexpsObject = {
-  email: `^[a-z0-9._%+-]+@([a-z0-9]+[\.])+[a-z]{2,}$`,
-  phone: `^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`,
-  first_name: `^[A-Za-zА-Яа-яЁё ,.'-]+$`,
-  last_name: `^[A-Za-zА-Яа-яЁё ,.'-]+$`,
-  second_name: `^[A-Za-zА-Яа-яЁё ,.'-]+$`,
+const inputsRegexp: RegexpsObject = {
+  email: '^[a-z0-9._%+-]+@([a-z0-9]+[\.])+[a-z]{2,}$',
+  phone: '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$',
+  first_name: '^[A-Za-zА-Яа-яЁё ,.\'-]+$',
+  last_name: '^[A-Za-zА-Яа-яЁё ,.\'-]+$',
+  second_name: '^[A-Za-zА-Яа-яЁё ,.\'-]+$',
 };
 
 const makeError = (element: HTMLInputElement, text: string): void => {
@@ -20,7 +20,7 @@ const makeError = (element: HTMLInputElement, text: string): void => {
 
     element.classList.add('invaid-input');
   }
-}
+};
 
 export const removeError = (element: HTMLInputElement): void => {
   const oldError: any = element?.parentElement?.querySelector('.input-error-message');
@@ -28,7 +28,7 @@ export const removeError = (element: HTMLInputElement): void => {
     oldError.remove();
     element.classList.remove('invaid-input');
   }
-}
+};
 
 export function validateInput(inputElement: HTMLInputElement) {
   removeError(inputElement);

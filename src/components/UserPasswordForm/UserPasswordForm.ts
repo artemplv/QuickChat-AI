@@ -1,8 +1,8 @@
-import Form from "../Form";
-import Button from "../Button";
-import { template } from './template';
+import Form from '../Form';
+import Button from '../Button';
+import template from './template';
 
-export const UserPasswordForm = new Form({
+const UserPasswordForm = new Form({
   formId: 'userPassword',
   className: 'profile-data__form',
   controlsWrapperClassName: 'profile-data__form-controls',

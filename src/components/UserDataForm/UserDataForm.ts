@@ -1,10 +1,9 @@
 import Handlebars from 'handlebars';
-import Form from "../Form";
-import Button from "../Button";
-import { template } from './template';
+import Form from '../Form';
+import Button from '../Button';
+import template from './template';
 
-
-export const UserDataForm = (userData: any = {}) => new Form({
+const UserDataForm = (userData: Record<string, any> = {}) => new Form({
   formId: 'userDetails',
   className: 'profile-data__form',
   controlsWrapperClassName: 'profile-data__form-controls',

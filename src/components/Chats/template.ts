@@ -1,13 +1,13 @@
 import Handlebars from 'handlebars';
 
-Handlebars.registerHelper('ifLessThanOne', function(value: number | undefined): string {
+Handlebars.registerHelper('ifLessThanOne', (value: number | undefined): string => {
   if (!value || value < 1) {
     return 'hidden';
   }
   return '';
 });
 
-export const template = `
+export default `
   <div class="chats">
     <div class="chats_header">
       {{{ profileButton }}}

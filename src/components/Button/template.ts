@@ -1,4 +1,4 @@
-export const template = `
+export default `
 <button
   type="{{ htmlType }}"
   class="button {{ className }}"

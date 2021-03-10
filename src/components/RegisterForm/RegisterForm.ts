@@ -1,8 +1,8 @@
-import Form from "../Form";
-import Button from "../Button";
-import { template } from './template';
+import Form from '../Form';
+import Button from '../Button';
+import template from './template';
 
-export const RegisterForm = new Form({
+const RegisterForm = new Form({
   formId: 'signUpForm',
   className: 'sign-form',
   mainContent: template,
@@ -12,8 +12,8 @@ export const RegisterForm = new Form({
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
-    onClick: `navigate('/login')`,
-    children: `<a class="button-link">Войти</a>`,
+    onClick: 'navigate(\'/login\')',
+    children: '<a class="button-link">Войти</a>',
     className: 'button_additional',
     htmlType: 'button',
   }).render(),

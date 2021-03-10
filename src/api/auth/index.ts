@@ -3,20 +3,6 @@ import {
   BaseAPI,
 } from '../../modules/http';
 
-// interface SignupData {
-//   first_name: string;
-//   second_name: string;
-//   login: string;
-//   email: string;
-//   password: string;
-//   phone: string;
-// }
-//
-// interface SignInData {
-//   login: string;
-//   password: string;
-// }
-
 const host = 'https://ya-praktikum.tech';
 
 const authAPIInstance = new HTTPTransport(`${host}/api/v2/auth`);

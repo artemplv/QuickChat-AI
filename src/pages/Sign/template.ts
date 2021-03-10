@@ -1,4 +1,4 @@
-export const template = `
+export default `
 <div class="sign-view">
     {{{ form }}}
 </div>

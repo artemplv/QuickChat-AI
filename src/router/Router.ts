@@ -2,7 +2,7 @@ import Route from './Route';
 import Block from '../modules/block';
 
 interface ComponentConstructor {
-    new (props?: Props): InstanceType<typeof Block>;
+  new (props?: Props): InstanceType<typeof Block>;
 }
 
 interface Props extends PlainObject {
@@ -11,9 +11,13 @@ interface Props extends PlainObject {
 
 export default class Router {
   routes: InstanceType<typeof Route>[];
+
   history: History;
+
   private _currentRoute: InstanceType<typeof Route> | null;
+
   private _rootQuery: string;
+
   static __instance: Router;
 
   constructor(rootQuery: string) {
@@ -43,7 +47,7 @@ export default class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  _onRoute(pathname: string) { // eslint-disable-line consistent-return
     const route = this.getRoute(pathname);
     if (!route) {
       return this.go('/404');

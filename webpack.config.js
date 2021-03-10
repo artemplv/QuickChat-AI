@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -20,9 +21,8 @@ module.exports = {
     contentBase: 'dist',
     compress: true,
     host: '0.0.0.0',
-    public: 'powerful-castle-19480.herokuapp.com',
     historyApiFallback: true,
-    port: process.env.PORT || 3001
+    port: 3001
   },
   module: {
     rules: [
@@ -87,6 +87,9 @@ module.exports = {
           to: './static',
         },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ['ts']
     })
   ]
 };

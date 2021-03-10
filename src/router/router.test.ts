@@ -1,5 +1,6 @@
+/* eslint-disable max-classes-per-file */
 import Router from './Router';
-import Block from "../modules/block";
+import Block from '../modules/block';
 
 class Test extends Block {
   constructor() {
@@ -7,7 +8,7 @@ class Test extends Block {
   }
 
   render() {
-    return `<p>Test route Test</p>`
+    return '<p>Test route Test</p>';
   }
 }
 
@@ -17,7 +18,7 @@ class NotFound extends Block {
   }
 
   render() {
-    return `<p>Test route NotFound</p>`
+    return '<p>Test route NotFound</p>';
   }
 }
 
@@ -31,7 +32,7 @@ describe('test router', () => {
 
     router
       .use('/test', Test)
-      .use('/404', NotFound)
+      .use('/404', NotFound);
   });
 
   test('it provides correct route on url change', () => {

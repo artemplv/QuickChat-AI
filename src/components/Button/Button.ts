@@ -1,9 +1,9 @@
 import Handlebars from 'handlebars';
-import Block from "../../modules/block";
-import { template } from './template';
+import Block from '../../modules/block';
+import template from './template';
 
 export default class Button extends Block {
-  constructor(props: {}) {
+  constructor(props: Record<string, any>) {
     super('div', props);
   }
 

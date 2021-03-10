@@ -1,7 +1,8 @@
+/* eslint-disable func-names */
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
 import Chats from '../../components/Chats';
-import { template } from './template';
+import template from './template';
 
 import handleModal from '../../utils/handleModals';
 import submitForm from '../../utils/submitForm';
@@ -19,14 +20,14 @@ interface Props extends PlainObject {
   chatsList?: ChatObject[];
 }
 
-
 export default class ChatsPage extends Block {
   public props: Props;
+
   constructor(props?: Props) {
     super('div', props);
   }
 
-  handleNewChatModal(event: clickEvent) {
+  handleNewChatModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('create-chat-modal');
   }
@@ -34,7 +35,7 @@ export default class ChatsPage extends Block {
   handleCreateChat() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) {
       event.preventDefault();
       const data = submitForm('newChat');
 
@@ -44,11 +45,11 @@ export default class ChatsPage extends Block {
           if (response.status === 200) {
             self.getChats();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
   async getChats() {

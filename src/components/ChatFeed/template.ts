@@ -2,14 +2,14 @@ import Handlebars from 'handlebars';
 
 type UserId = number | string | undefined;
 
-Handlebars.registerHelper('getMessageClass', function(loggedUserId: UserId, messageUserId: UserId): string {
+Handlebars.registerHelper('getMessageClass', (loggedUserId: UserId, messageUserId: UserId): string => {
   if (Number(loggedUserId) === Number(messageUserId)) {
     return 'message__outgoing';
   }
   return 'message__incoming';
 });
 
-export const template = `
+export default `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">

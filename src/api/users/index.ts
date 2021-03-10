@@ -1,7 +1,7 @@
 import {
   HTTPTransport,
   BaseAPI,
-} from '../../modules/http/index.js';
+} from '../../modules/http';
 
 const host = 'https://ya-praktikum.tech';
 

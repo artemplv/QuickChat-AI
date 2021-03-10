@@ -1,6 +1,7 @@
-import Block from '../../modules/block.js';
-import Button from '../Button/index.js';
-import { template } from './template.js';
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../Button';
+import { template } from './template';
 
 
 interface Props extends PlainObject {

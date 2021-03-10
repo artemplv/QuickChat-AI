@@ -1,15 +1,17 @@
-import Block from "../../modules/block.js";
-import submitForm from '../../utils/submitForm.js';
+import Handlebars from 'handlebars';
+import Block from "../../modules/block";
+import submitForm from '../../utils/submitForm';
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
+import { navigate } from '../../router/navigate';
 
-import AuthAPI from '../../api/auth/index.js';
+import AuthAPI from '../../api/auth';
 
 const authApi = new AuthAPI();
 
-import { template } from './template.js';
+import { template } from './template';
 
 interface Props extends PlainObject {
   form?: InstanceType<typeof Block>;

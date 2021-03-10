@@ -1,5 +1,5 @@
-import Block from '../modules/block.js';
-import { render } from '../utils/render.js';
+import Block from '../modules/block';
+import { render } from '../utils/render';
 
 interface ComponentConstructor {
     new (props?: Props): InstanceType<typeof Block>;

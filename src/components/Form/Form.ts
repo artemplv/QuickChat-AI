@@ -1,5 +1,7 @@
-import Block from "../../modules/block.js";
-import { template } from './template.js';
+import Handlebars from 'handlebars';
+
+import Block from "../../modules/block";
+import { template } from './template';
 
 export default class Form extends Block {
   public props: any;

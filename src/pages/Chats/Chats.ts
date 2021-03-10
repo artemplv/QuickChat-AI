@@ -1,16 +1,17 @@
-import Block from '../../modules/block.js';
-import Chats from '../../components/Chats/index.js';
-import { template } from './template.js';
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Chats from '../../components/Chats';
+import { template } from './template';
 
-import handleModal from '../../utils/handleModals.js';
-import submitForm from '../../utils/submitForm.js';
+import handleModal from '../../utils/handleModals';
+import submitForm from '../../utils/submitForm';
 
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
 
-import ChatsAPI from '../../api/chats/index.js';
+import ChatsAPI from '../../api/chats';
 
 const chatsApi = new ChatsAPI();
 

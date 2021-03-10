@@ -1,3 +1,3 @@
-import RegisterForm from './RegisterForm.js';
+import RegisterForm from './RegisterForm';
 
 export default RegisterForm;

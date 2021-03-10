@@ -1,5 +1,5 @@
-import HTTPTransport from './http-transport.js';
-import BaseAPI from './base-api.js';
+import HTTPTransport from './http-transport';
+import BaseAPI from './base-api';
 
 export {
   HTTPTransport,

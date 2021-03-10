@@ -1,8 +1,9 @@
-import Block from '../../modules/block.js';
-import Button from '../Button/index.js';
-import Form from "../Form/index.js";
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../Button';
+import Form from "../Form";
 
-import { template } from './template.js';
+import { template } from './template';
 
 export default class ChatFeed extends Block {
   public props: PlainObject;

@@ -1,3 +1,5 @@
+import Handlebars from 'handlebars';
+
 Handlebars.registerHelper('ifLessThanOne', function(value: number | undefined): string {
   if (!value || value < 1) {
     return 'hidden';

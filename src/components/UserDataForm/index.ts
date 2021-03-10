@@ -1,3 +1,3 @@
-import UserDataForm from './UserDataForm.js';
+import UserDataForm from './UserDataForm';
 
 export default UserDataForm;

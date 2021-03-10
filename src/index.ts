@@ -1,13 +1,16 @@
-import Router from './router/Router.js';
+import Router from './router/Router';
 
-import ChatsPage from './pages/Chats/index.js';
-import ChatFeedPage from './pages/ChatFeed/index.js';
-import Profile from './pages/Profile/index.js';
-import SignPage from './pages/Sign/index.js';
-import NotFoundError from './pages/NotFoundError/index.js';
+import ChatsPage from './pages/Chats';
+import ChatFeedPage from './pages/ChatFeed';
+import Profile from './pages/Profile';
+import SignPage from './pages/Sign';
+import NotFoundError from './pages/NotFoundError';
 
-import RegisterForm from './components/RegisterForm/index.js';
-import LoginForm from './components/LoginForm/index.js';
+import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
+
+import './static/assets/css/style.scss';
+import './globals';
 
 const router = new Router('.app');
 

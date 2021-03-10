@@ -1,4 +1,4 @@
-import { validateInput } from './validation.js';
+import { validateInput } from './validation';
 
 // interface SignupData extends PlainObject {
 //   first_name: string;

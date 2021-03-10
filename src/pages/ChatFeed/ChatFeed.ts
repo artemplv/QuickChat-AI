@@ -1,20 +1,21 @@
-import Block from '../../modules/block.js';
-import Chats from '../../components/Chats/index.js';
-import ChatFeed from '../../components/ChatFeed/index.js';
-import { template } from './template.js';
-import handleModal from '../../utils/handleModals.js';
-import submitForm from '../../utils/submitForm.js';
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Chats from '../../components/Chats';
+import ChatFeed from '../../components/ChatFeed';
+import { template } from './template';
+import handleModal from '../../utils/handleModals';
+import submitForm from '../../utils/submitForm';
 
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
 
-import ChatsAPI from '../../api/chats/index.js';
-import UsersAPI from '../../api/users/index.js';
-import AuthAPI from '../../api/auth/index.js';
+import ChatsAPI from '../../api/chats';
+import UsersAPI from '../../api/users';
+import AuthAPI from '../../api/auth';
 
-import WebSocketService from '../../modules/socket/socket-service.js';
+import WebSocketService from '../../modules/socket/socket-service';
 
 const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();

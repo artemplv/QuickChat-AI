@@ -1,3 +1,5 @@
+import Handlebars from 'handlebars';
+
 type UserId = number | string | undefined;
 
 Handlebars.registerHelper('getMessageClass', function(loggedUserId: UserId, messageUserId: UserId): string {

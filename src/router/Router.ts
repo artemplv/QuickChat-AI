@@ -1,5 +1,5 @@
-import Route from './Route.js';
-import Block from '../modules/block.js';
+import Route from './Route';
+import Block from '../modules/block';
 
 interface ComponentConstructor {
     new (props?: Props): InstanceType<typeof Block>;

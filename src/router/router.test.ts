@@ -1,5 +1,5 @@
 import Router from './Router';
-import Block from "../modules/block.js";
+import Block from "../modules/block";
 
 class Test extends Block {
   constructor() {

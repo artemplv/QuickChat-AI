@@ -1,3 +1,3 @@
-import ChatFeedPage from './ChatFeed.js';
+import ChatFeedPage from './ChatFeed';
 
 export default ChatFeedPage;

@@ -1,7 +1,7 @@
 import {
   HTTPTransport,
   BaseAPI,
-} from '../../modules/http/index.js';
+} from '../../modules/http';
 
 // interface SignupData {
 //   first_name: string;

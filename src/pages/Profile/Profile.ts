@@ -1,39 +1,41 @@
-import Block from '../../modules/block.js';
-import Button from '../../components/Button/index.js';
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../../components/Button';
+import { navigate } from '../../router/navigate';
 
-import UserDataForm from '../../components/UserDataForm/index.js';
-import UserPasswordForm from '../../components/UserPasswordForm/index.js';
+import UserDataForm from '../../components/UserDataForm';
+import UserPasswordForm from '../../components/UserPasswordForm';
 
 import {
   onChangeDetailsClick,
   onChangePasswordClick,
   cancelDetailsChange,
   cancelPasswordChange,
-} from '../../utils/handleUserDataButtons.js';
+} from '../../utils/handleUserDataButtons';
 
 import {
   handleAvatarUpload,
   resetAvatarForm,
   submitAvatar,
-} from '../../utils/handleAvatar.js';
+} from '../../utils/handleAvatar';
 
-import handleModal from '../../utils/handleModals.js';
-import submitForm from '../../utils/submitForm.js';
+import handleModal from '../../utils/handleModals';
+import submitForm from '../../utils/submitForm';
 
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
 
-import AuthAPI from '../../api/auth/index.js';
-import UsersAPI from '../../api/users/index.js';
+import AuthAPI from '../../api/auth';
+import UsersAPI from '../../api/users';
 
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
 
 const host = 'https://ya-praktikum.tech';
 
-import { template } from './template.js';
+import { template } from './template';
 
 
 export default class Profile extends Block {

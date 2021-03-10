@@ -1,5 +1,3 @@
-const baseUrl = 'wss://ya-praktikum.tech/ws/chats';
-
 type CallbackFunction = (event: any) => void;
 
 class WebSocketService {
@@ -11,7 +9,7 @@ class WebSocketService {
 
   socket: WebSocket;
 
-  constructor(userId: number, chatId: number, token: string) {
+  constructor(baseUrl: string, userId: number, chatId: number, token: string) {
     this.userId = userId;
     this.chatId = chatId;
     this.token = token;

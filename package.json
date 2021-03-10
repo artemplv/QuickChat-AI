@@ -8,7 +8,8 @@
     "start": "webpack && webpack serve --mode=development --progress",
     "test": "jest ./src",
     "serve": "webpack serve --mode=development --progress",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "prepare": "husky install"
   },
   "jest": {
     "verbose": true,

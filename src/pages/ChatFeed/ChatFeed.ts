@@ -23,6 +23,7 @@ const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
 const host = 'https://ya-praktikum.tech';
+const socketHost = 'wss://ya-praktikum.tech/ws/chats';
 
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
@@ -86,7 +87,7 @@ export default class ChatFeedPage extends Block {
 
     if (userId && token) {
       const self = this;
-      this._socket = new WebSocketService(userId, this.props?.chatId, token);
+      this._socket = new WebSocketService(socketHost, userId, this.props?.chatId, token);
 
       this._socket.subscribe('open', () => {
         self._socket?.send({

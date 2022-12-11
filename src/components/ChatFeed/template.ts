@@ -1,4 +1,15 @@
-export const template = `
+import Handlebars from 'handlebars';
+
+type UserId = number | string | undefined;
+
+Handlebars.registerHelper('getMessageClass', (loggedUserId: UserId, messageUserId: UserId): string => {
+  if (Number(loggedUserId) === Number(messageUserId)) {
+    return 'message__outgoing';
+  }
+  return 'message__incoming';
+});
+
+export default `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
@@ -50,6 +61,16 @@ export const template = `
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="chat-block__messages">
+      {{#each messages}}
+        <div class="message {{#getMessageClass ../loggedUserId this.user_id}}{{/getMessageClass}}">
+          <p>
+            {{ this.content }}
+          </p>
+        </div>
+      {{/each}}
     </div>
 
     <div class="chat-block__create-message-row">

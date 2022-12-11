@@ -1,48 +1,50 @@
-import Block from '../../modules/block.js';
-import Button from '../../components/Button/index.js';
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../../components/Button';
+import { navigate } from '../../router/navigate';
 
-import UserDataForm from '../../components/UserDataForm/index.js';
-import UserPasswordForm from '../../components/UserPasswordForm/index.js';
+import UserDataForm from '../../components/UserDataForm';
+import UserPasswordForm from '../../components/UserPasswordForm';
 
 import {
   onChangeDetailsClick,
   onChangePasswordClick,
   cancelDetailsChange,
   cancelPasswordChange,
-} from '../../utils/handleUserDataButtons.js';
+} from '../../utils/handleUserDataButtons';
 
 import {
   handleAvatarUpload,
   resetAvatarForm,
   submitAvatar,
-} from '../../utils/handleAvatar.js';
+} from '../../utils/handleAvatar';
 
-import handleModal from '../../utils/handleModals.js';
-import submitForm from '../../utils/submitForm.js';
+import handleModal from '../../utils/handleModals';
+import submitForm from '../../utils/submitForm';
 
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
 
-import AuthAPI from '../../api/auth/index.js';
-import UsersAPI from '../../api/users/index.js';
+import AuthAPI from '../../api/auth';
+import UsersAPI from '../../api/users';
+
+import template from './template';
 
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
 
 const host = 'https://ya-praktikum.tech';
 
-import { template } from './template.js';
-
-
 export default class Profile extends Block {
   public props: any;
+
   constructor(props: any) {
     super('div', {
       goBackButton: new Button({
         htmlType: 'submit',
-        onClick: `navigate('/chats')`,
+        onClick: 'navigate(\'/chats\')',
         children: `
           <img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" style="transform: rotate(180deg)" />
         `,
@@ -65,18 +67,18 @@ export default class Profile extends Block {
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: `<a class="button-link">Выйти</a>`,
+        children: '<a class="button-link">Выйти</a>',
       }),
       props,
     });
   }
 
-  handleAvatarModal(event: clickEvent) {
+  handleAvatarModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('uploadAvatarModal');
   }
 
-  async handleLogout(event: clickEvent) {
+  async handleLogout(event: ClickEvent) {
     event.preventDefault();
     await authApi.logout();
     navigate('/login');
@@ -90,7 +92,7 @@ export default class Profile extends Block {
   handleSubmitDetails() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
       const data = submitForm('userDetails');
 
@@ -100,17 +102,17 @@ export default class Profile extends Block {
           if (response.status === 200) {
             self.getData();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
   handleSubmitAvatar() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
       const data = submitAvatar();
 
@@ -121,14 +123,14 @@ export default class Profile extends Block {
             self.getData();
             resetAvatarForm();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
-  async handleSubmitPassword(event: clickEvent) {
+  async handleSubmitPassword(event: ClickEvent) {
     event.preventDefault();
     const data = submitForm('userPassword');
 
@@ -138,7 +140,7 @@ export default class Profile extends Block {
         if (response.status === 200) {
           cancelPasswordChange({ preventDefault: () => {} });
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }

@@ -1,4 +1,4 @@
-export const template = `
+export default `
   <h1 class="profile-data__name">{{ first_name }}</h1>
   <div class="profile-data__form-item">
     <label for="email" class="profile-data-form-field__label">Почта</label>

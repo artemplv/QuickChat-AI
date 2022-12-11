@@ -1,13 +1,15 @@
-import EventBus from '../event-bus.js';
+import EventBus from '../event-bus';
 
 interface MetaType {
   tagName: string;
-  props: {};
+  props: Record<string, any>;
 }
 
 interface ProxyConstructor {
-  revocable<T extends object>(target: T, handler: any): { proxy: T; revoke: () => void; };
-  new <T extends object>(target: T, handler: any): T;
+  revocable<T extends Record<string, any>>(target: T, handler: any):
+  { proxy: T; revoke: () => void; };
+
+  new <T extends Record<string, any>>(target: T, handler: any): T;
 }
 declare const Proxy: ProxyConstructor;
 
@@ -20,10 +22,12 @@ export default class Block {
     FLOW_CDR: 'flow:component-did-render',
   };
 
-  private _element: any;
+  private _element: HTMLElement;
+
   private _meta: MetaType;
 
-  props: {};
+  props: Record<string, any>;
+
   eventBus: () => EventBus;
 
   constructor(tagName = 'div', props = {}) {
@@ -31,7 +35,7 @@ export default class Block {
     this._meta = {
       tagName,
       props,
-    }
+    };
 
     this.props = this._makePropsProxy(props);
 
@@ -82,7 +86,7 @@ export default class Block {
     return true;
   }
 
-  setProps = (nextProps: {}): void => {
+  setProps = (nextProps: Record<string, any>): void => {
     if (!nextProps) {
       return;
     }
@@ -96,27 +100,22 @@ export default class Block {
 
   _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this.element.innerHTML = block;
     this.eventBus().emit(Block.EVENTS.FLOW_CDR);
   }
 
-	// Может переопределять пользователь, необязательно трогать
   render(): any {}
 
   getContent(): HTMLElement {
     return this._element;
   }
 
-  _makePropsProxy(props: {}) {
+  _makePropsProxy(props: Record<string, any>) {
     const self = this;
 
     const proxyProps = new Proxy(props, {
       set(target: any, prop: any, value: any): boolean {
-        target[prop] = value;
+        target[prop] = value; // eslint-disable-line no-param-reassign
 
         self.eventBus().emit(Block.EVENTS.FLOW_CDU);
         return true;
@@ -130,7 +129,6 @@ export default class Block {
   }
 
   _createDocumentElement(tagName: string): HTMLElement {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 

@@ -1,3 +1,3 @@
-import SignPage from './Sign.js';
+import SignPage from './Sign';
 
 export default SignPage;

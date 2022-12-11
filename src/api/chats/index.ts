@@ -1,7 +1,7 @@
 import {
   HTTPTransport,
   BaseAPI,
-} from '../../modules/http/index.js';
+} from '../../modules/http';
 
 const host = 'https://ya-praktikum.tech';
 
@@ -41,6 +41,13 @@ export default class ChatsAPI extends BaseAPI {
 
   getChatUsers(chatId: number | string) {
     return chatsAPIInstance.get(`/${chatId}/users`, {
+      withCredentials: true,
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+
+  getChatToken(chatId: number | string) {
+    return chatsAPIInstance.post(`/token/${chatId}`, {
       withCredentials: true,
       headers: { 'content-type': 'application/json' },
     });

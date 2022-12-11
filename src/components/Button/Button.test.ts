@@ -1,7 +1,7 @@
 import Button from './Button';
 
 describe('Button component', () => {
-  global.Handlebars = require('handlebars');
+  global.Handlebars = require('handlebars'); // eslint-disable-line global-require
   const button = new Button({ children: 'Test content' });
 
   test('it creates button element', () => {
@@ -11,4 +11,4 @@ describe('Button component', () => {
   test('it puts correct content inside button', () => {
     expect(button.getContent().innerHTML).toContain('Test content');
   });
-})
+});

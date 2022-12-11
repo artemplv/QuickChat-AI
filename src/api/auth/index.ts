@@ -1,21 +1,7 @@
 import {
   HTTPTransport,
   BaseAPI,
-} from '../../modules/http/index.js';
-
-// interface SignupData {
-//   first_name: string;
-//   second_name: string;
-//   login: string;
-//   email: string;
-//   password: string;
-//   phone: string;
-// }
-//
-// interface SignInData {
-//   login: string;
-//   password: string;
-// }
+} from '../../modules/http';
 
 const host = 'https://ya-praktikum.tech';
 

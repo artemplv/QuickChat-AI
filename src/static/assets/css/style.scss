@@ -373,6 +373,38 @@ input.search__input {
   border-top: 1px solid $border-color;
 }
 
+.chat-block__messages {
+  height: 100%;
+  padding: 0px 25px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.message {
+  width: fit-content;
+  max-width: 45%;
+  padding: 11px;
+
+  p {
+    margin: 3px 0;
+    font-size: 12px;
+  }
+
+  &__incoming {
+    margin: 6px auto 6px 0;
+    background-color: #F8F8F8;
+    border-radius: 0 12px 12px 12px;
+  }
+
+  &__outgoing {
+    margin: 6px 0 6px auto;
+    padding: 11px;
+    background-color: #E4EDFD;
+    border-radius: 12px 12px 0 12px;
+  }
+}
+
 .avatar-with-name {
   display: flex;
   align-items: center;

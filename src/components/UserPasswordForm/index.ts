@@ -1,3 +1,3 @@
-import UserPasswordForm from './UserPasswordForm.js';
+import UserPasswordForm from './UserPasswordForm';
 
 export default UserPasswordForm;

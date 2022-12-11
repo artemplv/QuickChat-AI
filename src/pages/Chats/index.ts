@@ -1,3 +1,3 @@
-import ChatsPage from './Chats.js';
+import ChatsPage from './Chats';
 
 export default ChatsPage;

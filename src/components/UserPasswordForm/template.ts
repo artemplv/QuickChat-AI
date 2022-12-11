@@ -1,4 +1,4 @@
-export const template = `
+export default `
   <div class="profile-data__form-item">
     <label for="oldPassword" class="profile-data-form-field__label">Старый пароль</label>
     <div>

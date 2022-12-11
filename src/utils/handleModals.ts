@@ -16,7 +16,7 @@ export default function handleModal(modalId: string): void {
       modal.style.display = 'none';
       document.removeEventListener('click', listener);
     }
-  }
+  };
 
   setTimeout(() => {
     document.addEventListener('click', listener);

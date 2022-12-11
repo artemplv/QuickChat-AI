@@ -1,3 +1,3 @@
-import NotFoundError from './NotFoundError.js';
+import NotFoundError from './NotFoundError';
 
 export default NotFoundError;

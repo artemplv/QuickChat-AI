@@ -1,14 +1,13 @@
 /**
  * Управление кнопками для изменений в профиле
 */
-
-export function onChangeDetailsClick(event: clickEvent): void {
+export function onChangeDetailsClick(event: ClickEvent): void {
   event.preventDefault();
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
 
   const inputs: HTMLCollectionOf<HTMLInputElement> = detailsForm.getElementsByTagName('input');
 
-  for (const input of inputs as any) {
+  for (const input of inputs as any) { // eslint-disable-line no-restricted-syntax
     input.disabled = false;
   }
 
@@ -19,7 +18,7 @@ export function onChangeDetailsClick(event: clickEvent): void {
   formButtons.hidden = false;
 }
 
-export function cancelDetailsChange(event: clickEvent): void {
+export function cancelDetailsChange(event: ClickEvent): void {
   event.preventDefault();
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
 
@@ -27,7 +26,7 @@ export function cancelDetailsChange(event: clickEvent): void {
 
   const inputs: HTMLCollectionOf<HTMLInputElement> = detailsForm.getElementsByTagName('input');
 
-  for (const input of inputs as any) {
+  for (const input of inputs as any) { // eslint-disable-line no-restricted-syntax
     input.disabled = true;
   }
 
@@ -38,12 +37,12 @@ export function cancelDetailsChange(event: clickEvent): void {
   formButtons.hidden = true;
 
   const errors: NodeListOf<Element> = detailsForm.querySelectorAll('.input-error-message');
-  for (let i = 0; i < errors.length; i++) {
+  for (let i = 0; i < errors.length; i += 1) {
     errors[i].remove();
   }
 }
 
-export function onChangePasswordClick(event: clickEvent): void {
+export function onChangePasswordClick(event: ClickEvent): void {
   event.preventDefault();
   const passwordForm = <HTMLFormElement> document.getElementById('userPassword');
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
@@ -54,7 +53,7 @@ export function onChangePasswordClick(event: clickEvent): void {
   controlButtons.hidden = true;
 }
 
-export function cancelPasswordChange(event: clickEvent) {
+export function cancelPasswordChange(event: ClickEvent) {
   event.preventDefault();
   const passwordForm = <HTMLFormElement> document.getElementById('userPassword');
   const detailsForm = <HTMLFormElement> document.getElementById('userDetails');
@@ -66,7 +65,7 @@ export function cancelPasswordChange(event: clickEvent) {
   controlButtons.hidden = false;
 
   const errors: NodeListOf<Element> = passwordForm.querySelectorAll('.input-error-message');
-  for (let i = 0; i < errors.length; i++) {
+  for (let i = 0; i < errors.length; i += 1) {
     errors[i].remove();
   }
 }

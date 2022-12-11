@@ -1,7 +1,8 @@
-import Block from '../../modules/block.js';
-import Button from "../../components/Button/index.js";
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../../components/Button';
 
-import { template } from './template.js';
+import template from './template';
 
 export default class NotFoundError extends Block {
   constructor() {
@@ -12,8 +13,8 @@ export default class NotFoundError extends Block {
     return Handlebars.compile(template)({
       button: new Button({
         className: 'button_additional',
-        children: `<a class="button-link">Назад к чатам</a>`,
-        onClick: `navigate('/chats')`,
+        children: '<a class="button-link">Назад к чатам</a>',
+        onClick: 'navigate(\'/chats\')',
       }).render(),
     });
   }

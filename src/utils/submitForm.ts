@@ -1,18 +1,4 @@
-import { validateInput } from './validation.js';
-
-// interface SignupData extends PlainObject {
-//   first_name: string;
-//   second_name: string;
-//   login: string;
-//   email: string;
-//   password: string;
-//   phone: string;
-// }
-//
-// interface SignInData extends PlainObject {
-//   login: string;
-//   password: string;
-// }
+import { validateInput } from './validation';
 
 /**
  * Отправка формы
@@ -20,7 +6,7 @@ import { validateInput } from './validation.js';
 export default function submitForm(formId: string): PlainObject | undefined {
   const form: any = document.getElementById(formId);
 
-  let hasError: boolean = false;
+  let hasError = false;
 
   form.querySelectorAll('input').forEach((element: HTMLInputElement) => {
     try {
@@ -31,13 +17,13 @@ export default function submitForm(formId: string): PlainObject | undefined {
   });
 
   if (hasError) {
-    return;
+    return undefined;
   }
 
   const formData: any = new FormData(form);
   const formFields: PlainObject = {};
 
-  for (let [key, value] of formData) {
+  for (const [key, value] of formData) { // eslint-disable-line no-restricted-syntax
     formFields[key] = value;
   }
 

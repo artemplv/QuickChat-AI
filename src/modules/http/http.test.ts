@@ -1,5 +1,6 @@
-const sinon = require ('sinon');
 import HTTPTransport from './http-transport';
+
+const sinon = require('sinon'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 const testAPIInstance = new HTTPTransport();
 
@@ -7,7 +8,7 @@ const server = sinon.fakeServer.create();
 
 server.respondWith('POST', '/test', [
   200,
-  { "Content-Type": "application/json" },
+  { 'Content-Type': 'application/json' },
   '{ id: 0 }',
 ]);
 server.autoRespond = true;
@@ -24,4 +25,4 @@ describe('test api calls', () => {
     expect(res).toBeDefined();
     expect(res.status).toBe(200);
   });
-})
+});

@@ -1,4 +1,4 @@
-export const template = `
+export default `
 <form
   id="{{ formId }}"
   class="form {{ className }}"

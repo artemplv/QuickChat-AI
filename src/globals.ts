@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 interface PlainObject {
   [key: string]: any;
 }
@@ -12,7 +13,7 @@ interface ChatObject extends PlainObject {
   unreadMessagesCount?: number;
 }
 
-interface clickEvent {
+interface ClickEvent {
   preventDefault: () => void;
 }
 

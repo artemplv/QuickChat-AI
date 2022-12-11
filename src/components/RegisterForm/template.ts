@@ -1,4 +1,4 @@
-export const template = `
+export default `
   <h1 class="sign-form__heading sign-up-form__heading">Регистрация</h1>
 
   <div class="form-fields-wrapper sign-up-form-fields-wrapper">

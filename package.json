@@ -2,20 +2,30 @@
   "name": "messenger-web-app",
   "version": "1.0.0",
   "description": "Web messenger project",
-  "main": "./src/server.js",
+  "main": "./src/index.ts",
   "scripts": {
-    "build": "tsc",
-    "postbuild": "cp -r ./src/static ./src/index.html ./build && npm run sass",
-    "start": "node ./build/server.js",
-    "tsc": "tsc",
-    "sass": "sass ./build/static/assets/css",
-    "pretest": "npm run build",
-    "test": "jest ./build"
+    "build": "webpack",
+    "start": "webpack && webpack serve --mode=development --progress",
+    "test": "jest ./src",
+    "serve": "webpack serve --mode=development --progress",
+    "lint": "eslint ./src --ext .ts",
+    "prepare": "husky install"
   },
   "jest": {
     "verbose": true,
     "testURL": "http://localhost:3001",
-    "setupFilesAfterEnv": [ "./tests/setupTests.js" ]
+    "setupFilesAfterEnv": [
+      "./tests/setupTests.js"
+    ],
+    "transform": {
+      ".(ts)": "./node_modules/ts-jest/preprocessor.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint",
+      "pre-push": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -31,7 +41,6 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "typescript": "^4.1.3"
   },
@@ -39,12 +48,34 @@
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-typescript": "^7.13.0",
-    "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "copy-webpack-plugin": "^8.0.0",
+    "css-loader": "^5.1.1",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.2.0",
+    "eslint-webpack-plugin": "^2.5.2",
+    "handlebars-loader": "^1.7.1",
+    "html-webpack-plugin": "^5.3.1",
+    "husky": "^5.1.3",
     "jest": "^26.6.3",
     "jest-handlebars": "^1.0.1",
+    "mini-css-extract-plugin": "^1.3.9",
+    "node-sass": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-loader": "^5.1.0",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.32.8",
-    "sinon": "^9.2.4"
+    "sass-loader": "^11.0.1",
+    "sinon": "^9.2.4",
+    "style-loader": "^2.0.0",
+    "ts-jest": "^26.5.3",
+    "ts-loader": "^8.0.17",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   }
 }

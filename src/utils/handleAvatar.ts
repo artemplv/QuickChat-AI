@@ -1,5 +1,4 @@
-
-export function handleAvatarUpload(event: clickEvent): void {
+export function handleAvatarUpload(event: ClickEvent): void {
   event.preventDefault();
 
   const avatarInput = <HTMLInputElement> document.getElementById('avatar');
@@ -34,7 +33,6 @@ export function resetAvatarForm(): void {
 }
 
 export function submitAvatar(): FormData | undefined {
-
   const avatarInput = <HTMLInputElement> document.getElementById('avatar');
   const modal = <HTMLElement> document.getElementById('uploadAvatarModal');
 
@@ -46,8 +44,9 @@ export function submitAvatar(): FormData | undefined {
   if (files.length === 0) {
     const errorMsg = <HTMLElement> document.getElementsByClassName('modal-body__error-msg')[0];
     errorMsg.style.display = 'block';
-  } else {
-    modal.style.display = 'none';
-    return data;
+    return undefined;
   }
+
+  modal.style.display = 'none';
+  return data;
 }

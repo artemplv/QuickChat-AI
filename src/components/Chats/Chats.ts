@@ -1,19 +1,18 @@
-import Block from '../../modules/block.js';
-import Button from '../Button/index.js';
-import { template } from './template.js';
-
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../Button';
+import template from './template';
 
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
 }
 
-
 export default class Chats extends Block {
   public props: Props;
+
   constructor(props?: Props) {
     super('div', props);
   }
-
 
   render() {
     return Handlebars.compile(template)({
@@ -25,7 +24,7 @@ export default class Chats extends Block {
       }).render(),
       profileButton: new Button({
         className: 'profile-button',
-        onClick: `navigate('/profile')`,
+        onClick: 'navigate(\'/profile\')',
         children: `
           <div class="button-inner-container">
             <a class="button-link">Профиль</a>

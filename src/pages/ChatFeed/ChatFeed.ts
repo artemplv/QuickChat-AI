@@ -1,23 +1,29 @@
-import Block from '../../modules/block.js';
-import Chats from '../../components/Chats/index.js';
-import ChatFeed from '../../components/ChatFeed/index.js';
-import { template } from './template.js';
-import handleModal from '../../utils/handleModals.js';
-import submitForm from '../../utils/submitForm.js';
+/* eslint-disable func-names */
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Chats from '../../components/Chats';
+import ChatFeed from '../../components/ChatFeed';
+import template from './template';
+import handleModal from '../../utils/handleModals';
+import submitForm from '../../utils/submitForm';
 
 import {
   validateInput,
   removeError,
-} from '../../utils/validation.js';
+} from '../../utils/validation';
 
-import ChatsAPI from '../../api/chats/index.js';
-import UsersAPI from '../../api/users/index.js';
+import ChatsAPI from '../../api/chats';
+import UsersAPI from '../../api/users';
+import AuthAPI from '../../api/auth';
 
+import WebSocketService from '../../modules/socket/socket-service';
+
+const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
 const host = 'https://ya-praktikum.tech';
-
+const socketHost = 'wss://ya-praktikum.tech/ws/chats';
 
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
@@ -25,26 +31,26 @@ interface Props extends PlainObject {
 
 export default class ChatFeedPage extends Block {
   public props: Props;
-  // private _chatId: number | undefined;
-  // private _chatTitle: string | undefined;
+
+  private _socket: WebSocketService | null;
+
   constructor(props?: Props) {
     super('div', props);
 
-    // this._chatId = Number(this.props?.chatId);
-    // this._chatTitle = this.props?.chatTitle;
+    this._socket = null;
   }
 
-  handleAddUserModal(event: clickEvent) {
+  handleAddUserModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('add-user-modal');
   }
 
-  handleDeleteUserModal(event: clickEvent) {
+  handleDeleteUserModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('remove-user-modal');
   }
 
-  handleDeleteChatModal(event: clickEvent) {
+  handleDeleteChatModal(event: ClickEvent) {
     event.preventDefault();
     handleModal('delete-chat-modal');
   }
@@ -63,7 +69,7 @@ export default class ChatFeedPage extends Block {
           return {
             ...user,
             avatar: `${host}${userAvatar}`,
-          }
+          };
         }
         return user;
       });
@@ -72,10 +78,52 @@ export default class ChatFeedPage extends Block {
     }
   }
 
+  async addSocketConnection() {
+    const userResponse: any = await authApi.getUser();
+    const tokenResponse: any = await chatsApi.getChatToken(this.props?.chatId);
+
+    const userId = userResponse?.data?.id;
+    const token = tokenResponse?.data?.token;
+
+    if (userId && token) {
+      const self = this;
+      this._socket = new WebSocketService(socketHost, userId, this.props?.chatId, token);
+
+      this._socket.subscribe('open', () => {
+        self._socket?.send({
+          content: '0',
+          type: 'get old',
+        });
+      });
+
+      this._socket.subscribe('message', (event: any) => {
+        const dataRaw = event?.data;
+        const data = JSON.parse(dataRaw);
+
+        if (data) {
+          if (Array.isArray(data)) {
+            this.setProps({
+              messages: data,
+            });
+          } else {
+            this.setProps({
+              messages: [{
+                content: data?.content,
+                user_id: data?.userId,
+              }, ...this.props?.messages],
+            });
+          }
+        }
+      });
+    }
+
+    this.setProps({ userId });
+  }
+
   handleAddUser() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) {
       event.preventDefault();
       const data = submitForm('addUser');
 
@@ -83,20 +131,25 @@ export default class ChatFeedPage extends Block {
         try {
           const usersResponse: any = await usersApi.getUsersByLogin(data);
           if (usersResponse?.data && usersResponse.data[0]?.id) {
-            await chatsApi.addUsers({ users: [usersResponse.data[0].id], chatId: Number(self.props?.chatId) });
+            await chatsApi.addUsers(
+              {
+                users: [usersResponse.data[0].id],
+                chatId: Number(self.props?.chatId),
+              },
+            );
             self.getChatUsers();
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
   }
 
   handleRemoveUser() {
     const self = this;
 
-    return async function(event: clickEvent) {
+    return async function (event: ClickEvent) {
       event.preventDefault();
       const data = submitForm('removeUser');
 
@@ -106,15 +159,36 @@ export default class ChatFeedPage extends Block {
           if (users && users[0]) {
             const userToDelete = users.find((user: PlainObject) => user.login === data.login);
             if (userToDelete) {
-              await chatsApi.deleteUsers({ users: [userToDelete.id], chatId: Number(self.props?.chatId) });
+              await chatsApi.deleteUsers(
+                {
+                  users: [userToDelete.id],
+                  chatId: Number(self.props?.chatId),
+                },
+              );
               self.getChatUsers();
             }
           }
-        } catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
-    }
+    };
+  }
+
+  handleSendMessage() {
+    const self = this;
+
+    return async function (event: ClickEvent) {
+      event.preventDefault();
+      const data = submitForm('messageForm');
+
+      if (data?.message) {
+        self._socket?.send({
+          content: data.message,
+          type: 'message',
+        });
+      }
+    };
   }
 
   addListeners() {
@@ -133,12 +207,18 @@ export default class ChatFeedPage extends Block {
 
     this.getContent().querySelector('#addUser')?.addEventListener('submit', this.handleAddUser());
     this.getContent().querySelector('#removeUser')?.addEventListener('submit', this.handleRemoveUser());
+    this.getContent().querySelector('#messageForm')?.addEventListener('submit', this.handleSendMessage());
   }
 
   componentDidRender() {
     this.addListeners();
-    if (!this.props?.chatTitle && this.props?.chatId && this.props?.chatsList && this.props.chatsList.length > 0) {
-      const currentChat = this.props.chatsList.find((chat: ChatObject) => chat.id === Number(this.props.chatId));
+    if (
+      !this.props?.chatTitle && this.props?.chatId
+      && this.props?.chatsList && this.props.chatsList.length > 0
+    ) {
+      const currentChat = this.props.chatsList.find(
+        (chat: ChatObject) => chat.id === Number(this.props.chatId),
+      );
       this.setProps({ chatTitle: currentChat?.title || 'Unknown' });
     }
   }
@@ -146,6 +226,7 @@ export default class ChatFeedPage extends Block {
   componentDidMount() {
     this.getChats();
     this.getChatUsers();
+    this.addSocketConnection();
   }
 
   render() {
@@ -156,6 +237,8 @@ export default class ChatFeedPage extends Block {
       feed: new ChatFeed({
         chatName: this.props?.chatTitle,
         chatMembers: this.props?.chatMembers,
+        loggedUserId: this.props?.userId,
+        messages: this.props?.messages,
       }).render(),
     });
   }

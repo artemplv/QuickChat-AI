@@ -1,8 +1,9 @@
-import Block from '../../modules/block.js';
-import Button from '../Button/index.js';
-import Form from "../Form/index.js";
+import Handlebars from 'handlebars';
+import Block from '../../modules/block';
+import Button from '../Button';
+import Form from '../Form';
 
-import { template } from './template.js';
+import template from './template';
 
 export default class ChatFeed extends Block {
   public props: PlainObject;
@@ -16,6 +17,8 @@ export default class ChatFeed extends Block {
       chatName: this.props?.chatName,
       avatarUrl: this.props?.avatar,
       chatMembers: this.props?.chatMembers,
+      loggedUserId: this.props?.loggedUserId,
+      messages: this.props?.messages,
 
       chatMembersDropdownButton: new Button({
         className: 'button_additional dropdown-button',
@@ -23,7 +26,7 @@ export default class ChatFeed extends Block {
       }).render(),
       chatOptionsDropdownButton: new Button({
         className: 'dropdown-button',
-        children: `<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />`,
+        children: '<img src="static/assets/images/options-button.svg" alt="options" width="25" height="25" />',
       }).render(),
       addUserButton: new Button({
         className: 'button-with-image-and-text add-user-button',
@@ -48,7 +51,7 @@ export default class ChatFeed extends Block {
       }).render(),
       messageOptionsButton: new Button({
         className: 'dropdown-button',
-        children: `<img src="static/assets/images/attachments.svg" alt="add attachments" width="32" height="32" />`,
+        children: '<img src="static/assets/images/attachments.svg" alt="add attachments" width="32" height="32" />',
       }).render(),
       addMediaButton: new Button({
         className: 'button-with-image-and-text',
@@ -74,9 +77,9 @@ export default class ChatFeed extends Block {
       newMessageForm: new Form({
         formId: 'messageForm',
         className: 'message-form',
-        mainContent: `<textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>`,
+        mainContent: '<textarea class="message-textarea" name="message" placeholder="Сообщение" required></textarea>',
         buttonOk: new Button({
-          children: `<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />`,
+          children: '<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />',
           htmlType: 'submit',
         }).render(),
       }).render(),

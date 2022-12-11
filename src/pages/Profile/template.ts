@@ -1,4 +1,4 @@
-export const template = `
+export default `
   <div class="profile-view">
 
   <div class="go-back-section">

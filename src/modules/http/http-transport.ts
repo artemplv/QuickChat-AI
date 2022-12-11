@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const METHODS = {
   GET: 'GET',
   PUT: 'PUT',
@@ -5,33 +6,33 @@ const METHODS = {
   DELETE: 'DELETE',
 };
 
-interface requestDataObject {
+interface RequestDataObject {
   [key: string]: any;
 }
 
-interface headersObject {
+interface HeadersObject {
   [key: string]: string;
 }
 
-interface optionsObject {
-  data?: requestDataObject;
+interface OptionsObject {
+  data?: RequestDataObject;
   file?: FormData;
   timeout?: number;
-  headers?: headersObject;
+  headers?: HeadersObject;
   withCredentials?: boolean;
 }
 
-interface requestPreparedOptions extends optionsObject {
+interface RequestPreparedOptions extends OptionsObject {
   method: string;
 }
 
-function queryStringify(data: requestDataObject): string {
+function queryStringify(data: RequestDataObject): string {
   if (!data) {
     return '';
   }
-  let params = new URLSearchParams();
+  const params = new URLSearchParams();
 
-  for (const key in data) {
+  Object.keys(data).forEach((key) => {
     if (Array.isArray(data[key])) {
       data[key].forEach((item: any) => {
         params.append(key, item);
@@ -39,7 +40,8 @@ function queryStringify(data: requestDataObject): string {
     } else {
       params.set(key, data[key]);
     }
-  }
+  });
+
   const paramsString = params.toString();
   if (!paramsString) {
     return '';
@@ -54,34 +56,25 @@ export default class HTTPTransport {
     this.baseUrl = baseUrl;
   }
 
-  get = (url: string, options: optionsObject = {}) => {
+  get = (url: string, options: OptionsObject = {}) => {
     if (options.data) {
       const data = queryStringify(options.data);
-      url = `${url}${data}`;
+      url = `${url}${data}`; // eslint-disable-line no-param-reassign
     }
 
-  	return this.request(`${this.baseUrl}${url}`, {...options, method: METHODS.GET}, options?.timeout);
+    return this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.GET }, options?.timeout);
   };
 
-  put = (url: string, options: optionsObject = {}) => {
+  put = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
 
-  	return this.request(`${this.baseUrl}${url}`, {...options, method: METHODS.PUT}, options?.timeout);
-  };
+  post = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
 
-  post = (url: string, options: optionsObject = {}) => {
-
-  	return this.request(`${this.baseUrl}${url}`, {...options, method: METHODS.POST}, options?.timeout);
-  };
-
-  delete = (url: string, options: optionsObject = {}) => {
-
-  	return this.request(`${this.baseUrl}${url}`, {...options, method: METHODS.DELETE}, options?.timeout);
-  };
+  delete = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
 
   // options:
   // headers — obj
   // data — obj
-  request = (url: string, options: requestPreparedOptions, timeout = 5000) => {
+  request = (url: string, options: RequestPreparedOptions, timeout = 5000) => {
     const {
       method,
       data,
@@ -99,30 +92,30 @@ export default class HTTPTransport {
         xhr.withCredentials = true;
       }
 
-      for (const key in headers) {
+      Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
-      }
+      });
 
-      xhr.onload = function() {
-        let data;
+      xhr.onload = function () {
+        let responseData;
         try {
-          data = JSON.parse(xhr.response);
+          responseData = JSON.parse(xhr.response);
         } catch {
-          data = xhr.response;
+          responseData = xhr.response;
         }
         resolve({
           status: xhr.status,
-          data,
+          data: responseData,
         });
       };
 
-      xhr.onabort = function() {
+      xhr.onabort = function () {
         reject(new Error('aborted'));
-      };;
-      xhr.onerror = function() {
+      };
+      xhr.onerror = function () {
         reject(new Error('error'));
       };
-      xhr.ontimeout = function() {
+      xhr.ontimeout = function () {
         reject(new Error('request timed out'));
       };
 

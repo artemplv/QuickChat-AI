@@ -1,7 +1,7 @@
 {
   "name": "messenger-web-app",
   "version": "1.0.0",
-  "description": "Web messenger project",
+  "description": "Messenger SPA without use of any framework",
   "main": "./src/index.ts",
   "scripts": {
     "build": "webpack",
@@ -29,14 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artemplv/mf.messenger.praktikum.yandex.git"
+    "url": "git+https://github.com/artemplv/messenger-web-app.git"
   },
   "author": "Artem Polevoy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/artemplv/mf.messenger.praktikum.yandex/issues"
+    "url": "https://github.com/artemplv/messenger-web-app/issues"
   },
-  "homepage": "https://github.com/artemplv/mf.messenger.praktikum.yandex#readme",
+  "homepage": "https://github.com/artemplv/messenger-web-app#readme",
   "engines": {
     "node": ">=12.0.0"
   },

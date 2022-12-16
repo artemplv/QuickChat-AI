@@ -1,11 +1,10 @@
 FROM node:12
 
-RUN mkdir -p /app
-WORKDIR /app
+WORKDIR /opt/messenger-web-app/
 
-COPY package.json /app
-COPY package-lock.json /app
-COPY . /app
+COPY package.json /opt/messenger-web-app
+COPY package-lock.json /opt/messenger-web-app
+COPY . /opt/messenger-web-app
 
 EXPOSE 3001
 

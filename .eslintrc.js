@@ -8,6 +8,11 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
   ],
+  settings: {
+    jest: {
+      version: 26,
+    },
+  },
   parserOptions: {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,

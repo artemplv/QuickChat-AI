@@ -13,7 +13,7 @@
   },
   "jest": {
     "verbose": true,
-    "testURL": "http://localhost:3001",
+    "testURL": "http://localhost:3000",
     "setupFilesAfterEnv": [
       "./tests/setupTests.js"
     ],

@@ -8,7 +8,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 require('dotenv').config();
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),

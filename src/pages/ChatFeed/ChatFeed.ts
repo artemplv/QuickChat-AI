@@ -85,7 +85,6 @@ export default class ChatFeedPage extends Block {
 
     const userId = userResponse?.data?.id;
 
-    // if (userId && token) {
     if (userId) {
       const self = this;
       this._socket = new WebSocketService(socketHost, this.props?.chatId);
@@ -98,11 +97,8 @@ export default class ChatFeedPage extends Block {
       });
 
       this._socket.subscribe('message', (event: any) => {
-        // console.log(event);
         const dataRaw = event?.data;
         const data = JSON.parse(dataRaw);
-
-        // console.log(data);
 
         if (data) {
           if (Array.isArray(data)) {
@@ -110,7 +106,7 @@ export default class ChatFeedPage extends Block {
               messages: data,
             });
           } else {
-            // eslint-disable-next-line max-len
+          // eslint-disable-next-line max-len
             const messagesToSet = Array.isArray(this.props?.messages) ? [data, ...this.props.messages] : [data];
             this.setProps({
               messages: messagesToSet,
@@ -181,9 +177,14 @@ export default class ChatFeedPage extends Block {
   handleSendMessage() {
     const self = this;
 
-    return async function (event: ClickEvent) {
+    return async function (event: ClickEvent | SubmitEvent) {
       event.preventDefault();
       const data = submitForm('messageForm');
+
+      setTimeout(() => {
+        const messageTextareaElem = self.getContent().querySelector('#messageTextArea') as HTMLTextAreaElement;
+        messageTextareaElem?.focus();
+      }, 200);
 
       if (data?.message) {
         self._socket?.send({
@@ -194,10 +195,19 @@ export default class ChatFeedPage extends Block {
     };
   }
 
+  submitMessageOnEnter(event: KeyboardEvent) {
+    const target = event.target as HTMLTextAreaElement;
+    if (event.key === 'Enter' && !event.shiftKey && target.form) {
+      target.form.dispatchEvent(new Event('submit', { cancelable: true }));
+      event.preventDefault();
+    }
+  }
+
   addListeners() {
     this.getContent().querySelector('.add-user-button')?.addEventListener('click', this.handleAddUserModal);
     this.getContent().querySelector('.delete-user-button')?.addEventListener('click', this.handleDeleteUserModal);
     this.getContent().querySelector('.delete-chat-button')?.addEventListener('click', this.handleDeleteChatModal);
+    this.getContent().querySelector('#messageTextArea')?.addEventListener('keypress', this.submitMessageOnEnter);
 
     this.getContent().querySelectorAll('.modal-wrapper input').forEach((element: HTMLInputElement) => {
       element.addEventListener('focus', () => {
@@ -240,7 +250,7 @@ export default class ChatFeedPage extends Block {
       feed: new ChatFeed({
         chatName: this.props?.chatTitle,
         chatMembers: this.props?.chatMembers,
-        loggedUserId: this.props?.userId,
+        loggedUserId: this.props?.chatId,
         messages: this.props?.messages,
       }).render(),
     });

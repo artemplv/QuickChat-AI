@@ -22,3 +22,7 @@ interface ClickEvent {
 interface CustomEventData extends Event {
   detail: string;
 }
+
+interface SubmitEvent extends Event {
+  readonly submitter: HTMLElement | null;
+}

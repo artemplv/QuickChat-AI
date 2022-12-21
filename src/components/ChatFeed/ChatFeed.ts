@@ -78,7 +78,7 @@ export default class ChatFeed extends Block {
         formId: 'messageForm',
         className: 'message-form',
         controlsWrapperClassName: 'flex-container',
-        mainContent: '<textarea class="message-textarea" name="message" placeholder="Message" required></textarea>',
+        mainContent: '<textarea id="messageTextArea" class="message-textarea" name="message" placeholder="Message" required></textarea>',
         buttonOk: new Button({
           children: '<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />',
           htmlType: 'submit',

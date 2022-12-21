@@ -9,13 +9,22 @@ Handlebars.registerHelper('getMessageClass', (loggedUserId: UserId, messageUserI
   return 'message__incoming';
 });
 
+Handlebars.registerHelper('getUserSelf', (loggedUserId: UserId, providedUserId: UserId): string => {
+  if (loggedUserId === providedUserId) {
+    return '<span class="self-user-tag">you</span>';
+  }
+  return '';
+});
+
 export default `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
         <div
-          class="avatar"
-          style="background-image: url({{ avatar }})"
+          class="avatar chat-avatar"
+          {{#if avatarUrl}}
+            style="background-image: url({{ avatarUrl }})"
+          {{/if}}
         >
         </div>
         <h4 class="chat-list-item__name">{{ chatName }}</h4>
@@ -31,11 +40,15 @@ export default `
                 <li style="padding: 5px 10px;">
                   <div class="avatar-with-name">
                     <div
-                      class="avatar"
-                      style="background-image: url({{ this.avatar }})"
+                      class="avatar user-avatar"
+                      {{#if this.avatar}}
+                        style="background-image: url({{ this.avatar }}); background-size: cover;"
+                      {{/if}}      
                     >
                     </div>
-                    <h4 class="chat-list-item__name">{{ this.firstName }} {{ this.lastName }} ({{ this.username }})</h4>
+                    <h4 class="chat-list-item__name">
+                      {{ this.firstName }} {{ this.lastName }} ({{ this.username }}) {{#getUserSelf ../loggedUserId this.id}}{{/getUserSelf}}
+                    </h4>
                   </div>
                 </li>
               {{/each}}

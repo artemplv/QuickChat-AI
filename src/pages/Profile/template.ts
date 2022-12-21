@@ -10,7 +10,6 @@ export default `
       <div class="profile-data">
         <div
           class="profile-data__avatar"
-          style="background-image: url({{ avatarUrl }})"
         >
           {{{ changeAvatarButton }}}
         </div>

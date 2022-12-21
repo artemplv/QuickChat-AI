@@ -265,6 +265,11 @@ input.search__input {
   &:hover {
     background: aliceblue;
   }
+
+  .avatar {
+    background-size: 50%;
+    background-image: url("../images/message-icon.svg");
+  }
 }
 
 .avatar {
@@ -276,6 +281,16 @@ input.search__input {
   background-size: cover;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.chat-avatar {
+  background-size: 50%;
+  background-image: url("../images/message-icon.svg");
+}
+
+.user-avatar {
+  background-size: 50%;
+  background-image: url("../images/user-icon.svg");
 }
 
 .chat-list-item__info {
@@ -294,6 +309,11 @@ input.search__input {
   font-weight: 600;
   font-size: 13px;
   color: $main-text-color;
+
+  .self-user-tag {
+    font-size: 11px;
+    color: $additional-text-color;
+  }
 }
 
 .chat-list-item__last-message-time {
@@ -580,8 +600,8 @@ input.search__input {
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
-  background-image: url("../images/media-icon-grey.svg");
+  background-size: 50%;
+  background-image: url("../images/user-icon.svg");
   overflow: hidden;
   margin-bottom: 20px;
 }

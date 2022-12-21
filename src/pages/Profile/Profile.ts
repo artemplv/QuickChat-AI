@@ -187,7 +187,7 @@ export default class Profile extends Block {
       logoutButton: this.props.logoutButton.render(),
       changeDataForm: UserDataForm(this.props.userData).render(),
       changePasswordForm: UserPasswordForm.render(),
-      avatarUrl: '../images/media-icon-grey.svg',
+      avatarUrl: null,
     });
   }
 }

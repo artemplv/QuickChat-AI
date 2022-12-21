@@ -36,7 +36,9 @@ export default `
           <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chat/{{ this.id }}')">
             <div
               class="avatar"
-              style="background-image: url({{ this.avatar }}"
+              {{#if this.avatar}}
+                style="background-image: url({{ this.avatar }}); background-size: cover;"
+              {{/if}}
             ></div>
             <div class="chat-list-item__info">
               <div class="chat-list-item__name-container">

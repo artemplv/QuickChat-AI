@@ -42,7 +42,7 @@ export default class ChatsPage extends Block {
       if (data) {
         try {
           const response: any = await chatsApi.createChat(data);
-          if (response.status === 200) {
+          if (response.status === 201) {
             self.getChats();
           }
         } catch (error) {

@@ -18,12 +18,14 @@ import AuthAPI from '../../api/auth';
 
 import WebSocketService from '../../modules/socket/socket-service';
 
+import config from '../../config/config';
+
 const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
-const host = 'https://ya-praktikum.tech';
-const socketHost = 'wss://ya-praktikum.tech/ws/chats';
+const host = config.serverHost;
+const socketHost = `${config.socketHost}/ws/chat`;
 
 interface Props extends PlainObject {
   chatsList?: ChatObject[];
@@ -80,14 +82,13 @@ export default class ChatFeedPage extends Block {
 
   async addSocketConnection() {
     const userResponse: any = await authApi.getUser();
-    const tokenResponse: any = await chatsApi.getChatToken(this.props?.chatId);
 
     const userId = userResponse?.data?.id;
-    const token = tokenResponse?.data?.token;
 
-    if (userId && token) {
+    // if (userId && token) {
+    if (userId) {
       const self = this;
-      this._socket = new WebSocketService(socketHost, userId, this.props?.chatId, token);
+      this._socket = new WebSocketService(socketHost, this.props?.chatId);
 
       this._socket.subscribe('open', () => {
         self._socket?.send({
@@ -97,8 +98,11 @@ export default class ChatFeedPage extends Block {
       });
 
       this._socket.subscribe('message', (event: any) => {
+        // console.log(event);
         const dataRaw = event?.data;
         const data = JSON.parse(dataRaw);
+
+        // console.log(data);
 
         if (data) {
           if (Array.isArray(data)) {
@@ -106,11 +110,10 @@ export default class ChatFeedPage extends Block {
               messages: data,
             });
           } else {
+            // eslint-disable-next-line max-len
+            const messagesToSet = Array.isArray(this.props?.messages) ? [data, ...this.props.messages] : [data];
             this.setProps({
-              messages: [{
-                content: data?.content,
-                user_id: data?.userId,
-              }, ...this.props?.messages],
+              messages: messagesToSet,
             });
           }
         }
@@ -134,7 +137,7 @@ export default class ChatFeedPage extends Block {
             await chatsApi.addUsers(
               {
                 users: [usersResponse.data[0].id],
-                chatId: Number(self.props?.chatId),
+                chatId: self.props?.chatId,
               },
             );
             self.getChatUsers();
@@ -157,12 +160,12 @@ export default class ChatFeedPage extends Block {
         try {
           const users = self.props?.chatMembers;
           if (users && users[0]) {
-            const userToDelete = users.find((user: PlainObject) => user.login === data.login);
+            const userToDelete = users.find((user: PlainObject) => user.username === data.username);
             if (userToDelete) {
               await chatsApi.deleteUsers(
                 {
                   users: [userToDelete.id],
-                  chatId: Number(self.props?.chatId),
+                  chatId: self.props?.chatId,
                 },
               );
               self.getChatUsers();
@@ -217,9 +220,9 @@ export default class ChatFeedPage extends Block {
       && this.props?.chatsList && this.props.chatsList.length > 0
     ) {
       const currentChat = this.props.chatsList.find(
-        (chat: ChatObject) => chat.id === Number(this.props.chatId),
+        (chat: ChatObject) => chat.id === this.props.chatId,
       );
-      this.setProps({ chatTitle: currentChat?.title || 'Unknown' });
+      this.setProps({ chatTitle: currentChat?.name || 'Unknown' });
     }
   }
 

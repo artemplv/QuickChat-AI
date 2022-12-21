@@ -6,7 +6,9 @@ COPY package.json /opt/messenger-web-app
 COPY package-lock.json /opt/messenger-web-app
 COPY . /opt/messenger-web-app
 
-EXPOSE 3001
+ARG CLIENT_PORT
+
+EXPOSE ${CLIENT_PORT}
 
 RUN npm install
 

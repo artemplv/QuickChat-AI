@@ -1,6 +1,7 @@
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
 import submitForm from '../../utils/submitForm';
+import sessionStorageAuth from '../../utils/sessionStorageAuth';
 import {
   validateInput,
   removeError,
@@ -32,6 +33,7 @@ export default class SignPage extends Block {
       try {
         const response: any = await authApi.signin(data);
         if (response.status === 200) {
+          sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
         }
       } catch (error) {
@@ -48,6 +50,7 @@ export default class SignPage extends Block {
       try {
         const response: any = await authApi.signup(data);
         if (response.status === 200) {
+          sessionStorage.setItem('token', response.data.accessToken);
           navigate('/chats');
         }
       } catch (error) {

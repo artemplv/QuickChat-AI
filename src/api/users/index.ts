@@ -2,17 +2,17 @@ import {
   HTTPTransport,
   BaseAPI,
 } from '../../modules/http';
+import config from '../../config/config';
 
-const host = 'https://ya-praktikum.tech';
-
-const usersAPIInstance = new HTTPTransport(`${host}/api/v2/user`);
+const usersAPIInstance = new HTTPTransport(`${config.serverHost}/api/user`);
 
 export default class UsersAPI extends BaseAPI {
   changeProfile(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return usersAPIInstance.put('/profile', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
@@ -20,23 +20,24 @@ export default class UsersAPI extends BaseAPI {
     return usersAPIInstance.put('/profile/avatar', {
       data: {},
       file: data,
-      withCredentials: true,
     });
   }
 
   changePassword(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return usersAPIInstance.put('/password', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   getUsersByLogin(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return usersAPIInstance.post('/search', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 }

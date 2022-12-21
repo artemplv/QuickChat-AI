@@ -2,54 +2,59 @@ import {
   HTTPTransport,
   BaseAPI,
 } from '../../modules/http';
+import config from '../../config/config';
 
-const host = 'https://ya-praktikum.tech';
-
-const chatsAPIInstance = new HTTPTransport(`${host}/api/v2/chats`);
+const chatsAPIInstance = new HTTPTransport(`${config.serverHost}/api/chats`);
 
 export default class ChatsAPI extends BaseAPI {
   getChats() {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.get('/', {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   createChat(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.post('/', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   addUsers(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.put('/users', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   deleteUsers(data: PlainObject) {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.delete('/users', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   getChatUsers(chatId: number | string) {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.get(`/${chatId}/users`, {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 
   getChatToken(chatId: number | string) {
+    const accessToken = sessionStorage.getItem('token');
+
     return chatsAPIInstance.post(`/token/${chatId}`, {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
     });
   }
 }

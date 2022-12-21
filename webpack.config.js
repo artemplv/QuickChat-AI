@@ -1,8 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+
+require('dotenv').config();
 
 module.exports = {
   mode: 'development',
@@ -22,7 +25,7 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     historyApiFallback: true,
-    port: 3001
+    port: process.env.CLIENT_PORT || 3000
   },
   module: {
     rules: [
@@ -72,6 +75,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
+      base: process.env.CLIENT_HOST || 'http://localhost:3000/',
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -90,6 +94,11 @@ module.exports = {
     }),
     new ESLintPlugin({
       extensions: ['ts']
+    }),
+    new webpack.DefinePlugin({
+      'process.env.SERVER_HOST': JSON.stringify(process.env.SERVER_HOST),
+      'process.env.SOCKET_HOST': JSON.stringify(process.env.SOCKET_HOST),
+      'process.env.CLIENT_HOST': JSON.stringify(process.env.CLIENT_HOST),
     })
   ]
 };

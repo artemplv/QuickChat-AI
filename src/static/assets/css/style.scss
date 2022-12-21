@@ -317,6 +317,8 @@ input.search__input {
   max-width: 195px;
   max-height: 30px;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
 }
 
 .last-message-from-user-label {
@@ -593,7 +595,7 @@ input.search__input {
   font-size: 16px;
   line-height: 16px;
   color: $main-text-color;
-  margin: 0;
+  margin: 0 0 20px;
 }
 
 .profile-data__form {

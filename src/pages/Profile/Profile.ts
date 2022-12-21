@@ -21,6 +21,7 @@ import {
 
 import handleModal from '../../utils/handleModals';
 import submitForm from '../../utils/submitForm';
+import sessionStorageAuth from '../../utils/sessionStorageAuth';
 
 import {
   validateInput,
@@ -34,8 +35,6 @@ import template from './template';
 
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
-
-const host = 'https://ya-praktikum.tech';
 
 export default class Profile extends Block {
   public props: any;
@@ -78,9 +77,9 @@ export default class Profile extends Block {
     handleModal('uploadAvatarModal');
   }
 
-  async handleLogout(event: ClickEvent) {
+  handleLogout(event: ClickEvent) {
     event.preventDefault();
-    await authApi.logout();
+    sessionStorageAuth.logout();
     navigate('/login');
   }
 
@@ -188,7 +187,7 @@ export default class Profile extends Block {
       logoutButton: this.props.logoutButton.render(),
       changeDataForm: UserDataForm(this.props.userData).render(),
       changePasswordForm: UserPasswordForm.render(),
-      avatarUrl: this.props.userData?.avatar ? `${host}${this.props.userData.avatar}` : '../images/media-icon-grey.svg',
+      avatarUrl: '../images/media-icon-grey.svg',
     });
   }
 }

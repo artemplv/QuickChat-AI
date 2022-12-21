@@ -9,7 +9,9 @@ module.exports = {
     'plugin:jest/recommended',
   ],
   parserOptions: {
-    project: './tsconfig.json',
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
   env: {
     node: true,
@@ -21,6 +23,7 @@ module.exports = {
     'dist/*',
     '*config.js',
     'tests/*',
+    '.eslintrc.js'
   ],
   rules: {
     camelcase: 'warn',

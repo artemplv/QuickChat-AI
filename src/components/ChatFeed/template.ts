@@ -3,7 +3,7 @@ import Handlebars from 'handlebars';
 type UserId = number | string | undefined;
 
 Handlebars.registerHelper('getMessageClass', (loggedUserId: UserId, messageUserId: UserId): string => {
-  if (Number(loggedUserId) === Number(messageUserId)) {
+  if (loggedUserId === messageUserId) {
     return 'message__outgoing';
   }
   return 'message__incoming';
@@ -35,7 +35,7 @@ export default `
                       style="background-image: url({{ this.avatar }})"
                     >
                     </div>
-                    <h4 class="chat-list-item__name">{{ this.first_name }} {{ this.second_name }} ({{ this.login }})</h4>
+                    <h4 class="chat-list-item__name">{{ this.firstName }} {{ this.lastName }} ({{ this.username }})</h4>
                   </div>
                 </li>
               {{/each}}
@@ -65,7 +65,7 @@ export default `
 
     <div class="chat-block__messages">
       {{#each messages}}
-        <div class="message {{#getMessageClass ../loggedUserId this.user_id}}{{/getMessageClass}}">
+        <div class="message {{#getMessageClass ../loggedUserId this.userId}}{{/getMessageClass}}">
           <p>
             {{ this.content }}
           </p>
@@ -100,7 +100,7 @@ export default `
 
       <div class="form-field">
         <div class="form-field__control">
-          <input id="login-add" name="login" type="text" class="form-field__input" placeholder=" "  />
+          <input id="login-add" name="username" type="text" class="form-field__input" placeholder=" "  />
           <label for="login-add" class="form-field__label">Логин</label>
           <div class="form-field__bar"></div>
         </div>
@@ -118,7 +118,7 @@ export default `
 
       <div class="form-field">
         <div class="form-field__control">
-          <input id="login-remove" name="login" type="text" class="form-field__input" placeholder=" " />
+          <input id="login-remove" name="username" type="text" class="form-field__input" placeholder=" " />
           <label for="login-remove" class="form-field__label">Логин</label>
           <div class="form-field__bar"></div>
         </div>

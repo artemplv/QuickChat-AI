@@ -7,6 +7,14 @@ Handlebars.registerHelper('ifLessThanOne', (value: number | undefined): string =
   return '';
 });
 
+Handlebars.registerHelper('formatDatetime', (value: string | undefined): string => {
+  if (!value) {
+    return '';
+  }
+
+  return new Date(value).toLocaleString();
+});
+
 export default `
   <div class="chats">
     <div class="chats_header">
@@ -32,8 +40,10 @@ export default `
             ></div>
             <div class="chat-list-item__info">
               <div class="chat-list-item__name-container">
-                <h4 class="chat-list-item__name">{{ this.title }}</h4>
-                <p class="chat-list-item__last-message-time">{{ this.lastMessageTime }}</p>
+                <h4 class="chat-list-item__name">{{ this.name }}</h4>
+                <p class="chat-list-item__last-message-time">
+                  {{#formatDatetime this.lastMessage.createdAt}}{{/formatDatetime}}
+                </p>
               </div>
 
               <div class="chat-list-item__last-message-container">
@@ -46,7 +56,7 @@ export default `
                   >
                     Вы:&nbsp;
                   </span>
-                  {{ this.lastMessageText }}
+                  {{ this.lastMessage.content }}
                 </p>
                 <div
                   class="chat-list-item__unread-message-count"
@@ -68,7 +78,7 @@ export default `
 
         <div class="form-field">
           <div class="form-field__control">
-            <input id="chat-add-title" name="title" type="text" class="form-field__input" placeholder=" "  />
+            <input id="chat-add-title" name="name" type="text" class="form-field__input" placeholder=" "  />
             <label for="chat-add-title" class="form-field__label">Название чата</label>
             <div class="form-field__bar"></div>
           </div>

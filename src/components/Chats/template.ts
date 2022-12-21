@@ -21,7 +21,7 @@ export default `
       {{{ profileButton }}}
 
       <form id="searchForm" class="search-form">
-        <input name="search" type="text" class="search__input" placeholder="Поиск" />
+        <input name="search" type="text" class="search__input" placeholder="Search" />
       </form>
     </div>
 
@@ -56,7 +56,7 @@ export default `
                       hidden
                     {{/unless}}
                   >
-                    Вы:&nbsp;
+                    You:&nbsp;
                   </span>
                   {{ this.lastMessage.content }}
                 </p>
@@ -76,18 +76,18 @@ export default `
 
     <div id="create-chat-modal" class="modal-wrapper">
       <form id="newChat" class="modal-body">
-        <h4 class="modal-body__name">Создать новый чат</h4>
+        <h4 class="modal-body__name">Create new chat</h4>
 
         <div class="form-field">
           <div class="form-field__control">
             <input id="chat-add-title" name="name" type="text" class="form-field__input" placeholder=" "  />
-            <label for="chat-add-title" class="form-field__label">Название чата</label>
+            <label for="chat-add-title" class="form-field__label">Chat name</label>
             <div class="form-field__bar"></div>
           </div>
         </div>
 
         <button type="submit" class="button button_main">
-          Создать
+          Create
         </button>
       </form>
     </div>

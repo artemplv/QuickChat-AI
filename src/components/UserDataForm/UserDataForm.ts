@@ -10,12 +10,12 @@ const UserDataForm = (userData: Record<string, any> = {}) => new Form({
   isControlsHidden: true,
   mainContent: Handlebars.compile(template)(userData),
   buttonOk: new Button({
-    children: 'Сохранить',
+    children: 'Save',
     className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
-    children: 'Отменить',
+    children: 'Cancel',
     className: 'button_additional cancel-details-change-button',
     htmlType: 'button',
   }).render(),

@@ -3,7 +3,7 @@ export default `
     {{{ chats }}}
 
     <div class="chat-feed-empty">
-      <p>Выберите чат чтобы отправить сообщение</p>
+      <p>Select chat to send a message</p>
     </div>
   </div>
 `;

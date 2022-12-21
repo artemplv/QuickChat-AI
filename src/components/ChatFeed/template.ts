@@ -43,7 +43,7 @@ export default `
                       class="avatar user-avatar"
                       {{#if this.avatar}}
                         style="background-image: url({{ this.avatar }}); background-size: cover;"
-                      {{/if}}      
+                      {{/if}}
                     >
                     </div>
                     <h4 class="chat-list-item__name">
@@ -109,46 +109,46 @@ export default `
 
     <div id="add-user-modal" class="modal-wrapper">
     <form id="addUser" class="modal-body">
-      <h4 class="modal-body__name">Добавить пользователя</h4>
+      <h4 class="modal-body__name">Add user</h4>
 
       <div class="form-field">
         <div class="form-field__control">
           <input id="login-add" name="username" type="text" class="form-field__input" placeholder=" "  />
-          <label for="login-add" class="form-field__label">Логин</label>
+          <label for="login-add" class="form-field__label">Login</label>
           <div class="form-field__bar"></div>
         </div>
       </div>
 
       <button type="submit" class="button button_main">
-        Добавить
+        Confirm
       </button>
     </form>
   </div>
 
   <div id="remove-user-modal" class="modal-wrapper">
     <form id="removeUser" class="modal-body">
-      <h4 class="modal-body__name">Удалить пользователя</h4>
+      <h4 class="modal-body__name">Remove user</h4>
 
       <div class="form-field">
         <div class="form-field__control">
           <input id="login-remove" name="username" type="text" class="form-field__input" placeholder=" " />
-          <label for="login-remove" class="form-field__label">Логин</label>
+          <label for="login-remove" class="form-field__label">Login</label>
           <div class="form-field__bar"></div>
         </div>
       </div>
 
       <button type="submit" class="button button_main">
-        Удалить
+        Confirm
       </button>
     </form>
   </div>
 
   <div id="delete-chat-modal" class="modal-wrapper">
     <div class="modal-body">
-      <h4 class="modal-body__name">Удалить этот чат?</h4>
+      <h4 class="modal-body__name">Delete this chat?</h4>
 
       <button type="submit" class="button button_main">
-        Удалить
+        Confirm
       </button>
     </div>
   </div>

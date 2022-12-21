@@ -1,7 +1,7 @@
 export default `
   <h1 class="profile-data__name">{{ firstName }}</h1>
   <div class="profile-data__form-item">
-    <label for="email" class="profile-data-form-field__label">Почта</label>
+    <label for="email" class="profile-data-form-field__label">Email</label>
     <div>
       <input id="email" name="email" type="email" class="profile-data-form-field__input" placeholder=" "  value="{{ email }}" disabled />
     </div>
@@ -10,7 +10,7 @@ export default `
   <div class="divider"></div>
 
   <div class="profile-data__form-item">
-    <label for="username" class="profile-data-form-field__label">Логин</label>
+    <label for="username" class="profile-data-form-field__label">Login (username)</label>
     <div>
       <input id="username" name="username" type="text" class="profile-data-form-field__input" placeholder=" "  value="{{ username }}" disabled />
     </div>
@@ -19,7 +19,7 @@ export default `
   <div class="divider"></div>
 
   <div class="profile-data__form-item">
-    <label for="firstName" class="profile-data-form-field__label">Имя</label>
+    <label for="firstName" class="profile-data-form-field__label">Name</label>
     <div>
       <input id="firstName" name="firstName" type="text" class="profile-data-form-field__input" placeholder=" "  value="{{ firstName }}" disabled />
     </div>
@@ -28,7 +28,7 @@ export default `
   <div class="divider"></div>
 
   <div class="profile-data__form-item">
-    <label for="lastName" class="profile-data-form-field__label">Фамилия</label>
+    <label for="lastName" class="profile-data-form-field__label">Surname</label>
     <div>
       <input id="lastName" name="lastName" type="text" class="profile-data-form-field__input" placeholder=" "  value="{{ lastName }}" disabled />
     </div>
@@ -37,7 +37,7 @@ export default `
   <!-- <div class="divider"></div>
 
   <div class="profile-data__form-item">
-    <label for="display_name" class="profile-data-form-field__label">Имя в чате</label>
+    <label for="display_name" class="profile-data-form-field__label">Name в чате</label>
     <div>
       <input id="display_name" name="display_name" type="text" class="profile-data-form-field__input" placeholder=" "  value="{{ display_name }}" disabled />
     </div>
@@ -46,7 +46,7 @@ export default `
   <div class="divider"></div>
 
   <div class="profile-data__form-item">
-    <label for="phone" class="profile-data-form-field__label">Телефон</label>
+    <label for="phone" class="profile-data-form-field__label">Phone</label>
     <div>
       <input id="phone" name="phone" type="tel" class="profile-data-form-field__input" placeholder=" "  value="{{ phone }}" disabled />
     </div>

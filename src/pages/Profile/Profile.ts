@@ -51,22 +51,22 @@ export default class Profile extends Block {
       changeAvatarButton: new Button({
         className: 'change-avatar-button',
         htmlType: 'button',
-        children: 'Поменять<br>аватар',
+        children: 'Change<br>avatar',
       }),
       changeDataButton: new Button({
         className: 'profile-data__additional-button change-data-intention-button',
         htmlType: 'button',
-        children: 'Изменить данные',
+        children: 'Edit',
       }),
       changePasswordButton: new Button({
         className: 'profile-data__additional-button change-password-intention-button',
         htmlType: 'button',
-        children: 'Изменить пароль',
+        children: 'Change password',
       }),
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: '<a class="button-link">Выйти</a>',
+        children: '<a class="button-link">Logout</a>',
       }),
       props,
     });

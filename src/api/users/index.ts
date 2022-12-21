@@ -8,11 +8,9 @@ const usersAPIInstance = new HTTPTransport(`${config.serverHost}/api/user`);
 
 export default class UsersAPI extends BaseAPI {
   changeProfile(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return usersAPIInstance.put('/profile', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
@@ -24,20 +22,16 @@ export default class UsersAPI extends BaseAPI {
   }
 
   changePassword(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return usersAPIInstance.put('/password', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   getUsersByLogin(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return usersAPIInstance.post('/search', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 }

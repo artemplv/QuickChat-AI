@@ -22,9 +22,8 @@ export default class AuthAPI extends BaseAPI {
   }
 
   getUser() {
-    const accessToken = sessionStorage.getItem('token');
     return authAPIInstance.get('/user', {
-      headers: { authorization: accessToken || '' },
+      headers: { authorization: this.token() },
     });
   }
 }

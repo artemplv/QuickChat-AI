@@ -8,53 +8,41 @@ const chatsAPIInstance = new HTTPTransport(`${config.serverHost}/api/chats`);
 
 export default class ChatsAPI extends BaseAPI {
   getChats() {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.get('/', {
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   createChat(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.post('/', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   addUsers(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.put('/users', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   deleteUsers(data: PlainObject) {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.delete('/users', {
       data,
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   getChatUsers(chatId: number | string) {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.get(`/${chatId}/users`, {
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   getChatToken(chatId: number | string) {
-    const accessToken = sessionStorage.getItem('token');
-
     return chatsAPIInstance.post(`/token/${chatId}`, {
-      headers: { 'content-type': 'application/json', authorization: accessToken || '' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 }

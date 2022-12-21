@@ -5,11 +5,13 @@ interface PlainObject {
 
 interface ChatObject extends PlainObject {
   id: number;
-  title: string;
-  avatar: string;
-  lastMessageTime?: string;
-  isLastMessageFromUser?: boolean;
-  lastMessageText?: string;
+  name: string;
+  avatar?: string;
+  lastMessage?: {
+    userId: string;
+    content: string;
+    createdAt: string;
+  };
   unreadMessagesCount?: number;
 }
 

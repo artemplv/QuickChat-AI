@@ -19,7 +19,6 @@ interface OptionsObject {
   file?: FormData;
   timeout?: number;
   headers?: HeadersObject;
-  withCredentials?: boolean;
 }
 
 interface RequestPreparedOptions extends OptionsObject {
@@ -79,7 +78,6 @@ export default class HTTPTransport {
       method,
       data,
       headers = {},
-      withCredentials,
       file,
     } = options;
 
@@ -87,10 +85,6 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.timeout = timeout;
-
-      if (withCredentials) {
-        xhr.withCredentials = true;
-      }
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

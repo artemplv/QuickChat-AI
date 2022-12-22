@@ -31,8 +31,8 @@ describe('test router', () => {
     `;
 
     router
-      .use('/test', Test)
-      .use('/404', NotFound);
+      .use('/test', Test, {}, false)
+      .use('/404', NotFound, {}, false);
   });
 
   test('it provides correct route on url change', () => {

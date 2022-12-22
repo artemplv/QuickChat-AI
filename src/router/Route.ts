@@ -18,11 +18,14 @@ export default class Route {
 
   private _props: Props;
 
-  constructor(pathname: string, view: ComponentConstructor, props: Props) {
+  public withAuth: boolean;
+
+  constructor(pathname: string, view: ComponentConstructor, props: Props, withAuth: boolean) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this.withAuth = withAuth;
   }
 
   setProps(props: PlainObject) {

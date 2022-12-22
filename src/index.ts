@@ -15,12 +15,12 @@ import './globals';
 const router = new Router('.app');
 
 router
-  .use('/chats', ChatsPage, {})
-  .use('/chat/:chatId', ChatFeedPage, {})
-  .use('/profile', Profile, {})
-  .use('/login', SignPage, { form: LoginForm })
-  .use('/signup', SignPage, { form: RegisterForm })
-  .use('/404', NotFoundError, {})
+  .use('/chats', ChatsPage)
+  .use('/chat/:chatId', ChatFeedPage)
+  .use('/profile', Profile)
+  .use('/login', SignPage, { form: LoginForm }, false)
+  .use('/signup', SignPage, { form: RegisterForm }, false)
+  .use('/404', NotFoundError, {}, false)
   .start();
 
 window.addEventListener('_pushstate', (event: CustomEventData) => router.go(event.detail));

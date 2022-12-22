@@ -54,6 +54,10 @@ export default class Router {
   }
 
   _onRoute(pathname: string) { // eslint-disable-line consistent-return
+    if (pathname === '/') {
+      return this.go('/chats');
+    }
+
     const route = this.getRoute(pathname);
 
     if (!route) {

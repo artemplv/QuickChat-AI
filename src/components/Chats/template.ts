@@ -1,5 +1,7 @@
 import Handlebars from 'handlebars';
 
+type UserId = number | string | undefined;
+
 Handlebars.registerHelper('ifLessThanOne', (value: number | undefined): string => {
   if (!value || value < 1) {
     return 'hidden';
@@ -13,6 +15,13 @@ Handlebars.registerHelper('formatDatetime', (value: string | undefined): string 
   }
 
   return new Date(value).toLocaleString();
+});
+
+Handlebars.registerHelper('messageFromCurrentUserVisibility', (loggedUserId: UserId, messageFromUserId: UserId): string => {
+  if (loggedUserId === messageFromUserId) {
+    return '';
+  }
+  return 'hidden';
 });
 
 export default `
@@ -52,9 +61,8 @@ export default `
                 <p class="chat-list-item__last-message-text">
                   <span
                     class="last-message-from-user-label"
-                    {{#unless this.isLastMessageFromUser}}
-                      hidden
-                    {{/unless}}
+                    {{#messageFromCurrentUserVisibility ../loggedUserId this.lastMessage.userId}}
+                    {{/messageFromCurrentUserVisibility}}
                   >
                     You:&nbsp;
                   </span>

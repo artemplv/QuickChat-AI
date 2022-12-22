@@ -62,10 +62,15 @@ export default class ChatFeedPage extends Block {
     this.setProps({ chatsList: response.data || null });
   }
 
-  async getChatUsers() {
-    const usersResponse: any = await chatsApi.getChatUsers(this.props?.chatId);
-    if (Array.isArray(usersResponse?.data)) {
-      const membersPrepared = usersResponse.data.map((user: PlainObject) => {
+  async getChat() {
+    const response: any = await chatsApi.getChat(this.props?.chatId);
+
+    this.setProps({ chatTitle: response?.data?.name || 'Unknown' });
+
+    const chatUsers = response?.data?.users;
+
+    if (Array.isArray(chatUsers)) {
+      const membersPrepared = chatUsers.map((user: PlainObject) => {
         const userAvatar = user.avatar;
         if (userAvatar) {
           return {
@@ -130,13 +135,8 @@ export default class ChatFeedPage extends Block {
         try {
           const usersResponse: any = await usersApi.getUsersByLogin(data);
           if (usersResponse?.data && usersResponse.data[0]?.id) {
-            await chatsApi.addUsers(
-              {
-                users: [usersResponse.data[0].id],
-                chatId: self.props?.chatId,
-              },
-            );
-            self.getChatUsers();
+            await chatsApi.addUsers(self.props?.chatId, [usersResponse.data[0].id]);
+            self.getChat();
           }
         } catch (error) {
           console.error(error);
@@ -158,13 +158,8 @@ export default class ChatFeedPage extends Block {
           if (users && users[0]) {
             const userToDelete = users.find((user: PlainObject) => user.username === data.username);
             if (userToDelete) {
-              await chatsApi.deleteUsers(
-                {
-                  users: [userToDelete.id],
-                  chatId: self.props?.chatId,
-                },
-              );
-              self.getChatUsers();
+              await chatsApi.deleteUsers(self.props?.chatId, [userToDelete.id]);
+              self.getChat();
             }
           }
         } catch (error) {
@@ -225,20 +220,11 @@ export default class ChatFeedPage extends Block {
 
   componentDidRender() {
     this.addListeners();
-    if (
-      !this.props?.chatTitle && this.props?.chatId
-      && this.props?.chatsList && this.props.chatsList.length > 0
-    ) {
-      const currentChat = this.props.chatsList.find(
-        (chat: ChatObject) => chat.id === this.props.chatId,
-      );
-      this.setProps({ chatTitle: currentChat?.name || 'Unknown' });
-    }
   }
 
   componentDidMount() {
     this.getChats();
-    this.getChatUsers();
+    this.getChat();
     this.addSocketConnection();
   }
 

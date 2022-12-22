@@ -20,16 +20,22 @@ export default class ChatsAPI extends BaseAPI {
     });
   }
 
-  addUsers(data: PlainObject) {
-    return chatsAPIInstance.put('/users', {
-      data,
+  getChat(chatId: number | string) {
+    return chatsAPIInstance.get(`/${chatId}`, {
       headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
-  deleteUsers(data: PlainObject) {
-    return chatsAPIInstance.delete('/users', {
-      data,
+  addUsers(chatId: number | string, users: [string]) {
+    return chatsAPIInstance.put(`/${chatId}/users`, {
+      data: { users },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
+    });
+  }
+
+  deleteUsers(chatId: number | string, users: [string]) {
+    return chatsAPIInstance.delete(`/${chatId}/users`, {
+      data: { users },
       headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }

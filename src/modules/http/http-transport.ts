@@ -73,7 +73,7 @@ export default class HTTPTransport {
   // options:
   // headers — obj
   // data — obj
-  request = (url: string, options: RequestPreparedOptions, timeout = 5000) => {
+  request = (url: string, options: RequestPreparedOptions, timeout = 10000) => {
     const {
       method,
       data,

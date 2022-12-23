@@ -50,8 +50,8 @@ export default class Route {
 
     const regexPath = `${this._pathname.replace(/([:*])(\w+)/g, (_full, _colon, name) => {
       paramNames.push(name);
-      return '([^/]+)';
-    })}(?:/|$)`;
+      return '?([^/]+)';
+    })}?(?:/|$)`;
 
     let pathParams;
 
@@ -77,6 +77,7 @@ export default class Route {
       return;
     }
 
+    this._block.setProps(this._props);
     this._block.show();
   }
 }

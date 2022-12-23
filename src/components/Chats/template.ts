@@ -42,7 +42,7 @@ export default `
 
       <ul class="chats-container__list">
         {{#each chatsList}}
-          <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chat/{{ this.id }}')">
+          <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chats/{{ this.id }}')">
             <div
               class="avatar"
               {{#if this.avatar}}

@@ -1,7 +1,6 @@
 import Router from './router/Router';
 
 import ChatsPage from './pages/Chats';
-import ChatFeedPage from './pages/ChatFeed';
 import Profile from './pages/Profile';
 import SignPage from './pages/Sign';
 import NotFoundError from './pages/NotFoundError';
@@ -15,8 +14,7 @@ import './globals';
 const router = new Router('.app');
 
 router
-  .use('/chats', ChatsPage)
-  .use('/chat/:chatId', ChatFeedPage)
+  .use('/chats/:chatId', ChatsPage)
   .use('/profile', Profile)
   .use('/login', SignPage, { form: LoginForm }, false)
   .use('/signup', SignPage, { form: RegisterForm }, false)

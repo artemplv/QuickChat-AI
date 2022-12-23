@@ -121,7 +121,7 @@ export default class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error('нет доступа');
+        throw new Error('No access');
       },
     });
 

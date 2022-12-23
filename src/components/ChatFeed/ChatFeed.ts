@@ -2,13 +2,12 @@ import Handlebars from 'handlebars';
 import Block from '../../modules/block';
 import Button from '../Button';
 import Form from '../Form';
-
 import template from './template';
 
 export default class ChatFeed extends Block {
-  public props: PlainObject;
+  public props: Props;
 
-  constructor(props?: PlainObject) {
+  constructor(props?: Props) {
     super('div', props);
   }
 
@@ -78,7 +77,7 @@ export default class ChatFeed extends Block {
         formId: 'messageForm',
         className: 'message-form',
         controlsWrapperClassName: 'flex-container',
-        mainContent: '<textarea id="messageTextArea" class="message-textarea" name="message" placeholder="Message" required></textarea>',
+        mainContent: '<textarea id="messageTextArea" class="message-textarea" name="message" placeholder="Write a message..." required></textarea>',
         buttonOk: new Button({
           children: '<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />',
           htmlType: 'submit',
@@ -86,4 +85,8 @@ export default class ChatFeed extends Block {
       }).render(),
     });
   }
+}
+
+interface Props extends PlainObject {
+  chatId?: string;
 }

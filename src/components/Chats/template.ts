@@ -73,7 +73,7 @@ export default `
                   {{#ifLessThanOne this.unreadMessagesCount}}
                   {{/ifLessThanOne}}
                 >
-                  <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}<span>
+                  <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}</span>
                 </div>
               </div>
             </div>

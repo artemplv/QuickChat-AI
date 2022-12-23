@@ -88,15 +88,35 @@ export default class ChatsPage extends Block {
       this._socket.subscribe('message', (event: any) => {
         const dataRaw = event?.data;
         const data = JSON.parse(dataRaw);
-        // eslint-disable-next-line no-console
-        console.log(data);
 
         if (data && data.chatId === self.props.chatId) {
           if (data.type === 'old messages') {
             self.setProps({
               messages: data.data,
             });
+
+            if (Array.isArray(data.data) && data.data.length > 0) {
+              self._socket?.send({
+                chatId: data.chatId,
+                content: '0',
+                type: 'read all',
+              });
+
+              if (self.props.chatsList) {
+                // eslint-disable-next-line max-len
+                const listPositionOfTargetChat = self.props.chatsList.map((item) => item.id).indexOf(data.chatId);
+                const newChatsList = [...self.props.chatsList];
+                newChatsList[listPositionOfTargetChat].unreadMessagesCount = 0;
+                self.setProps({ chatsList: newChatsList });
+              }
+            }
           } else if (data.type === 'new message') {
+            self._socket?.send({
+              chatId: data.chatId,
+              content: data.data.id,
+              type: 'read',
+            });
+
             // eslint-disable-next-line max-len
             const messagesToSet = Array.isArray(self.props?.messages) ? [data.data, ...self.props.messages] : [data.data];
             self.setProps({
@@ -111,6 +131,12 @@ export default class ChatsPage extends Block {
           const newChatsList = moveArrayElement(self.props.chatsList, listPositionOfTargetChat, 0);
           if (newChatsList && newChatsList[0]) {
             newChatsList[0].lastMessage = data.data;
+
+            if ((data.chatId !== self.props.chatId) && (data.data.userId !== sessionStorage.getItem('userId'))) {
+              const currentUnread = newChatsList[0].unreadMessagesCount;
+              // eslint-disable-next-line max-len
+              newChatsList[0].unreadMessagesCount = Number.isInteger(currentUnread) ? currentUnread + 1 : 1;
+            }
             self.setProps({ chatsList: newChatsList });
           }
         }

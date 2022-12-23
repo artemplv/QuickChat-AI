@@ -258,9 +258,13 @@ input.search__input {
 .chat-list-item {
   display: flex;
   align-items: center;
-  padding: 12px 10px;
+  padding: 17px 10px;
   border-top: 1px solid $border-color;
   cursor: pointer;
+
+  &:last-child {
+    border-bottom: 1px solid $border-color;
+  }
 
   &:hover {
     background: aliceblue;
@@ -325,6 +329,7 @@ input.search__input {
 
 .chat-list-item__last-message-container {
   display: flex;
+  position: relative;
   justify-content: space-between;
 }
 
@@ -346,20 +351,21 @@ input.search__input {
 }
 
 .chat-list-item__unread-message-count {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background: $accent-color;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 11px;
   color: #FFFFFF;
-  margin-top: 5px;
+  position: absolute;
+  right: 0;
 }
 
 .chat-list-item__unread-message-count-number {
   position: relative;
-  top: 3px;
+  top: 6px;
 }
 
 .chat-feed-empty {

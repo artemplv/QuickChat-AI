@@ -7,7 +7,6 @@ import template from './template';
 
 import handleModal from '../../utils/handleModals';
 import submitForm from '../../utils/submitForm';
-import moveArrayElement from '../../utils/moveArrayElement';
 
 import {
   validateInput,
@@ -20,6 +19,11 @@ import AuthAPI from '../../api/auth';
 import WebSocketService from '../../modules/socket/socket-service';
 
 import config from '../../config/config';
+
+import {
+  resetChatUnreadMsgsCount,
+  rearrangeChatsList,
+} from './helpers';
 
 const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();
@@ -103,11 +107,7 @@ export default class ChatsPage extends Block {
               });
 
               if (self.props.chatsList) {
-                // eslint-disable-next-line max-len
-                const listPositionOfTargetChat = self.props.chatsList.map((item) => item.id).indexOf(data.chatId);
-                const newChatsList = [...self.props.chatsList];
-                newChatsList[listPositionOfTargetChat].unreadMessagesCount = 0;
-                self.setProps({ chatsList: newChatsList });
+                resetChatUnreadMsgsCount(self, data.chatId);
               }
             }
           } else if (data.type === 'new message') {
@@ -126,19 +126,7 @@ export default class ChatsPage extends Block {
         }
 
         if (data?.type === 'new message' && self.props.chatsList) {
-          // eslint-disable-next-line max-len
-          const listPositionOfTargetChat = self.props.chatsList.map((item) => item.id).indexOf(data.chatId);
-          const newChatsList = moveArrayElement(self.props.chatsList, listPositionOfTargetChat, 0);
-          if (newChatsList && newChatsList[0]) {
-            newChatsList[0].lastMessage = data.data;
-
-            if ((data.chatId !== self.props.chatId) && (data.data.userId !== sessionStorage.getItem('userId'))) {
-              const currentUnread = newChatsList[0].unreadMessagesCount;
-              // eslint-disable-next-line max-len
-              newChatsList[0].unreadMessagesCount = Number.isInteger(currentUnread) ? currentUnread + 1 : 1;
-            }
-            self.setProps({ chatsList: newChatsList });
-          }
+          rearrangeChatsList(self, data);
         }
       });
     }

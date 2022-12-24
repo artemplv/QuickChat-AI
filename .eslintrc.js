@@ -28,6 +28,7 @@ module.exports = {
     'dist/*',
     '*config.js',
     'tests/*',
+    'template.ts',
     '.eslintrc.js'
   ],
   rules: {
@@ -39,6 +40,12 @@ module.exports = {
     strict: 'off',
     'no-unused-expressions': 0,
     'class-methods-use-this': 0,
+    'max-len': [
+      'warn',
+      {
+        'code': 120
+      }
+    ],
     '@typescript-eslint/no-this-alias': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,

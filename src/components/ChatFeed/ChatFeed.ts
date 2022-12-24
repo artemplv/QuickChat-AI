@@ -11,6 +11,7 @@ export default class ChatFeed extends Block {
     super('div', props);
   }
 
+  /* eslint-disable max-len */
   render() {
     return Handlebars.compile(template)({
       chatName: this.props?.chatName,

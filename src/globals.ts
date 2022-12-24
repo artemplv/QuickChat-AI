@@ -4,15 +4,18 @@ interface PlainObject {
 }
 
 interface ChatObject extends PlainObject {
-  id: number;
+  id: string;
   name: string;
   avatar?: string;
-  lastMessage?: {
-    userId: string;
-    content: string;
-    createdAt: string;
-  };
+  lastMessage?: MessageObject;
   unreadMessagesCount?: number;
+}
+
+interface MessageObject extends PlainObject {
+  id: string;
+  content: string;
+  userId: string;
+  createdAt: string;
 }
 
 interface ClickEvent {

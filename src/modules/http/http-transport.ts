@@ -64,16 +64,25 @@ export default class HTTPTransport {
     return this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.GET }, options?.timeout);
   };
 
-  put = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
+  put = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
 
-  post = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
+  post = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
 
-  delete = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
+  delete = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
 
   // options:
   // headers — obj
   // data — obj
-  request = (url: string, options: RequestPreparedOptions, timeout = 10000) => {
+  request = (url: string, options: RequestPreparedOptions, timeout = 12000) => {
     const {
       method,
       data,

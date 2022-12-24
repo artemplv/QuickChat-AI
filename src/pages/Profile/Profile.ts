@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
 import Button from '../../components/Button';

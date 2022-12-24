@@ -136,11 +136,24 @@ body {
 .sign-in-form-fields-wrapper {
   margin-bottom: 130px;
   width: 100%;
+  position: relative;
+}
+
+.signin-error, .signup-error {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: -35px;
+
+  .input-error-message {
+    font-size: 13px;
+  }
 }
 
 .sign-up-form-fields-wrapper {
   margin-bottom: 60px;
   width: 100%;
+  position: relative;
 }
 
 .button {

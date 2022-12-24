@@ -5,6 +5,7 @@ import sessionStorageAuth from '../../utils/sessionStorageAuth';
 import {
   validateInput,
   removeError,
+  makeError,
 } from '../../utils/validation';
 import { navigate } from '../../router/navigate';
 
@@ -35,6 +36,12 @@ export default class SignPage extends Block {
         if (response.status === 200) {
           sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
+        } else {
+          const errorElem = document.querySelector('.signin-error span') as HTMLElement;
+          if (errorElem) {
+            removeError(errorElem);
+            makeError(errorElem, response.data.message);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -50,8 +57,14 @@ export default class SignPage extends Block {
       try {
         const response: any = await authApi.signup(data);
         if (response.status === 200) {
-          sessionStorage.setItem('token', response.data.accessToken);
+          sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
+        } else {
+          const errorElem = document.querySelector('.signup-error span') as HTMLElement;
+          if (errorElem) {
+            removeError(errorElem);
+            makeError(errorElem, response.data.message);
+          }
         }
       } catch (error) {
         console.error(error);

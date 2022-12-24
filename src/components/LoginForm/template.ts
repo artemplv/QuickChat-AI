@@ -17,5 +17,9 @@ export default `
         <div class="form-field__bar"></div>
       </div>
     </div>
+
+    <div class="signin-error">
+      <span></span>
+    </div>
   </div>
 `;

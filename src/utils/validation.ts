@@ -10,19 +10,21 @@ const inputsRegexp: RegexpsObject = {
   second_name: '^[A-Za-zА-Яа-яЁё ,.\'-]+$',
 };
 
-const makeError = (element: HTMLInputElement, text: string): void => {
+export const makeError = (element: HTMLInputElement | HTMLElement, text: string): void => {
   const error: any = document.createElement('div');
   error.className = 'input-error-message';
   error.innerText = text;
 
   if (element?.parentElement) {
+    // eslint-disable-next-line no-console
+    console.log('parent-elem');
     element.parentElement.insertBefore(error, element.nextSibling);
 
     element.classList.add('invaid-input');
   }
 };
 
-export const removeError = (element: HTMLInputElement): void => {
+export const removeError = (element: HTMLInputElement | HTMLElement): void => {
   const oldError: any = element?.parentElement?.querySelector('.input-error-message');
   if (oldError) {
     oldError.remove();

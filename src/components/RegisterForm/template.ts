@@ -13,7 +13,7 @@ export default `
     <div class="form-field">
       <div class="form-field__control">
         <input id="login" name="username" type="text" class="form-field__input" placeholder=" "  />
-        <label for="login" class="form-field__label">Login</label>
+        <label for="login" class="form-field__label">Login (username)</label>
         <div class="form-field__bar"></div>
       </div>
     </div>
@@ -56,6 +56,10 @@ export default `
         <label for="password_repeat" class="form-field__label">Repeat password</label>
         <div class="form-field__bar"></div>
       </div>
+    </div>
+
+    <div class="signup-error">
+      <span></span>
     </div>
   </div>
 `;

@@ -40,6 +40,8 @@ const usersApi = new UsersAPI();
 export default class Profile extends Block {
   public props: any;
 
+  private _state: PlainObject;
+
   constructor(props: any) {
     super('div', {
       goBackButton: new Button({
@@ -69,8 +71,10 @@ export default class Profile extends Block {
         htmlType: 'button',
         children: '<a class="button-link">Logout</a>',
       }),
-      props,
+      ...props,
     });
+
+    this._state = {};
   }
 
   handleAvatarModal(event: ClickEvent) {
@@ -177,6 +181,19 @@ export default class Profile extends Block {
 
   componentDidRender() {
     this.addListeners();
+  }
+
+  componentDidUpdate() {
+    const loggedUser = sessionStorage.getItem('userId');
+    if (this._state.userId !== loggedUser) {
+      this._state.userId = loggedUser;
+
+      if (this._state.userId) {
+        this.getData();
+      }
+    }
+
+    return true;
   }
 
   render() {

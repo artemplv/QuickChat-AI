@@ -48,6 +48,11 @@ export default class ChatsPage extends Block {
 
   componentDidRender() {
     this.addListeners();
+
+    setTimeout(() => {
+      const messageTextareaElem = this.getContent().querySelector('#messageTextArea') as HTMLTextAreaElement;
+      messageTextareaElem?.focus();
+    }, 100);
   }
 
   componentDidMount() {
@@ -66,6 +71,15 @@ export default class ChatsPage extends Block {
           content: '0',
           type: 'get old',
         });
+      }
+    }
+
+    const loggedUser = sessionStorage.getItem('userId');
+    if (this._state.userId !== loggedUser) {
+      this._state.userId = loggedUser;
+
+      if (this._state.userId) {
+        this.getChats();
       }
     }
 
@@ -257,11 +271,6 @@ export default class ChatsPage extends Block {
     return async function (event: ClickEvent | SubmitEvent) {
       event.preventDefault();
       const data = submitForm('messageForm');
-
-      setTimeout(() => {
-        const messageTextareaElem = self.getContent().querySelector('#messageTextArea') as HTMLTextAreaElement;
-        messageTextareaElem?.focus();
-      }, 200);
 
       if (data?.message) {
         self._socket?.send({

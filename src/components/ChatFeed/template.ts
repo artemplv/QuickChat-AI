@@ -79,9 +79,7 @@ export default `
     <div class="chat-block__messages">
       {{#each messages}}
         <div class="message {{#getMessageClass ../loggedUserId this.userId}}{{/getMessageClass}}">
-          <p>
-            {{ this.content }}
-          </p>
+          <p>{{ this.content }}</p>
         </div>
       {{/each}}
     </div>

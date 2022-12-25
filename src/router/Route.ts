@@ -18,6 +18,8 @@ export default class Route {
 
   private _props: Props;
 
+  private _pathParams: PlainObject;
+
   public withAuth: boolean;
 
   constructor(pathname: string, view: ComponentConstructor, props: Props, withAuth: boolean) {
@@ -25,6 +27,7 @@ export default class Route {
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this._pathParams = {};
     this.withAuth = withAuth;
   }
 
@@ -64,6 +67,7 @@ export default class Route {
       }, <PlainObject>{});
 
       this.setProps(pathParams);
+      this._pathParams = pathParams;
       return true;
     }
 
@@ -77,7 +81,7 @@ export default class Route {
       return;
     }
 
-    this._block.setProps(this._props);
+    this._block.setProps(this._pathParams);
     this._block.show();
   }
 }

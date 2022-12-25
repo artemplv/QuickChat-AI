@@ -309,6 +309,7 @@ export default class ChatsPage extends Block {
       selectedChatId: this.props?.chatId,
       chats: new Chats({
         chatsList: this.props?.chatsList,
+        selectedChatId: this.props?.chatId,
       }).render(),
       feed: new ChatFeed({
         chatId: this.props?.chatId,

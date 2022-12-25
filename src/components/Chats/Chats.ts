@@ -17,6 +17,7 @@ export default class Chats extends Block {
   render() {
     return Handlebars.compile(template)({
       chatsList: this.props?.chatsList,
+      selectedChatId: this.props?.selectedChatId,
       loggedUserId: sessionStorage.getItem('userId'),
       createChatButton: new Button({
         className: 'button_additional create-chat',

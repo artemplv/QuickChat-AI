@@ -275,6 +275,10 @@ input.search__input {
   border-top: 1px solid $border-color;
   cursor: pointer;
 
+  &.selected {
+    background: aliceblue;
+  }
+
   &:last-child {
     border-bottom: 1px solid $border-color;
   }

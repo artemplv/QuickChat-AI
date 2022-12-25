@@ -112,7 +112,7 @@ export default `
       <div class="form-field">
         <div class="form-field__control">
           <input id="login-add" name="username" type="text" class="form-field__input" placeholder=" "  />
-          <label for="login-add" class="form-field__label">Login</label>
+          <label for="login-add" class="form-field__label">Username</label>
           <div class="form-field__bar"></div>
         </div>
       </div>
@@ -130,7 +130,7 @@ export default `
       <div class="form-field">
         <div class="form-field__control">
           <input id="login-remove" name="username" type="text" class="form-field__input" placeholder=" " />
-          <label for="login-remove" class="form-field__label">Login</label>
+          <label for="login-remove" class="form-field__label">Username</label>
           <div class="form-field__bar"></div>
         </div>
       </div>

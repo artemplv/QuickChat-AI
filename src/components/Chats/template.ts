@@ -24,6 +24,10 @@ Handlebars.registerHelper('messageFromCurrentUserVisibility', (loggedUserId: Use
   return 'hidden';
 });
 
+Handlebars.registerHelper('isChatSelected', (chatId: string, selectedChatId: string | null | undefined) => {
+  return chatId === selectedChatId;
+});
+
 export default `
   <div class="chats">
     <div class="chats_header">
@@ -42,7 +46,10 @@ export default `
 
       <ul class="chats-container__list">
         {{#each chatsList}}
-          <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chats/{{ this.id }}')">
+          <li class="chat-list-item {{#if (isChatSelected this.id ../selectedChatId)}}selected{{/if}}"
+            key={{ this.id }}
+            onclick="navigate('/chats/{{ this.id }}')"
+          >
             <div
               class="avatar"
               {{#if this.avatar}}

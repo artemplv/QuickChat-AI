@@ -21,7 +21,7 @@ import {
 } from '../../utils/handleAvatar';
 
 import handleModal from '../../utils/handleModals';
-import submitForm from '../../utils/submitForm';
+import getFormData from '../../utils/getFormData';
 import sessionStorageAuth from '../../utils/sessionStorageAuth';
 
 import {
@@ -98,7 +98,7 @@ export default class Profile extends Block {
 
     return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
-      const data = submitForm('userDetails');
+      const data = getFormData('userDetails');
 
       if (data) {
         try {
@@ -136,7 +136,7 @@ export default class Profile extends Block {
 
   async handleSubmitPassword(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('userPassword');
+    const data = getFormData('userPassword');
 
     if (data) {
       try {

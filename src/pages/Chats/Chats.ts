@@ -6,7 +6,7 @@ import ChatFeed from '../../components/ChatFeed';
 import template from './template';
 
 import handleModal from '../../utils/handleModals';
-import submitForm from '../../utils/submitForm';
+import getFormData from '../../utils/getFormData';
 
 import {
   validateInput,
@@ -213,7 +213,7 @@ export default class ChatsPage extends Block {
 
     return async function (event: ClickEvent) {
       event.preventDefault();
-      const data = submitForm('newChat');
+      const data = getFormData('newChat');
 
       if (data) {
         try {
@@ -233,7 +233,7 @@ export default class ChatsPage extends Block {
 
     return async function (event: ClickEvent) {
       event.preventDefault();
-      const data = submitForm('addUser');
+      const data = getFormData('addUser');
 
       if (data && self.props?.chatId) {
         try {
@@ -254,7 +254,7 @@ export default class ChatsPage extends Block {
 
     return async function (event: ClickEvent) {
       event.preventDefault();
-      const data = submitForm('removeUser');
+      const data = getFormData('removeUser');
 
       if (data && self.props?.chatId) {
         try {
@@ -278,7 +278,7 @@ export default class ChatsPage extends Block {
 
     return async function (event: ClickEvent | SubmitEvent) {
       event.preventDefault();
-      const data = submitForm('messageForm');
+      const data = getFormData('messageForm');
 
       if (data?.message) {
         self._socket?.send({

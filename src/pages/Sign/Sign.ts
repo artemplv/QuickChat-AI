@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
-import submitForm from '../../utils/submitForm';
+import getFormData from '../../utils/getFormData';
 import sessionStorageAuth from '../../utils/sessionStorageAuth';
 import {
   validateInput,
@@ -28,7 +28,7 @@ export default class SignPage extends Block {
 
   async handleSubmitSignInForm(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('signInForm');
+    const data = getFormData('signInForm');
 
     if (data) {
       try {
@@ -51,7 +51,7 @@ export default class SignPage extends Block {
 
   async handleSubmitSignUpForm(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('signUpForm');
+    const data = getFormData('signUpForm');
 
     if (data) {
       try {

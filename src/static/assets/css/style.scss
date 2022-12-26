@@ -320,7 +320,7 @@ input.search__input {
 
 .chat-list-item__name-container {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   margin-bottom: 5px;
 }
@@ -429,12 +429,20 @@ input.search__input {
 .message {
   width: fit-content;
   max-width: 45%;
-  padding: 11px;
+  padding: 11px 11px 6px;
 
-  p {
+  &__content {
     margin: 3px 0;
     font-size: 12px;
     white-space: pre-line;
+  }
+
+  &__timestamp {
+    font-size: 10px;
+    color: $additional-text-color;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 0;
   }
 
   &__incoming {
@@ -445,7 +453,6 @@ input.search__input {
 
   &__outgoing {
     margin: 6px 0 6px auto;
-    padding: 11px;
     background-color: #E4EDFD;
     border-radius: 12px 12px 0 12px;
   }

@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+import formatDateTime from '../../utils/formatDateTime';
 
 type UserId = number | string | undefined;
 
@@ -14,7 +15,7 @@ Handlebars.registerHelper('formatDatetime', (value: string | undefined): string 
     return '';
   }
 
-  return new Date(value).toLocaleString();
+  return formatDateTime(value);
 });
 
 Handlebars.registerHelper('messageFromCurrentUserVisibility', (loggedUserId: UserId, messageFromUserId: UserId): string => {

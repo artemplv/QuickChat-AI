@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+import formatDateTime from '../../utils/formatDateTime';
 
 type UserId = number | string | undefined;
 
@@ -14,6 +15,14 @@ Handlebars.registerHelper('getUserSelf', (loggedUserId: UserId, providedUserId: 
     return '<span class="self-user-tag">you</span>';
   }
   return '';
+});
+
+Handlebars.registerHelper('formatTime', (value: string | undefined): string => {
+  if (!value) {
+    return '';
+  }
+
+  return formatDateTime(value, 'time');
 });
 
 export default `
@@ -79,7 +88,8 @@ export default `
     <div class="chat-block__messages">
       {{#each messages}}
         <div class="message {{#getMessageClass ../loggedUserId this.userId}}{{/getMessageClass}}">
-          <p>{{ this.content }}</p>
+          <p class="message__content">{{ this.content }}</p>
+          <p class="message__timestamp">{{#formatTime this.createdAt}}{{/formatTime}}</p>
         </div>
       {{/each}}
     </div>

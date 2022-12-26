@@ -29,3 +29,11 @@ interface CustomEventData extends Event {
 interface SubmitEvent extends Event {
   readonly submitter: HTMLElement | null;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace Intl {
+  interface DateTimeFormatOptions {
+    dateStyle?: 'full' | 'long' | 'medium' | 'short';
+    timeStyle?: 'full' | 'long' | 'medium' | 'short';
+  }
+}

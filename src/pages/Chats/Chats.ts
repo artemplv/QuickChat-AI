@@ -137,6 +137,14 @@ export default class ChatsPage extends Block {
               messages: messagesToSet,
             });
           }
+
+          if (data.pauseChat) {
+            self.setProps({ messageInputDisabled: true });
+          }
+
+          if (data.continueChat) {
+            self.setProps({ messageInputDisabled: false });
+          }
         }
 
         if (data?.type === 'new message' && self.props.chatsList) {
@@ -325,6 +333,7 @@ export default class ChatsPage extends Block {
         chatName: this.props?.chatTitle,
         chatMembers: this.props?.chatMembers,
         messages: this.props?.messages,
+        disabled: this.props.messageInputDisabled,
       }).render(),
     });
   }

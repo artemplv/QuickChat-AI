@@ -15,7 +15,7 @@ export default class ChatFeed extends Block {
   render() {
     return Handlebars.compile(template)({
       chatName: this.props?.chatName,
-      avatarUrl: this.props?.avatar,
+      avatarUrl: this.props?.chatAvatar,
       chatMembers: this.props?.chatMembers,
       loggedUserId: sessionStorage.getItem('userId'),
       messages: this.props?.messages,

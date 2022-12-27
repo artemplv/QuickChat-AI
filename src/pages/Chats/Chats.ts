@@ -163,7 +163,10 @@ export default class ChatsPage extends Block {
   async getChat() {
     const response: any = await chatsApi.getChat(this._state.chatId);
 
-    this.setProps({ chatTitle: response?.data?.name || 'Unknown' });
+    this.setProps({
+      chatTitle: response?.data?.name || 'Unknown',
+      chatAvatar: response?.data?.avatar,
+    });
 
     const chatUsers = response?.data?.users;
 
@@ -319,6 +322,7 @@ export default class ChatsPage extends Block {
       feed: new ChatFeed({
         chatId: this.props?.chatId,
         chatName: this.props?.chatTitle,
+        chatAvatar: this.props?.chatAvatar,
         chatMembers: this.props?.chatMembers,
         messages: this.props?.messages,
         disabled: this.props.messageInputDisabled,

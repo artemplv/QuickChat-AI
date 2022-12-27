@@ -33,11 +33,11 @@ export default `
 
               <div class="chat-list-item__last-message-container">
                 <p class="chat-list-item__last-message-text">
-                  {{#unless (areEqual ../loggedUserId this.lastMessage.userId) }}
+                  {{#if (areEqual ../loggedUserId this.lastMessage.userId) }}
                     <span class="last-message-from-user-label">
                       You:&nbsp;
                     </span>
-                  {{/unless}}
+                  {{/if}}
                   
                   {{ this.lastMessage.content }}
                 </p>

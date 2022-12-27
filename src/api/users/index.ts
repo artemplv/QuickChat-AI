@@ -15,9 +15,10 @@ export default class UsersAPI extends BaseAPI {
   }
 
   changeAvatar(data: FormData) {
-    return usersAPIInstance.put('/profile/avatar', {
+    return usersAPIInstance.put('/avatar', {
       data: {},
       file: data,
+      headers: { authorization: this.token() },
     });
   }
 

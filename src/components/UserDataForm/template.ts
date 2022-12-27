@@ -1,13 +1,5 @@
 export default `
   <h1 class="profile-data__name">{{ firstName }}</h1>
-  <div class="profile-data__form-item">
-    <label for="email" class="profile-data-form-field__label">Email</label>
-    <div class="profile-data-form-field__input-wrapper">
-      <input id="email" name="email" type="email" class="profile-data-form-field__input" placeholder=" "  value="{{ email }}" disabled />
-    </div>
-  </div>
-
-  <div class="divider"></div>
 
   <div class="profile-data__form-item">
     <label for="username" class="profile-data-form-field__label">Login (username)</label>
@@ -42,6 +34,15 @@ export default `
       <input id="display_name" name="display_name" type="text" class="profile-data-form-field__input" placeholder=" "  value="{{ display_name }}" disabled />
     </div>
   </div> -->
+
+  <div class="divider"></div>
+
+  <div class="profile-data__form-item">
+    <label for="email" class="profile-data-form-field__label">Email</label>
+    <div class="profile-data-form-field__input-wrapper">
+      <input id="email" name="email" type="email" class="profile-data-form-field__input" placeholder=" "  value="{{ email }}" disabled />
+    </div>
+  </div>
 
   <div class="divider"></div>
 

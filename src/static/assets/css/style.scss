@@ -753,6 +753,13 @@ input.search__input {
   cursor: pointer;
 }
 
+.avatar-upload__extra {
+  color: $additional-text-color;
+  font-size: 10px;
+  display: block;
+  margin-top: 4px;
+}
+
 .file-name {
   margin: 0;
   font-weight: 500;

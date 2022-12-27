@@ -10,6 +10,9 @@ export default `
       <div class="profile-data">
         <div
           class="profile-data__avatar"
+          {{#if avatarUrl}}
+            style="background-image: url({{ avatarUrl }}); background-size: cover;"
+          {{/if}}
         >
           {{{ changeAvatarButton }}}
         </div>
@@ -37,11 +40,12 @@ export default `
     <div class="modal-body">
       <h4 class="modal-body__name">Upload a picture</h4>
 
-      <form id="avatarForm" class="form">
+      <form id="avatarForm" class="form" enctype="multipart/form-data">
         <div class="file-container">
           <div class="upload-control">
             <label for="avatar" class="avatar-upload-label">Choose file</label>
-            <input id="avatar" class="avatar-upload-input" name="avatar" type="file" accept=".jpg, .jpeg, .png">
+            <span class="avatar-upload__extra">(max 2 MB)</span>
+            <input id="avatar" class="avatar-upload-input" name="image" type="file" accept=".jpg, .jpeg, .png">
           </div>
           <p class="file-name"></p>
         </div>

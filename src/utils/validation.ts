@@ -16,8 +16,6 @@ export const makeError = (element: HTMLInputElement | HTMLElement, text: string)
   error.innerText = text;
 
   if (element?.parentElement) {
-    // eslint-disable-next-line no-console
-    console.log('parent-elem');
     element.parentElement.insertBefore(error, element.nextSibling);
 
     element.classList.add('invaid-input');

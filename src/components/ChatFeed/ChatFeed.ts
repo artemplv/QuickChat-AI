@@ -19,6 +19,8 @@ export default class ChatFeed extends Block {
       chatMembers: this.props?.chatMembers,
       loggedUserId: sessionStorage.getItem('userId'),
       messages: this.props?.messages,
+      loading: this.props?.loading,
+      disabled: this.props?.disabled,
 
       chatMembersDropdownButton: new Button({
         className: 'button_additional dropdown-button',
@@ -48,16 +50,18 @@ export default class ChatFeed extends Block {
           <img src="static/assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
           Delete chat
         `,
+        disabled: true,
       }).render(),
       messageOptionsButton: new Button({
+        disabled: this.props.disabled,
         className: 'dropdown-button',
         children: '<img src="static/assets/images/attachments.svg" alt="add attachments" width="32" height="32" />',
       }).render(),
       addMediaButton: new Button({
-        className: 'button-with-image-and-text',
+        className: 'button-with-image-and-text upload-media-button',
         children: `
           <img src="static/assets/images/media-icon.svg" class="image-inside-button" alt="add media" width="22" height="22" />
-          Photo or Video
+          Photo
         `,
       }).render(),
       addFileButton: new Button({
@@ -66,6 +70,7 @@ export default class ChatFeed extends Block {
           <img src="static/assets/images/file-icon.svg" class="image-inside-button" alt="add file" width="22" height="22" />
           File
         `,
+        disabled: true,
       }).render(),
       addLocationButton: new Button({
         className: 'button-with-image-and-text',
@@ -73,6 +78,7 @@ export default class ChatFeed extends Block {
           <img src="static/assets/images/location-icon.svg" class="image-inside-button" alt="add location" width="22" height="22" />
           Location
         `,
+        disabled: true,
       }).render(),
       newMessageForm: new Form({
         formId: 'messageForm',
@@ -82,6 +88,7 @@ export default class ChatFeed extends Block {
           <textarea id="messageTextArea" class="message-textarea" ${this.props.disabled ? 'disabled' : ''} name="message" placeholder="Write a message..." required></textarea>
         `,
         buttonOk: new Button({
+          disabled: this.props.disabled,
           children: '<img src="static/assets/images/send-message-icon.svg" alt="options" width="28" height="28" />',
           htmlType: 'submit',
         }).render(),

@@ -13,6 +13,12 @@ import {
   removeError,
 } from '../../utils/validation';
 
+import {
+  handleFileUpload,
+  resetFileForm,
+  submitFile,
+} from '../../utils/handleFilesUpload';
+
 import ChatsAPI from '../../api/chats';
 import UsersAPI from '../../api/users';
 import AuthAPI from '../../api/auth';
@@ -131,7 +137,7 @@ export default class ChatsPage extends Block {
             });
 
             // eslint-disable-next-line max-len
-            const messagesToSet = Array.isArray(self.props?.messages) ? [data.data, ...self.props.messages] : [data.data];
+            const messagesToSet = Array.isArray(self.props.messages) ? [data.data, ...self.props.messages] : [data.data];
             self.setProps({
               messages: messagesToSet,
             });
@@ -141,7 +147,7 @@ export default class ChatsPage extends Block {
             self.setProps({ messageInputDisabled: true });
           }
 
-          if (data.continueChat) {
+          if (data.continueChat || (self.props.messageInputDisabled && !data.pauseChat)) {
             self.setProps({ messageInputDisabled: false });
           }
         }
@@ -196,6 +202,11 @@ export default class ChatsPage extends Block {
     event.preventDefault();
     handleModal('delete-chat-modal');
   }
+
+  handleUploadImageModal(event: ClickEvent) {
+    event.preventDefault();
+    handleModal('upload-image-to-chat-modal');
+  }
   //
 
   // event handlers
@@ -226,7 +237,7 @@ export default class ChatsPage extends Block {
       event.preventDefault();
       const data = getFormData('addUser');
 
-      if (data && self.props?.chatId) {
+      if (data && self.props.chatId) {
         try {
           const usersResponse: any = await usersApi.getUsersByLogin(data);
           if (usersResponse?.data && usersResponse.data[0]?.id) {
@@ -247,9 +258,9 @@ export default class ChatsPage extends Block {
       event.preventDefault();
       const data = getFormData('removeUser');
 
-      if (data && self.props?.chatId) {
+      if (data && self.props.chatId) {
         try {
-          const users = self.props?.chatMembers;
+          const users = self.props.chatMembers;
           if (users && users[0]) {
             const userToDelete = users.find((user: PlainObject) => user.username === data.username);
             if (userToDelete) {
@@ -273,7 +284,7 @@ export default class ChatsPage extends Block {
 
       if (data?.message) {
         self._socket?.send({
-          chatId: self.props?.chatId,
+          chatId: self.props.chatId,
           content: data.message,
           type: 'message',
         });
@@ -288,6 +299,41 @@ export default class ChatsPage extends Block {
       event.preventDefault();
     }
   }
+
+  handleUploadImage() {
+    const self = this;
+
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
+      event.preventDefault();
+      const data = submitFile({
+        inputId: 'message-file',
+        modalId: 'upload-image-to-chat-modal',
+        formId: 'message-image-form',
+      });
+
+      if (data) {
+        self.setProps({ isLoading: true });
+
+        try {
+          const response: any = await chatsApi.uploadImage(self._state.chatId, data);
+
+          self.setProps({ isLoading: false });
+
+          if (response.status === 200) {
+            self._socket?.send({
+              chatId: self._state.chatId,
+              content: response.data.url,
+              contentType: 'image',
+              type: 'message',
+            });
+            resetFileForm('upload-image-to-chat-modal', 'message-image-form');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+  }
   //
 
   addListeners() {
@@ -295,6 +341,7 @@ export default class ChatsPage extends Block {
     this.getContent().querySelector('.add-user-button')?.addEventListener('click', this.handleAddUserModal);
     this.getContent().querySelector('.delete-user-button')?.addEventListener('click', this.handleDeleteUserModal);
     this.getContent().querySelector('.delete-chat-button')?.addEventListener('click', this.handleDeleteChatModal);
+    this.getContent().querySelector('.upload-media-button')?.addEventListener('click', this.handleUploadImageModal);
     this.getContent().querySelector('#messageTextArea')?.addEventListener('keypress', this.submitMessageOnEnter);
 
     this.getContent().querySelectorAll('.modal-wrapper input').forEach((element: HTMLInputElement) => {
@@ -310,22 +357,27 @@ export default class ChatsPage extends Block {
     this.getContent().querySelector('#addUser')?.addEventListener('submit', this.handleAddUser());
     this.getContent().querySelector('#removeUser')?.addEventListener('submit', this.handleRemoveUser());
     this.getContent().querySelector('#messageForm')?.addEventListener('submit', this.handleSendMessage());
+
+    // eslint-disable-next-line max-len
+    this.getContent().querySelector('#message-file')?.addEventListener('change', handleFileUpload('upload-image-to-chat-modal', 'message-file'));
+    this.getContent().querySelector('#message-image-form')?.addEventListener('submit', this.handleUploadImage());
   }
 
   render() {
     return Handlebars.compile(template)({
-      selectedChatId: this.props?.chatId,
+      selectedChatId: this.props.chatId,
       chats: new Chats({
-        chatsList: this.props?.chatsList,
-        selectedChatId: this.props?.chatId,
+        chatsList: this.props.chatsList,
+        selectedChatId: this.props.chatId,
       }).render(),
       feed: new ChatFeed({
-        chatId: this.props?.chatId,
-        chatName: this.props?.chatTitle,
-        chatAvatar: this.props?.chatAvatar,
-        chatMembers: this.props?.chatMembers,
-        messages: this.props?.messages,
+        chatId: this.props.chatId,
+        chatName: this.props.chatTitle,
+        chatAvatar: this.props.chatAvatar,
+        chatMembers: this.props.chatMembers,
+        messages: this.props.messages,
         disabled: this.props.messageInputDisabled,
+        loading: this.props.isLoading,
       }).render(),
     });
   }

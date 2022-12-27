@@ -1,5 +1,5 @@
 export default `
-  <div class="profile-view">
+  <div class="profile-view {{#if loading}}busy{{/if}}">
 
   <div class="go-back-section">
     {{{ goBackButton }}}
@@ -41,9 +41,9 @@ export default `
       <form id="avatarForm" class="form" enctype="multipart/form-data">
         <div class="file-container">
           <div class="upload-control">
-            <label for="avatar" class="avatar-upload-label">Choose file</label>
-            <span class="avatar-upload__extra">(max 2 MB)</span>
-            <input id="avatar" class="avatar-upload-input" name="image" type="file" accept=".jpg, .jpeg, .png">
+            <label for="avatar" class="file-upload-label">Choose file</label>
+            <span class="file-upload__extra">(max 2 MB)</span>
+            <input id="avatar" class="file-upload-input" name="image" type="file" accept=".jpg, .jpeg, .png">
           </div>
           <p class="file-name"></p>
         </div>
@@ -53,7 +53,7 @@ export default `
         </button>
       </form>
 
-      <p class="modal-body__error-msg">Need to select a file</p>
+      <p class="modal-body__error-msg">File is not selected</p>
     </div>
   </div>
 

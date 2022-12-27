@@ -38,8 +38,12 @@ export default `
                       You:&nbsp;
                     </span>
                   {{/if}}
-                  
-                  {{ this.lastMessage.content }}
+
+                  {{#if (areEqual this.lastMessage.contentType 'image')}}
+                    <i>Photo</i>
+                  {{else}}
+                    {{ this.lastMessage.content }}
+                  {{/if}}
                 </p>
                 
                 {{#unless (isLessThanOne this.unreadMessagesCount)}}

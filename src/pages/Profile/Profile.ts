@@ -15,10 +15,10 @@ import {
 } from '../../utils/handleUserDataButtons';
 
 import {
-  handleAvatarUpload,
-  resetAvatarForm,
-  submitAvatar,
-} from '../../utils/handleAvatar';
+  handleFileUpload,
+  resetFileForm,
+  submitFile,
+} from '../../utils/handleFilesUpload';
 
 import handleModal from '../../utils/handleModals';
 import getFormData from '../../utils/getFormData';
@@ -118,14 +118,23 @@ export default class Profile extends Block {
 
     return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
-      const data = submitAvatar();
+      const data = submitFile({
+        inputId: 'avatar',
+        modalId: 'uploadAvatarModal',
+        formId: 'avatarForm',
+      });
 
       if (data) {
+        self.setProps({ isLoading: true });
+
         try {
           const response: any = await usersApi.changeAvatar(data);
+
+          self.setProps({ isLoading: false });
+
           if (response.status === 200) {
             self.getData();
-            resetAvatarForm();
+            resetFileForm('uploadAvatarModal', 'avatarForm');
           }
         } catch (error) {
           console.error(error);
@@ -169,7 +178,7 @@ export default class Profile extends Block {
     this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails());
     this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
 
-    this.getContent().querySelector('.avatar-upload-input')?.addEventListener('change', handleAvatarUpload);
+    this.getContent().querySelector('#avatar')?.addEventListener('change', handleFileUpload('uploadAvatarModal', 'avatar'));
     this.getContent().querySelector('#avatarForm')?.addEventListener('submit', this.handleSubmitAvatar());
 
     this.getContent().querySelector('.logout-button')?.addEventListener('click', this.handleLogout);
@@ -206,6 +215,7 @@ export default class Profile extends Block {
       changeDataForm: UserDataForm(this.props.userData).render(),
       changePasswordForm: UserPasswordForm.render(),
       avatarUrl: this.props.userData?.avatar,
+      loading: this.props.isLoading,
     });
   }
 }

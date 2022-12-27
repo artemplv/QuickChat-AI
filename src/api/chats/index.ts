@@ -51,4 +51,12 @@ export default class ChatsAPI extends BaseAPI {
       headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
+
+  uploadImage(chatId: number | string, data: FormData) {
+    return chatsAPIInstance.put(`/${chatId}/images`, {
+      data: {},
+      file: data,
+      headers: { authorization: this.token() },
+    });
+  }
 }

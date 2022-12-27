@@ -10,6 +10,7 @@ import LoginForm from './components/LoginForm';
 
 import './static/assets/css/style.scss';
 import './globals';
+import './utils/registerHandlebarsHelpers';
 
 const router = new Router('.app');
 

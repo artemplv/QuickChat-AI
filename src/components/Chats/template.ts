@@ -1,36 +1,6 @@
-import Handlebars from 'handlebars';
-import formatDateTime from '../../utils/formatDateTime';
-
-type UserId = number | string | undefined;
-
-Handlebars.registerHelper('ifLessThanOne', (value: number | undefined): string => {
-  if (!value || value < 1) {
-    return 'hidden';
-  }
-  return '';
-});
-
-Handlebars.registerHelper('formatDatetime', (value: string | undefined): string => {
-  if (!value) {
-    return '';
-  }
-
-  return formatDateTime(value);
-});
-
-Handlebars.registerHelper('messageFromCurrentUserVisibility', (loggedUserId: UserId, messageFromUserId: UserId): string => {
-  if (loggedUserId === messageFromUserId) {
-    return '';
-  }
-  return 'hidden';
-});
-
-Handlebars.registerHelper('isChatSelected', (chatId: string, selectedChatId: string | null | undefined) => {
-  return chatId === selectedChatId;
-});
-
 export default `
   <div class="chats">
+    
     <div class="chats_header">
       {{{ profileButton }}}
 
@@ -47,42 +17,36 @@ export default `
 
       <ul class="chats-container__list">
         {{#each chatsList}}
-          <li class="chat-list-item {{#if (isChatSelected this.id ../selectedChatId)}}selected{{/if}}"
+          <li class="chat-list-item {{#if (areEqual this.id ../selectedChatId)}}selected{{/if}}"
             key={{ this.id }}
             onclick="navigate('/chats/{{ this.id }}')"
           >
-            <div
-              class="avatar"
-              {{#if this.avatar}}
-                style="background-image: url({{ this.avatar }}); background-size: cover;"
-              {{/if}}
-            ></div>
+            <div class="avatar" {{ addAvatar this.avatar }}></div>
+            
             <div class="chat-list-item__info">
               <div class="chat-list-item__name-container">
                 <h4 class="chat-list-item__name">{{ this.name }}</h4>
                 <p class="chat-list-item__last-message-time">
-                  {{#formatDatetime this.lastMessage.createdAt}}{{/formatDatetime}}
+                  {{ formatDateTime this.lastMessage.createdAt }}
                 </p>
               </div>
 
               <div class="chat-list-item__last-message-container">
                 <p class="chat-list-item__last-message-text">
-                  <span
-                    class="last-message-from-user-label"
-                    {{#messageFromCurrentUserVisibility ../loggedUserId this.lastMessage.userId}}
-                    {{/messageFromCurrentUserVisibility}}
-                  >
-                    You:&nbsp;
-                  </span>
+                  {{#unless (areEqual ../loggedUserId this.lastMessage.userId) }}
+                    <span class="last-message-from-user-label">
+                      You:&nbsp;
+                    </span>
+                  {{/unless}}
+                  
                   {{ this.lastMessage.content }}
                 </p>
-                <div
-                  class="chat-list-item__unread-message-count"
-                  {{#ifLessThanOne this.unreadMessagesCount}}
-                  {{/ifLessThanOne}}
-                >
-                  <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}</span>
-                </div>
+                
+                {{#unless (isLessThanOne this.unreadMessagesCount)}}
+                  <div class="chat-list-item__unread-message-count">
+                    <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}</span>
+                  </div>
+                {{/unless}}
               </div>
             </div>
           </li>

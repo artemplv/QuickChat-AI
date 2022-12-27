@@ -10,9 +10,7 @@ export default `
       <div class="profile-data">
         <div
           class="profile-data__avatar"
-          {{#if avatarUrl}}
-            style="background-image: url({{ avatarUrl }}); background-size: cover;"
-          {{/if}}
+          {{ addAvatar avatarUrl }}
         >
           {{{ changeAvatarButton }}}
         </div>

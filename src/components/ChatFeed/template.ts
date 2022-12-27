@@ -1,39 +1,10 @@
-import Handlebars from 'handlebars';
-import formatDateTime from '../../utils/formatDateTime';
-
-type UserId = number | string | undefined;
-
-Handlebars.registerHelper('getMessageClass', (loggedUserId: UserId, messageUserId: UserId): string => {
-  if (loggedUserId === messageUserId) {
-    return 'message__outgoing';
-  }
-  return 'message__incoming';
-});
-
-Handlebars.registerHelper('getUserSelf', (loggedUserId: UserId, providedUserId: UserId): string => {
-  if (loggedUserId === providedUserId) {
-    return '<span class="self-user-tag">you</span>';
-  }
-  return '';
-});
-
-Handlebars.registerHelper('formatTime', (value: string | undefined): string => {
-  if (!value) {
-    return '';
-  }
-
-  return formatDateTime(value, 'time');
-});
-
 export default `
   <div class="chat-block">
     <div class="chat-block__info-row">
       <div class="avatar-with-name">
         <div
           class="avatar chat-avatar"
-          {{#if avatarUrl}}
-            style="background-image: url({{ avatarUrl }})"
-          {{/if}}
+          {{ addAvatar avatarUrl }}
         >
         </div>
         <h4 class="chat-list-item__name">{{ chatName }}</h4>
@@ -50,13 +21,16 @@ export default `
                   <div class="avatar-with-name">
                     <div
                       class="avatar user-avatar"
-                      {{#if this.avatar}}
-                        style="background-image: url({{ this.avatar }}); background-size: cover;"
-                      {{/if}}
+                      {{ addAvatar this.avatar }}
                     >
                     </div>
                     <h4 class="chat-list-item__name">
-                      {{ this.firstName }} {{ this.lastName }} ({{ this.username }}) {{#getUserSelf ../loggedUserId this.id}}{{/getUserSelf}}
+                      {{ this.firstName }}
+                      {{ this.lastName }}
+                      ({{ this.username }})
+                      {{#if (areEqual ../loggedUserId this.id) }}
+                        <span class="self-user-tag">you</span>
+                      {{/if}}
                     </h4>
                   </div>
                 </li>
@@ -87,9 +61,18 @@ export default `
 
     <div class="chat-block__messages">
       {{#each messages}}
-        <div class="message {{#getMessageClass ../loggedUserId this.userId}}{{/getMessageClass}}">
+        <div
+          class="
+            message
+            {{#if (areEqual ../loggedUserId this.userId)}}
+              message__outgoing
+            {{else}}
+              message__incoming
+            {{/if}}
+          "
+        >
           <p class="message__content">{{ this.content }}</p>
-          <p class="message__timestamp">{{#formatTime this.createdAt}}{{/formatTime}}</p>
+          <p class="message__timestamp">{{ formatTime this.createdAt }}</p>
         </div>
       {{/each}}
     </div>

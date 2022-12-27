@@ -29,7 +29,6 @@ const authApi = new AuthAPI();
 const chatsApi = new ChatsAPI();
 const usersApi = new UsersAPI();
 
-const host = config.serverHost;
 const socketHost = `${config.socketHost}/ws/chat`;
 
 export default class ChatsPage extends Block {
@@ -169,18 +168,7 @@ export default class ChatsPage extends Block {
     const chatUsers = response?.data?.users;
 
     if (Array.isArray(chatUsers)) {
-      const membersPrepared = chatUsers.map((user: PlainObject) => {
-        const userAvatar = user.avatar;
-        if (userAvatar) {
-          return {
-            ...user,
-            avatar: `${host}${userAvatar}`,
-          };
-        }
-        return user;
-      });
-
-      this.setProps({ chatMembers: membersPrepared });
+      this.setProps({ chatMembers: chatUsers });
     }
   }
   //

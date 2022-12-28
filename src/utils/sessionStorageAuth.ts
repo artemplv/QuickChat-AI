@@ -1,11 +1,15 @@
+import updateSessionStorageWithCustomEvent from './updateSessionStorageWithCustomEvent';
+
 const sessionStorageAuth = {
   login: (token: string, userId: string) => {
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('userId', userId);
+    updateSessionStorageWithCustomEvent('set', [
+      ['token', token],
+      ['userId', userId],
+    ]);
   },
 
   logout: () => {
-    sessionStorage.clear();
+    updateSessionStorageWithCustomEvent('clear');
   },
 };
 

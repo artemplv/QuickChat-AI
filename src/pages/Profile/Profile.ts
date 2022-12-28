@@ -40,8 +40,6 @@ const usersApi = new UsersAPI();
 export default class Profile extends Block {
   public props: any;
 
-  private _state: PlainObject;
-
   constructor(props: any) {
     super('div', {
       goBackButton: new Button({
@@ -73,8 +71,6 @@ export default class Profile extends Block {
       }),
       ...props,
     });
-
-    this._state = {};
   }
 
   handleAvatarModal(event: ClickEvent) {
@@ -91,6 +87,21 @@ export default class Profile extends Block {
   async getData() {
     const response: any = await authApi.getUser();
     this.setProps({ userData: response.data || null });
+  }
+
+  onLoginLogout() {
+    const self = this;
+
+    return async function () { // eslint-disable-line func-names
+      const currentUserId = sessionStorage.getItem('userId');
+
+      if (!currentUserId) {
+        self.setProps({ userData: null });
+        return;
+      }
+
+      self.getData();
+    };
   }
 
   handleSubmitDetails() {
@@ -186,23 +197,12 @@ export default class Profile extends Block {
 
   componentDidMount() {
     this.getData();
+
+    window.addEventListener('sessionStorageUpdate', this.onLoginLogout());
   }
 
   componentDidRender() {
     this.addListeners();
-  }
-
-  componentDidUpdate() {
-    const loggedUser = sessionStorage.getItem('userId');
-    if (this._state.userId !== loggedUser) {
-      this._state.userId = loggedUser;
-
-      if (this._state.userId) {
-        this.getData();
-      }
-    }
-
-    return true;
   }
 
   render() {

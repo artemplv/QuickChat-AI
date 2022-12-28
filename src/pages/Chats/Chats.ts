@@ -63,6 +63,7 @@ export default class ChatsPage extends Block {
   componentDidMount() {
     this.getChats();
     this.addSocketConnection();
+    window.addEventListener('sessionStorageUpdate', this.onLoginLogout());
   }
 
   componentDidUpdate() {
@@ -76,15 +77,6 @@ export default class ChatsPage extends Block {
           content: '0',
           type: 'get old',
         });
-      }
-    }
-
-    const loggedUser = sessionStorage.getItem('userId');
-    if (this._state.userId !== loggedUser) {
-      this._state.userId = loggedUser;
-
-      if (this._state.userId) {
-        this.getChats();
       }
     }
 
@@ -210,6 +202,21 @@ export default class ChatsPage extends Block {
   //
 
   // event handlers
+  onLoginLogout() {
+    const self = this;
+
+    return async function () { // eslint-disable-line func-names
+      const currentUserId = sessionStorage.getItem('userId');
+
+      if (!currentUserId) {
+        self.setProps({ chatsList: null });
+        return;
+      }
+
+      self.getChats();
+    };
+  }
+
   handleCreateChat() {
     const self = this;
 

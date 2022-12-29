@@ -82,7 +82,11 @@ export default class SignPage extends Block {
       });
 
       element.addEventListener('blur', () => {
-        validateInput(element);
+        try {
+          validateInput(element);
+        } catch (err) {
+          console.error(err);
+        }
       });
     });
   }

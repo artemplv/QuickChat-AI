@@ -7,13 +7,13 @@ const RegisterForm = new Form({
   className: 'sign-form',
   mainContent: template,
   buttonOk: new Button({
-    children: 'Зарегистрироваться',
+    children: 'Sign up',
     className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
     onClick: 'navigate(\'/login\')',
-    children: '<a class="button-link">Войти</a>',
+    children: '<a class="button-link">Sign in</a>',
     className: 'button_additional',
     htmlType: 'button',
   }).render(),

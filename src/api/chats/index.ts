@@ -2,54 +2,61 @@ import {
   HTTPTransport,
   BaseAPI,
 } from '../../modules/http';
+import config from '../../config/config';
 
-const host = 'https://ya-praktikum.tech';
-
-const chatsAPIInstance = new HTTPTransport(`${host}/api/v2/chats`);
+const chatsAPIInstance = new HTTPTransport(`${config.serverHost}/api/chats`);
 
 export default class ChatsAPI extends BaseAPI {
   getChats() {
     return chatsAPIInstance.get('/', {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   createChat(data: PlainObject) {
     return chatsAPIInstance.post('/', {
       data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
-  addUsers(data: PlainObject) {
-    return chatsAPIInstance.put('/users', {
-      data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+  getChat(chatId: number | string) {
+    return chatsAPIInstance.get(`/${chatId}`, {
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
-  deleteUsers(data: PlainObject) {
-    return chatsAPIInstance.delete('/users', {
-      data,
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+  addUsers(chatId: number | string, users: [string]) {
+    return chatsAPIInstance.put(`/${chatId}/users`, {
+      data: { users },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
+    });
+  }
+
+  deleteUsers(chatId: number | string, users: [string]) {
+    return chatsAPIInstance.delete(`/${chatId}/users`, {
+      data: { users },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   getChatUsers(chatId: number | string) {
     return chatsAPIInstance.get(`/${chatId}/users`, {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
     });
   }
 
   getChatToken(chatId: number | string) {
     return chatsAPIInstance.post(`/token/${chatId}`, {
-      withCredentials: true,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', authorization: this.token() },
+    });
+  }
+
+  uploadImage(chatId: number | string, data: FormData) {
+    return chatsAPIInstance.put(`/${chatId}/images`, {
+      data: {},
+      file: data,
+      headers: { authorization: this.token() },
     });
   }
 }

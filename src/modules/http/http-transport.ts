@@ -19,7 +19,6 @@ interface OptionsObject {
   file?: FormData;
   timeout?: number;
   headers?: HeadersObject;
-  withCredentials?: boolean;
 }
 
 interface RequestPreparedOptions extends OptionsObject {
@@ -65,21 +64,29 @@ export default class HTTPTransport {
     return this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.GET }, options?.timeout);
   };
 
-  put = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
+  put = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.PUT }, options?.timeout);
 
-  post = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
+  post = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.POST }, options?.timeout);
 
-  delete = (url: string, options: OptionsObject = {}) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
+  delete = (
+    url: string,
+    options: OptionsObject = {},
+  ) => this.request(`${this.baseUrl}${url}`, { ...options, method: METHODS.DELETE }, options?.timeout);
 
   // options:
   // headers — obj
   // data — obj
-  request = (url: string, options: RequestPreparedOptions, timeout = 5000) => {
+  request = (url: string, options: RequestPreparedOptions, timeout = 12000) => {
     const {
       method,
       data,
       headers = {},
-      withCredentials,
       file,
     } = options;
 
@@ -87,10 +94,6 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.timeout = timeout;
-
-      if (withCredentials) {
-        xhr.withCredentials = true;
-      }
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

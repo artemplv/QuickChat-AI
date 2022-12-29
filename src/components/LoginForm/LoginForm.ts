@@ -7,13 +7,13 @@ const LoginForm = new Form({
   className: 'sign-form',
   mainContent: template,
   buttonOk: new Button({
-    children: 'Авторизоваться',
+    children: 'Sign in',
     className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
     onClick: 'navigate(\'/signup\')',
-    children: '<a class="button-link">Нет аккаунта?</a>',
+    children: '<a class="button-link">Don&#39;t have an account?</a>',
     className: 'button_additional',
     htmlType: 'button',
   }).render(),

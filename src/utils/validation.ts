@@ -10,7 +10,7 @@ const inputsRegexp: RegexpsObject = {
   second_name: '^[A-Za-zА-Яа-яЁё ,.\'-]+$',
 };
 
-const makeError = (element: HTMLInputElement, text: string): void => {
+export const makeError = (element: HTMLInputElement | HTMLElement, text: string): void => {
   const error: any = document.createElement('div');
   error.className = 'input-error-message';
   error.innerText = text;
@@ -22,7 +22,7 @@ const makeError = (element: HTMLInputElement, text: string): void => {
   }
 };
 
-export const removeError = (element: HTMLInputElement): void => {
+export const removeError = (element: HTMLInputElement | HTMLElement): void => {
   const oldError: any = element?.parentElement?.querySelector('.input-error-message');
   if (oldError) {
     oldError.remove();
@@ -34,7 +34,7 @@ export function validateInput(inputElement: HTMLInputElement) {
   removeError(inputElement);
 
   if (!inputElement.value || inputElement.value === ' ') {
-    makeError(inputElement, 'Поле не должно быть пустым');
+    makeError(inputElement, 'This field is required');
     throw Error('Input field should not be empty');
   }
 
@@ -43,7 +43,7 @@ export function validateInput(inputElement: HTMLInputElement) {
   if (inputsRegexp[inputName]) {
     const regexp = new RegExp(inputsRegexp[inputName], 'u');
     if (!regexp.test(inputElement.value)) {
-      makeError(inputElement, 'Неверный формат данных');
+      makeError(inputElement, 'Invalid data format');
       throw Error('Invalid input field value');
     }
   }
@@ -53,7 +53,7 @@ export function validateInput(inputElement: HTMLInputElement) {
       || inputElement?.closest('form')?.querySelector('#password')
       || null;
     if (newPasswordField && inputElement.value !== newPasswordField.value) {
-      makeError(inputElement, 'Пароли не совпадают');
+      makeError(inputElement, `Passwords don't match`); // eslint-disable-line @typescript-eslint/quotes
       throw Error('Passwords are not the same');
     }
   }

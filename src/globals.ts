@@ -4,13 +4,18 @@ interface PlainObject {
 }
 
 interface ChatObject extends PlainObject {
-  id: number;
-  title: string;
-  avatar: string;
-  lastMessageTime?: string;
-  isLastMessageFromUser?: boolean;
-  lastMessageText?: string;
+  id: string;
+  name: string;
+  avatar?: string;
+  lastMessage?: MessageObject;
   unreadMessagesCount?: number;
+}
+
+interface MessageObject extends PlainObject {
+  id: string;
+  content: string;
+  userId: string;
+  createdAt: string;
 }
 
 interface ClickEvent {
@@ -19,4 +24,16 @@ interface ClickEvent {
 
 interface CustomEventData extends Event {
   detail: string;
+}
+
+interface SubmitEvent extends Event {
+  readonly submitter: HTMLElement | null;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace Intl {
+  interface DateTimeFormatOptions {
+    dateStyle?: 'full' | 'long' | 'medium' | 'short';
+    timeStyle?: 'full' | 'long' | 'medium' | 'short';
+  }
 }

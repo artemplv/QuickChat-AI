@@ -1,5 +1,5 @@
 export default `
-  <div class="profile-view">
+  <div class="profile-view {{#if loading}}busy{{/if}}">
 
   <div class="go-back-section">
     {{{ goBackButton }}}
@@ -10,7 +10,7 @@ export default `
       <div class="profile-data">
         <div
           class="profile-data__avatar"
-          style="background-image: url({{ avatarUrl }})"
+          {{ addAvatar avatarUrl }}
         >
           {{{ changeAvatarButton }}}
         </div>
@@ -36,23 +36,24 @@ export default `
 
   <div id="uploadAvatarModal" class="modal-wrapper">
     <div class="modal-body">
-      <h4 class="modal-body__name">Загрузите файл</h4>
+      <h4 class="modal-body__name">Upload a picture</h4>
 
-      <form id="avatarForm" class="form">
+      <form id="avatarForm" class="form" enctype="multipart/form-data">
         <div class="file-container">
           <div class="upload-control">
-            <label for="avatar" class="avatar-upload-label">Выбрать файл на компьютере</label>
-            <input id="avatar" class="avatar-upload-input" name="avatar" type="file" accept=".jpg, .jpeg, .png">
+            <label for="avatar" class="file-upload-label">Choose file</label>
+            <span class="file-upload__extra">(max 2 MB)</span>
+            <input id="avatar" class="file-upload-input" name="image" type="file" accept=".jpg, .jpeg, .png">
           </div>
           <p class="file-name"></p>
         </div>
 
         <button type="submit" class="button button_main">
-          Поменять
+          Confirm
         </button>
       </form>
 
-      <p class="modal-body__error-msg">Нужно выбрать файл</p>
+      <p class="modal-body__error-msg">File is not selected</p>
     </div>
   </div>
 

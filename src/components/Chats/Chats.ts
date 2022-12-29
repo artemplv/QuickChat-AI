@@ -17,9 +17,11 @@ export default class Chats extends Block {
   render() {
     return Handlebars.compile(template)({
       chatsList: this.props?.chatsList,
+      selectedChatId: this.props?.selectedChatId,
+      loggedUserId: sessionStorage.getItem('userId'),
       createChatButton: new Button({
         className: 'button_additional create-chat',
-        children: 'Новый чат',
+        children: 'New chat',
         htmlType: 'button',
       }).render(),
       profileButton: new Button({
@@ -27,7 +29,7 @@ export default class Chats extends Block {
         onClick: 'navigate(\'/profile\')',
         children: `
           <div class="button-inner-container">
-            <a class="button-link">Профиль</a>
+            <a class="button-link">View profile</a>
             <img src="static/assets/images/arrow-right.svg" alt="arrow right" class="button-arrow-right-image" />
           </div>
         `,

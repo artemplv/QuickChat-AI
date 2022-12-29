@@ -1,9 +1,11 @@
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
-import submitForm from '../../utils/submitForm';
+import getFormData from '../../utils/getFormData';
+import sessionStorageAuth from '../../utils/sessionStorageAuth';
 import {
   validateInput,
   removeError,
+  makeError,
 } from '../../utils/validation';
 import { navigate } from '../../router/navigate';
 
@@ -26,13 +28,20 @@ export default class SignPage extends Block {
 
   async handleSubmitSignInForm(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('signInForm');
+    const data = getFormData('signInForm');
 
     if (data) {
       try {
         const response: any = await authApi.signin(data);
         if (response.status === 200) {
+          sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
+        } else {
+          const errorElem = document.querySelector('.signin-error span') as HTMLElement;
+          if (errorElem) {
+            removeError(errorElem);
+            makeError(errorElem, response.data.message);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -42,13 +51,20 @@ export default class SignPage extends Block {
 
   async handleSubmitSignUpForm(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('signUpForm');
+    const data = getFormData('signUpForm');
 
     if (data) {
       try {
         const response: any = await authApi.signup(data);
         if (response.status === 200) {
+          sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
+        } else {
+          const errorElem = document.querySelector('.signup-error span') as HTMLElement;
+          if (errorElem) {
+            removeError(errorElem);
+            makeError(errorElem, response.data.message);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -66,7 +82,11 @@ export default class SignPage extends Block {
       });
 
       element.addEventListener('blur', () => {
-        validateInput(element);
+        try {
+          validateInput(element);
+        } catch (err) {
+          console.error(err);
+        }
       });
     });
   }

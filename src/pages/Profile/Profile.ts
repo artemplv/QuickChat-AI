@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Handlebars from 'handlebars';
 import Block from '../../modules/block';
 import Button from '../../components/Button';
@@ -14,13 +15,14 @@ import {
 } from '../../utils/handleUserDataButtons';
 
 import {
-  handleAvatarUpload,
-  resetAvatarForm,
-  submitAvatar,
-} from '../../utils/handleAvatar';
+  handleFileUpload,
+  resetFileForm,
+  submitFile,
+} from '../../utils/handleFilesUpload';
 
 import handleModal from '../../utils/handleModals';
-import submitForm from '../../utils/submitForm';
+import getFormData from '../../utils/getFormData';
+import sessionStorageAuth from '../../utils/sessionStorageAuth';
 
 import {
   validateInput,
@@ -34,8 +36,6 @@ import template from './template';
 
 const authApi = new AuthAPI();
 const usersApi = new UsersAPI();
-
-const host = 'https://ya-praktikum.tech';
 
 export default class Profile extends Block {
   public props: any;
@@ -52,24 +52,24 @@ export default class Profile extends Block {
       changeAvatarButton: new Button({
         className: 'change-avatar-button',
         htmlType: 'button',
-        children: 'Поменять<br>аватар',
+        children: 'Change<br>avatar',
       }),
       changeDataButton: new Button({
         className: 'profile-data__additional-button change-data-intention-button',
         htmlType: 'button',
-        children: 'Изменить данные',
+        children: 'Edit',
       }),
       changePasswordButton: new Button({
         className: 'profile-data__additional-button change-password-intention-button',
         htmlType: 'button',
-        children: 'Изменить пароль',
+        children: 'Change password',
       }),
       logoutButton: new Button({
         className: 'profile-data__additional-button logout-button',
         htmlType: 'button',
-        children: '<a class="button-link">Выйти</a>',
+        children: '<a class="button-link">Logout</a>',
       }),
-      props,
+      ...props,
     });
   }
 
@@ -78,9 +78,9 @@ export default class Profile extends Block {
     handleModal('uploadAvatarModal');
   }
 
-  async handleLogout(event: ClickEvent) {
+  handleLogout(event: ClickEvent) {
     event.preventDefault();
-    await authApi.logout();
+    sessionStorageAuth.logout();
     navigate('/login');
   }
 
@@ -89,12 +89,27 @@ export default class Profile extends Block {
     this.setProps({ userData: response.data || null });
   }
 
+  onLoginLogout() {
+    const self = this;
+
+    return async function () { // eslint-disable-line func-names
+      const currentUserId = sessionStorage.getItem('userId');
+
+      if (!currentUserId) {
+        self.setProps({ userData: null });
+        return;
+      }
+
+      self.getData();
+    };
+  }
+
   handleSubmitDetails() {
     const self = this;
 
     return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
-      const data = submitForm('userDetails');
+      const data = getFormData('userDetails');
 
       if (data) {
         try {
@@ -114,14 +129,23 @@ export default class Profile extends Block {
 
     return async function (event: ClickEvent) { // eslint-disable-line func-names
       event.preventDefault();
-      const data = submitAvatar();
+      const data = submitFile({
+        inputId: 'avatar',
+        modalId: 'uploadAvatarModal',
+        formId: 'avatarForm',
+      });
 
       if (data) {
+        self.setProps({ isLoading: true });
+
         try {
           const response: any = await usersApi.changeAvatar(data);
+
+          self.setProps({ isLoading: false });
+
           if (response.status === 200) {
             self.getData();
-            resetAvatarForm();
+            resetFileForm('uploadAvatarModal', 'avatarForm');
           }
         } catch (error) {
           console.error(error);
@@ -132,7 +156,7 @@ export default class Profile extends Block {
 
   async handleSubmitPassword(event: ClickEvent) {
     event.preventDefault();
-    const data = submitForm('userPassword');
+    const data = getFormData('userPassword');
 
     if (data) {
       try {
@@ -158,14 +182,18 @@ export default class Profile extends Block {
         removeError(element);
       });
       element.addEventListener('blur', () => {
-        validateInput(element);
+        try {
+          validateInput(element);
+        } catch (err) {
+          console.error(err);
+        }
       });
     });
 
     this.getContent().querySelector('#userDetails')?.addEventListener('submit', this.handleSubmitDetails());
     this.getContent().querySelector('#userPassword')?.addEventListener('submit', this.handleSubmitPassword);
 
-    this.getContent().querySelector('.avatar-upload-input')?.addEventListener('change', handleAvatarUpload);
+    this.getContent().querySelector('#avatar')?.addEventListener('change', handleFileUpload('uploadAvatarModal', 'avatar'));
     this.getContent().querySelector('#avatarForm')?.addEventListener('submit', this.handleSubmitAvatar());
 
     this.getContent().querySelector('.logout-button')?.addEventListener('click', this.handleLogout);
@@ -173,6 +201,8 @@ export default class Profile extends Block {
 
   componentDidMount() {
     this.getData();
+
+    window.addEventListener('sessionStorageUpdate', this.onLoginLogout());
   }
 
   componentDidRender() {
@@ -188,7 +218,8 @@ export default class Profile extends Block {
       logoutButton: this.props.logoutButton.render(),
       changeDataForm: UserDataForm(this.props.userData).render(),
       changePasswordForm: UserPasswordForm.render(),
-      avatarUrl: this.props.userData?.avatar ? `${host}${this.props.userData.avatar}` : '../images/media-icon-grey.svg',
+      avatarUrl: this.props.userData?.avatar,
+      loading: this.props.isLoading,
     });
   }
 }

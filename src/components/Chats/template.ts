@@ -1,19 +1,11 @@
-import Handlebars from 'handlebars';
-
-Handlebars.registerHelper('ifLessThanOne', (value: number | undefined): string => {
-  if (!value || value < 1) {
-    return 'hidden';
-  }
-  return '';
-});
-
 export default `
   <div class="chats">
+    
     <div class="chats_header">
       {{{ profileButton }}}
 
       <form id="searchForm" class="search-form">
-        <input name="search" type="text" class="search__input" placeholder="Поиск" />
+        <input name="search" type="text" class="search__input" placeholder="Search" />
       </form>
     </div>
 
@@ -25,36 +17,40 @@ export default `
 
       <ul class="chats-container__list">
         {{#each chatsList}}
-          <li class="chat-list-item" key={{ this.id }} onclick="navigate('/chat/{{ this.id }}')">
-            <div
-              class="avatar"
-              style="background-image: url({{ this.avatar }}"
-            ></div>
+          <li class="chat-list-item {{#if (areEqual this.id ../selectedChatId)}}selected{{/if}}"
+            key={{ this.id }}
+            onclick="navigate('/chats/{{ this.id }}')"
+          >
+            <div class="avatar" {{ addAvatar this.avatar }}></div>
+            
             <div class="chat-list-item__info">
               <div class="chat-list-item__name-container">
-                <h4 class="chat-list-item__name">{{ this.title }}</h4>
-                <p class="chat-list-item__last-message-time">{{ this.lastMessageTime }}</p>
+                <h4 class="chat-list-item__name">{{ this.name }}</h4>
+                <p class="chat-list-item__last-message-time">
+                  {{ formatDateTime this.lastMessage.createdAt }}
+                </p>
               </div>
 
               <div class="chat-list-item__last-message-container">
                 <p class="chat-list-item__last-message-text">
-                  <span
-                    class="last-message-from-user-label"
-                    {{#unless this.isLastMessageFromUser}}
-                      hidden
-                    {{/unless}}
-                  >
-                    Вы:&nbsp;
-                  </span>
-                  {{ this.lastMessageText }}
+                  {{#if (areEqual ../loggedUserId this.lastMessage.userId) }}
+                    <span class="last-message-from-user-label">
+                      You:&nbsp;
+                    </span>
+                  {{/if}}
+
+                  {{#if (areEqual this.lastMessage.contentType 'image')}}
+                    <i>Photo</i>
+                  {{else}}
+                    {{ this.lastMessage.content }}
+                  {{/if}}
                 </p>
-                <div
-                  class="chat-list-item__unread-message-count"
-                  {{#ifLessThanOne this.unreadMessagesCount}}
-                  {{/ifLessThanOne}}
-                >
-                  <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}<span>
-                </div>
+                
+                {{#unless (isLessThanOne this.unreadMessagesCount)}}
+                  <div class="chat-list-item__unread-message-count">
+                    <span class="chat-list-item__unread-message-count-number">{{ this.unreadMessagesCount }}</span>
+                  </div>
+                {{/unless}}
               </div>
             </div>
           </li>
@@ -64,18 +60,18 @@ export default `
 
     <div id="create-chat-modal" class="modal-wrapper">
       <form id="newChat" class="modal-body">
-        <h4 class="modal-body__name">Создать новый чат</h4>
+        <h4 class="modal-body__name">Create new chat</h4>
 
         <div class="form-field">
           <div class="form-field__control">
-            <input id="chat-add-title" name="title" type="text" class="form-field__input" placeholder=" "  />
-            <label for="chat-add-title" class="form-field__label">Название чата</label>
+            <input id="chat-add-title" name="name" type="text" class="form-field__input" placeholder=" "  />
+            <label for="chat-add-title" class="form-field__label">Chat name</label>
             <div class="form-field__bar"></div>
           </div>
         </div>
 
         <button type="submit" class="button button_main">
-          Создать
+          Create
         </button>
       </form>
     </div>

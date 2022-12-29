@@ -9,12 +9,12 @@ const UserPasswordForm = new Form({
   isHidden: true,
   mainContent: template,
   buttonOk: new Button({
-    children: 'Сохранить',
+    children: 'Save',
     className: 'button_main',
     htmlType: 'submit',
   }).render(),
   buttonCancel: new Button({
-    children: 'Отменить',
+    children: 'Cancel',
     className: 'button_additional cancel-password-change-button',
     htmlType: 'button',
   }).render(),

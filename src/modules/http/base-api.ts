@@ -1,4 +1,8 @@
 export default class BaseAPI {
+  token() {
+    return sessionStorage.getItem('token') || '';
+  }
+
   create() {
     throw new Error('Not implemented');
   }

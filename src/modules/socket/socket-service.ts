@@ -1,31 +1,31 @@
 type CallbackFunction = (event: any) => void;
 
 class WebSocketService {
-  userId: number;
-
-  chatId: number;
+  chatId: string;
 
   token: string;
 
   socket: WebSocket;
 
-  constructor(baseUrl: string, userId: number, chatId: number, token: string) {
-    this.userId = userId;
-    this.chatId = chatId;
-    this.token = token;
+  constructor(baseUrl: string) {
+    this.token = sessionStorage.getItem('token') || '';
 
-    this.socket = new WebSocket(`${baseUrl}/${userId}/${chatId}/${token}`);
+    this.socket = new WebSocket(`${baseUrl}?token=${this.token}`);
   }
 
-  subscribe = (eventType: string, callback: CallbackFunction): void => {
+  subscribe(eventType: string, callback: CallbackFunction): void {
     this.socket.addEventListener(eventType, (event) => {
       callback(event);
     });
-  };
+  }
 
-  send = (data: any) => {
+  send(data: any) {
     this.socket.send(JSON.stringify(data));
-  };
+  }
+
+  close() {
+    this.socket.close();
+  }
 }
 
 export default WebSocketService;

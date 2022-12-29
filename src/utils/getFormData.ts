@@ -3,7 +3,7 @@ import { validateInput } from './validation';
 /**
  * Отправка формы
  */
-export default function submitForm(formId: string): PlainObject | undefined {
+export default function getFormData(formId: string): PlainObject | undefined {
   const form: any = document.getElementById(formId);
 
   let hasError = false;

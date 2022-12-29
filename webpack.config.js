@@ -1,11 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+require('dotenv').config();
+
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,11 +23,17 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: 'dist',
+    static: {
+      directory: 'dist',
+    },
     compress: true,
     host: '0.0.0.0',
     historyApiFallback: true,
-    port: 3001
+    port: process.env.CLIENT_PORT || 3000,
+    client: {
+      logging: isProd ? 'error' : 'verbose',
+      overlay: isProd ? false : { errors: true, warnings: false },
+    },
   },
   module: {
     rules: [
@@ -66,12 +77,19 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.SERVER_HOST': JSON.stringify(process.env.SERVER_HOST),
+      'process.env.SOCKET_HOST': JSON.stringify(process.env.SOCKET_HOST),
+      'process.env.CLIENT_HOST': JSON.stringify(process.env.CLIENT_HOST),
+    }),
     new MiniCssExtractPlugin({
       filename: 'style-bundle.css',
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
+      base: process.env.CLIENT_HOST || 'http://localhost:3000/',
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -90,6 +108,6 @@ module.exports = {
     }),
     new ESLintPlugin({
       extensions: ['ts']
-    })
+    }),
   ]
 };

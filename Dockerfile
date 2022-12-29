@@ -1,14 +1,14 @@
-FROM node:12
+FROM node:14-alpine
 
-RUN mkdir -p /app
-WORKDIR /app
+WORKDIR /opt/messenger-web-app/
 
-COPY package.json /app
-COPY package-lock.json /app
-COPY . /app
-
-EXPOSE 3001
+COPY package.json package-lock.json /opt/messenger-web-app/
 
 RUN npm install
+
+COPY . /opt/messenger-web-app
+
+ARG CLIENT_PORT
+EXPOSE ${CLIENT_PORT}
 
 CMD ["npm", "run", "start"]

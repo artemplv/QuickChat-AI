@@ -2,16 +2,14 @@ import {
   HTTPTransport,
   BaseAPI,
 } from '../../modules/http';
+import config from '../../config/config';
 
-const host = 'https://ya-praktikum.tech';
-
-const authAPIInstance = new HTTPTransport(`${host}/api/v2/auth`);
+const authAPIInstance = new HTTPTransport(`${config.serverHost}/auth`);
 
 export default class AuthAPI extends BaseAPI {
   signup(data: PlainObject) {
     return authAPIInstance.post('/signup', {
       data,
-      withCredentials: true,
       headers: { 'content-type': 'application/json' },
     });
   }
@@ -19,20 +17,13 @@ export default class AuthAPI extends BaseAPI {
   signin(data: PlainObject) {
     return authAPIInstance.post('/signin', {
       data,
-      withCredentials: true,
       headers: { 'content-type': 'application/json' },
-    });
-  }
-
-  logout() {
-    return authAPIInstance.post('/logout', {
-      withCredentials: true,
     });
   }
 
   getUser() {
     return authAPIInstance.get('/user', {
-      withCredentials: true,
+      headers: { authorization: this.token() },
     });
   }
 }

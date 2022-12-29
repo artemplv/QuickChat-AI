@@ -18,11 +18,17 @@ export default class Route {
 
   private _props: Props;
 
-  constructor(pathname: string, view: ComponentConstructor, props: Props) {
+  private _pathParams: PlainObject;
+
+  public withAuth: boolean;
+
+  constructor(pathname: string, view: ComponentConstructor, props: Props, withAuth: boolean) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this._pathParams = {};
+    this.withAuth = withAuth;
   }
 
   setProps(props: PlainObject) {
@@ -47,8 +53,8 @@ export default class Route {
 
     const regexPath = `${this._pathname.replace(/([:*])(\w+)/g, (_full, _colon, name) => {
       paramNames.push(name);
-      return '([^/]+)';
-    })}(?:/|$)`;
+      return '?([^/]+)';
+    })}?(?:/|$)`;
 
     let pathParams;
 
@@ -61,6 +67,7 @@ export default class Route {
       }, <PlainObject>{});
 
       this.setProps(pathParams);
+      this._pathParams = pathParams;
       return true;
     }
 
@@ -74,6 +81,7 @@ export default class Route {
       return;
     }
 
+    this._block.setProps(this._pathParams);
     this._block.show();
   }
 }

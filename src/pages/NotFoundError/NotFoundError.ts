@@ -13,7 +13,7 @@ export default class NotFoundError extends Block {
     return Handlebars.compile(template)({
       button: new Button({
         className: 'button_additional',
-        children: '<a class="button-link">Назад к чатам</a>',
+        children: '<a class="button-link">Back to chats</a>',
         onClick: 'navigate(\'/chats\')',
       }).render(),
     });

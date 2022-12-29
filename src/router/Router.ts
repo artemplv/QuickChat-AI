@@ -33,8 +33,14 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: ComponentConstructor, blockProps: PlainObject = {}) {
-    const route = new Route(pathname, block, { ...blockProps, rootQuery: this._rootQuery });
+  // eslint-disable-next-line max-len
+  use(pathname: string, block: ComponentConstructor, blockProps: PlainObject = {}, withAuth = true) {
+    const route = new Route(
+      pathname,
+      block,
+      { ...blockProps, rootQuery: this._rootQuery },
+      withAuth,
+    );
     this.routes.push(route);
     return this;
   }
@@ -48,9 +54,18 @@ export default class Router {
   }
 
   _onRoute(pathname: string) { // eslint-disable-line consistent-return
+    if (pathname === '/') {
+      return this.go('/chats');
+    }
+
     const route = this.getRoute(pathname);
+
     if (!route) {
       return this.go('/404');
+    }
+
+    if (route.withAuth && !sessionStorage.getItem('token')) {
+      return this.go('/login');
     }
 
     if (this._currentRoute) {

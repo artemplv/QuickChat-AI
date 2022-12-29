@@ -23,11 +23,17 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: 'dist',
+    static: {
+      directory: 'dist',
+    },
     compress: true,
     host: '0.0.0.0',
     historyApiFallback: true,
     port: process.env.CLIENT_PORT || 3000,
+    client: {
+      logging: isProd ? 'error' : 'verbose',
+      overlay: isProd ? false : { errors: true, warnings: false },
+    },
   },
   module: {
     rules: [

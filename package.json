@@ -5,9 +5,9 @@
   "main": "./src/index.ts",
   "scripts": {
     "build": "webpack",
-    "start": "webpack && webpack serve --mode=development --progress",
+    "start": "webpack && webpack serve --progress",
     "test": "jest ./src",
-    "serve": "webpack serve --mode=development --progress",
+    "serve": "webpack serve --progress",
     "lint": "eslint ./src --ext .ts",
     "prepare": "husky install"
   },

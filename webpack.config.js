@@ -7,6 +7,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 require('dotenv').config();
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.ts',
@@ -25,7 +27,7 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     historyApiFallback: true,
-    port: process.env.CLIENT_PORT || 3000
+    port: process.env.CLIENT_PORT || 3000,
   },
   module: {
     rules: [
@@ -69,6 +71,12 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.SERVER_HOST': JSON.stringify(process.env.SERVER_HOST),
+      'process.env.SOCKET_HOST': JSON.stringify(process.env.SOCKET_HOST),
+      'process.env.CLIENT_HOST': JSON.stringify(process.env.CLIENT_HOST),
+    }),
     new MiniCssExtractPlugin({
       filename: 'style-bundle.css',
     }),
@@ -95,10 +103,5 @@ module.exports = {
     new ESLintPlugin({
       extensions: ['ts']
     }),
-    new webpack.DefinePlugin({
-      'process.env.SERVER_HOST': JSON.stringify(process.env.SERVER_HOST),
-      'process.env.SOCKET_HOST': JSON.stringify(process.env.SOCKET_HOST),
-      'process.env.CLIENT_HOST': JSON.stringify(process.env.CLIENT_HOST),
-    })
   ]
 };

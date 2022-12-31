@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-require('dotenv').config();
+require('dotenv').config({ path: './production.env' });
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -29,7 +29,7 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     historyApiFallback: true,
-    port: process.env.CLIENT_PORT || 3000,
+    port: process.env.PORT || 3000,
     client: {
       logging: isProd ? 'error' : 'verbose',
       overlay: isProd ? false : { errors: true, warnings: false },
@@ -78,7 +78,6 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.SERVER_HOST': JSON.stringify(process.env.SERVER_HOST),
       'process.env.SOCKET_HOST': JSON.stringify(process.env.SOCKET_HOST),
       'process.env.CLIENT_HOST': JSON.stringify(process.env.CLIENT_HOST),

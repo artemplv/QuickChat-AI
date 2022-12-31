@@ -8,7 +8,6 @@ RUN npm install
 
 COPY . /opt/messenger-web-app
 
-ARG CLIENT_PORT
-EXPOSE ${CLIENT_PORT}
+EXPOSE $PORT
 
 CMD ["npm", "run", "start"]

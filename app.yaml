@@ -1,0 +1,26 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static/assets/images
+  static_dir: dist/static/assets/images
+
+- url: /.*\.js$
+  static_files: dist/js-bundle.js
+  upload: dist/js-bundle.js
+
+- url: /.*\.css$
+  static_files: dist/style-bundle.css
+  upload: dist/style-bundle.css
+
+- url: /favicon.ico
+  static_files: dist/static/favicon.ico
+  upload: dist/static/favicon.ico
+
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /
+  static_dir: dist

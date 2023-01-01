@@ -1,5 +1,5 @@
 export default `
-  <div class="chats">
+  <div class="chats {{#if selectedChatId}}mobile-hidden{{/if}}">
     
     <div class="chats_header">
       {{{ profileButton }}}

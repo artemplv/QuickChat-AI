@@ -2,14 +2,20 @@
 
 @import './variables';
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0;
+  overflow: hidden;
 }
 
 %full-screen {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
 }
 
@@ -230,6 +236,7 @@ body {
 
 .chats {
   width: 310px;
+  min-width: 310px;
   height: 100%;
   background: $light-grey;
   border-right: 1px solid $border-color;
@@ -301,6 +308,7 @@ input.search__input {
 .avatar {
   width: 47px;
   height: 47px;
+  min-width: 47px;
   background: $background-grey;
   background-position: center;
   background-repeat: no-repeat;
@@ -327,6 +335,7 @@ input.search__input {
   display: flex;
   align-items: start;
   justify-content: space-between;
+  gap: 2px;
   margin-bottom: 5px;
 }
 
@@ -335,6 +344,9 @@ input.search__input {
   font-weight: 600;
   font-size: 13px;
   color: $main-text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .self-user-tag {
     font-size: 11px;
@@ -346,7 +358,9 @@ input.search__input {
   margin: 0;
   font-weight: 500;
   font-size: 9px;
+  text-align: right;
   color: $additional-text-color;
+  min-width: 55px;
 }
 
 .chat-list-item__last-message-container {
@@ -391,8 +405,8 @@ input.search__input {
 }
 
 .chat-feed-empty {
-  width: calc(100vw - 310px);
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -402,8 +416,8 @@ input.search__input {
 }
 
 .chat-block {
-  width: calc(100vw - 310px);
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -440,6 +454,10 @@ input.search__input {
     margin: 3px 0;
     font-size: 12px;
     white-space: pre-line;
+  }
+
+  &__image-content {
+    width: 100%;
   }
 
   &__timestamp {
@@ -596,9 +614,9 @@ input.search__input {
 }
 
 .profile-view {
-  min-width: 100vw;
-  min-height: 100vh;
-  overflow: visible;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 .go-back-section {
@@ -618,8 +636,8 @@ input.search__input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
 }
 
 .profile-data {
@@ -627,7 +645,9 @@ input.search__input {
   flex-direction: column;
   align-items: center;
   width: 510px;
-  padding: 10px;
+  max-width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
 }
 
 .change-avatar-button {
@@ -697,6 +717,12 @@ input.search__input {
     color: $additional-text-color;
     background: none;
     width: 100%;
+  }
+
+  &__input:disabled {
+    color: $additional-text-color;
+    -webkit-text-fill-color: $additional-text-color;
+    opacity: 1;
   }
 
   &__input-wrapper {
@@ -821,4 +847,46 @@ input.search__input {
 
 .busy {
   cursor: wait;
+}
+
+@media (max-width: 600px) {
+  .mobile-hidden {
+    display: none;
+  }
+  
+  .chats {
+    width: 100%;
+  }
+
+  .chat-feed-empty {
+    display: none;
+  }
+
+  .chat-block__info-row {
+    padding: 10px 5px;
+  }
+
+  .chat-block__create-message-row {
+    padding: 10px 2px;
+
+    .button {
+      padding: 1px 4px;
+    }
+  }
+
+  .message {
+    max-width: 70%;
+  }
+
+  .go-back-section {
+    display: none;
+  }
+
+  .profile-data__form-item {
+    flex-wrap: wrap;
+  }
+
+  .profile-data-form-field__input {
+    margin-top: 5px;
+  }
 }

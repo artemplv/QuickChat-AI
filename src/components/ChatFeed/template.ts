@@ -156,7 +156,7 @@ export default `
           <div class="file-container">
             <div class="upload-control">
               <label for="message-file" class="file-upload-label">Choose file</label>
-              <span class="file-upload__extra">(max 2 MB)</span>
+              <span class="file-upload__extra">(max 5 MB)</span>
               <input id="message-file" class="file-upload-input" name="image" type="file" accept=".jpg, .jpeg, .png">
             </div>
             <p class="file-name"></p>

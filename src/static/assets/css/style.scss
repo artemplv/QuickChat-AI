@@ -97,6 +97,7 @@ body {
   transition: all 0.3s;
   width: 100%;
   cursor: text;
+  pointer-events: none;
 }
 
 .form-field__control {

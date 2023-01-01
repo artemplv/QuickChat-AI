@@ -72,7 +72,7 @@ export default `
           "
         >
           {{#if (areEqual this.contentType 'image')}}
-            <img src={{ this.content }} />
+            <img src={{ this.content }} class="message__image-content" />
           {{else}}
             <p class="message__content">{{ this.content }}</p>
           {{/if}}

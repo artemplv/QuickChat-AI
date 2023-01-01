@@ -1,3 +1,5 @@
+import ReconnectingWebSocket from 'reconnecting-websocket';
+
 type CallbackFunction = (event: any) => void;
 
 class WebSocketService {
@@ -10,7 +12,7 @@ class WebSocketService {
   constructor(baseUrl: string) {
     this.token = sessionStorage.getItem('token') || '';
 
-    this.socket = new WebSocket(`${baseUrl}?token=${this.token}`);
+    this.socket = new ReconnectingWebSocket(`${baseUrl}?token=${this.token}`) as WebSocket;
   }
 
   subscribe(eventType: string, callback: CallbackFunction): void {

@@ -97,6 +97,7 @@ body {
   transition: all 0.3s;
   width: 100%;
   cursor: text;
+  pointer-events: none;
 }
 
 .form-field__control {
@@ -863,7 +864,7 @@ input.search__input {
   }
 
   .chat-block__info-row {
-    padding: 10px 5px;
+    padding: 10px 5px 10px 10px;
   }
 
   .chat-block__create-message-row {

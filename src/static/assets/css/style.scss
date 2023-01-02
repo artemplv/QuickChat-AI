@@ -272,8 +272,8 @@ input.search__input {
 
 .chats-container {
   height: auto;
-  max-height: calc(100vh - 100px);
-  overflow-y: scroll;
+  max-height: calc(100% - 100px);
+  overflow-y: auto;
 }
 
 .chats-container__list {
@@ -859,12 +859,20 @@ input.search__input {
     width: 100%;
   }
 
+  .chats-container__list {
+    margin-bottom: 40px;
+  }
+
   .chat-feed-empty {
     display: none;
   }
 
   .chat-block__info-row {
     padding: 10px 5px 10px 10px;
+  }
+
+  .chat-block__messages {
+    padding: 0 12px;
   }
 
   .chat-block__create-message-row {

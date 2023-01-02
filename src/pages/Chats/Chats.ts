@@ -70,6 +70,12 @@ export default class ChatsPage extends Block {
     if (this._state.chatId !== this.props.chatId) {
       this._state.chatId = this.props.chatId;
 
+      this.setProps({
+        chatTitle: '',
+        chatAvatar: null,
+        messages: [],
+      });
+
       if (this._state.chatId) {
         this.getChat();
         this._socket?.send({

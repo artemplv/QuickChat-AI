@@ -17,6 +17,7 @@ export default class ChatFeed extends Block {
       chatName: this.props?.chatName,
       avatarUrl: this.props?.chatAvatar,
       chatMembers: this.props?.chatMembers,
+      chatType: this.props?.chatType,
       loggedUserId: sessionStorage.getItem('userId'),
       messages: this.props?.messages,
       loading: this.props?.loading,
@@ -42,6 +43,14 @@ export default class ChatFeed extends Block {
         children: `
           <img src="static/assets/images/remove-icon.svg" class="image-inside-button" alt="remove user" width="22" height="22" />
           Remove user
+        `,
+      }).render(),
+      resetPromptButton: new Button({
+        id: 'resetPrompt',
+        className: 'button-with-image-and-text reset-prompt-button',
+        children: `
+          <img src="static/assets/images/remove-icon.svg" class="image-inside-button" alt="reset context" width="22" height="22" />
+          Reset context
         `,
       }).render(),
       deleteChatButton: new Button({

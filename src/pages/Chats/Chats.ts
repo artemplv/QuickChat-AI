@@ -170,6 +170,7 @@ export default class ChatsPage extends Block {
     this.setProps({
       chatTitle: response?.data?.name || 'Unknown',
       chatAvatar: response?.data?.avatar,
+      chatType: response?.data?.type,
     });
 
     const chatUsers = response?.data?.users;
@@ -288,6 +289,21 @@ export default class ChatsPage extends Block {
     };
   }
 
+  handleResetPrompt() {
+    const self = this;
+
+    return async function (event: ClickEvent) {
+      event.preventDefault();
+      if (self.props.chatId) {
+        try {
+          await chatsApi.resetPrompt(self.props.chatId);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+  }
+
   handleSendMessage() {
     const self = this;
 
@@ -374,6 +390,7 @@ export default class ChatsPage extends Block {
     this.getContent().querySelector('#addUser')?.addEventListener('submit', this.handleAddUser());
     this.getContent().querySelector('#removeUser')?.addEventListener('submit', this.handleRemoveUser());
     this.getContent().querySelector('#messageForm')?.addEventListener('submit', this.handleSendMessage());
+    this.getContent().querySelector('#resetPrompt')?.addEventListener('click', this.handleResetPrompt());
 
     // eslint-disable-next-line max-len
     this.getContent().querySelector('#message-file')?.addEventListener('change', handleFileUpload('upload-image-to-chat-modal', 'message-file'));
@@ -392,6 +409,7 @@ export default class ChatsPage extends Block {
         chatName: this.props.chatTitle,
         chatAvatar: this.props.chatAvatar,
         chatMembers: this.props.chatMembers,
+        chatType: this.props.chatType,
         messages: this.props.messages,
         disabled: this.props.messageInputDisabled,
         loading: this.props.isLoading,

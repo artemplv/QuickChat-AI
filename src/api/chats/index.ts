@@ -59,4 +59,10 @@ export default class ChatsAPI extends BaseAPI {
       headers: { authorization: this.token() },
     });
   }
+
+  resetPrompt(chatId: number | string) {
+    return chatsAPIInstance.delete(`/${chatId}/prompt`, {
+      headers: { 'content-type': 'application/json', authorization: this.token() },
+    });
+  }
 }

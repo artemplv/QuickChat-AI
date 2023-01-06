@@ -53,6 +53,11 @@ export default `
               <li>
                 {{{ deleteChatButton }}}
               </li>
+              {{#if (areEqual chatType 'ai') }}
+                <li>
+                  {{{ resetPromptButton }}}
+                </li>
+              {{/if}}
             </ul>
           </div>
         </div>

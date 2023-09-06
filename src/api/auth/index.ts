@@ -26,4 +26,8 @@ export default class AuthAPI extends BaseAPI {
       headers: { authorization: this.token() },
     });
   }
+
+  demo() {
+    return authAPIInstance.post('/demo');
+  }
 }

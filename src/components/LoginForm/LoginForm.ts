@@ -17,6 +17,11 @@ const LoginForm = new Form({
     className: 'button_additional',
     htmlType: 'button',
   }).render(),
+  buttonOkExtra: new Button({
+    children: 'Demo login',
+    className: 'button_main demo-login-button',
+    htmlType: 'button',
+  }).render(),
 });
 
 export default LoginForm;

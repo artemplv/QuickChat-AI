@@ -106,6 +106,11 @@ export default class HTTPTransport {
         } catch {
           responseData = xhr.response;
         }
+
+        if (xhr.status >= 400) {
+          reject(new Error(responseData.message || 'error'));
+        }
+
         resolve({
           status: xhr.status,
           data: responseData,

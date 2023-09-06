@@ -271,6 +271,7 @@ input.search__input {
 }
 
 .chats-container {
+  width: 100%;
   height: auto;
   max-height: calc(100% - 100px);
   overflow-y: auto;
@@ -852,6 +853,10 @@ input.search__input {
   button, input, textarea {
     pointer-events: none;
   }
+}
+
+.search-form {
+  display: none;
 }
 
 @media (max-width: 600px) {

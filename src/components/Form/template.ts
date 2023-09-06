@@ -15,6 +15,9 @@ export default `
     {{/if}}
   >
     {{{ buttonOk }}}
+    {{#if buttonOkExtra}}
+      {{{ buttonOkExtra }}}
+    {{/if}}
     {{{ buttonCancel }}}
   </div>
 </form>

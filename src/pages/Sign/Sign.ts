@@ -42,7 +42,7 @@ export default class SignPage extends Block {
 
           sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
 
-          self.setProps({ isLoading: true });
+          self.setProps({ isLoading: false });
           navigate('/chats');
         } catch (error) {
           console.error(error);
@@ -73,6 +73,8 @@ export default class SignPage extends Block {
           const response: any = await authApi.signup(data);
 
           sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
+
+          self.setProps({ isLoading: false });
           navigate('/chats');
         } catch (error) {
           console.error(error);
@@ -89,9 +91,37 @@ export default class SignPage extends Block {
     };
   }
 
+  handleDemoLogin() {
+    const self = this;
+
+    return async function () { // eslint-disable-line func-names
+      self.setProps({ isLoading: true });
+
+      try {
+        const response: any = await authApi.demo();
+
+        sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
+
+        self.setProps({ isLoading: false });
+        navigate('/chats');
+      } catch (error) {
+        console.error(error);
+
+        self.setProps({ isLoading: false });
+
+        const errorElem = document.querySelector('.signin-error span') as HTMLElement;
+        if (errorElem) {
+          removeError(errorElem);
+          makeError(errorElem, error.message);
+        }
+      }
+    };
+  }
+
   addListeners() {
     this.getContent().querySelector('#signInForm')?.addEventListener('submit', this.handleSubmitSignInForm());
     this.getContent().querySelector('#signUpForm')?.addEventListener('submit', this.handleSubmitSignUpForm());
+    this.getContent().querySelector('.demo-login-button')?.addEventListener('click', this.handleDemoLogin());
 
     this.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
       element.addEventListener('focus', () => {

@@ -1,8 +1,23 @@
+const githubLink = 'https://github.com/artemplv/messenger-web-app';
+const linkedinLink = 'https://www.linkedin.com/in/artemplv';
+
 export default `
   <div class="chats {{#if selectedChatId}}mobile-hidden{{/if}}">
     
     <div class="chats_header">
-      {{{ profileButton }}}
+      <div class="chats_header__links">
+
+        <div class="chats_header__public-links">
+          <a class="button-link" href=${githubLink} target="_blank">
+            <img src="static/assets/images/github-icon.svg" alt="github logo" />
+          </a>
+          <a class="button-link" href=${linkedinLink} target="_blank">
+            <img src="static/assets/images/linkedin-icon.svg" alt="linkedIn logo" />
+          </a>
+        </div>
+
+        {{{ profileButton }}}
+      </div>
 
       <form id="searchForm" class="search-form">
         <input name="search" type="text" class="search__input" placeholder="Search" />

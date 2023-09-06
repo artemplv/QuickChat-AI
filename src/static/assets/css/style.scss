@@ -189,8 +189,6 @@ body {
   &.profile-button {
     font-size: 12px;
     color: $additional-text-color;
-    float: right;
-    margin-bottom: 15px;
   }
 
   &.button-with-image-and-text {
@@ -247,6 +245,27 @@ body {
 .chats_header {
   margin-bottom: 15px;
   padding: 20px 10px 0 10px;
+}
+
+.chats_header__links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.chats_header__public-links {
+  a {
+    text-decoration: none;
+    &:not(:last-child) {
+      margin-right: 5px;
+    }  
+  }
+
+  img {
+    width: 18px;
+    height: auto;
+  }
 }
 
 .search__input {

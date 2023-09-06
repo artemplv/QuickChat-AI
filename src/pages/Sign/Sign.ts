@@ -26,55 +26,72 @@ export default class SignPage extends Block {
     super('div', props);
   }
 
-  async handleSubmitSignInForm(event: ClickEvent) {
-    event.preventDefault();
-    const data = getFormData('signInForm');
+  handleSubmitSignInForm() {
+    const self = this;
 
-    if (data) {
-      try {
-        const response: any = await authApi.signin(data);
-        if (response.status === 200) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
+      event.preventDefault();
+
+      const data = getFormData('signInForm');
+
+      if (data) {
+        self.setProps({ isLoading: true });
+
+        try {
+          const response: any = await authApi.signin(data);
+
           sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
+
+          self.setProps({ isLoading: true });
           navigate('/chats');
-        } else {
+        } catch (error) {
+          console.error(error);
+
+          self.setProps({ isLoading: false });
+
           const errorElem = document.querySelector('.signin-error span') as HTMLElement;
           if (errorElem) {
             removeError(errorElem);
-            makeError(errorElem, response.data.message);
+            makeError(errorElem, error.message);
           }
         }
-      } catch (error) {
-        console.error(error);
       }
-    }
+    };
   }
 
-  async handleSubmitSignUpForm(event: ClickEvent) {
-    event.preventDefault();
-    const data = getFormData('signUpForm');
+  handleSubmitSignUpForm() {
+    const self = this;
 
-    if (data) {
-      try {
-        const response: any = await authApi.signup(data);
-        if (response.status === 200) {
+    return async function (event: ClickEvent) { // eslint-disable-line func-names
+      event.preventDefault();
+      const data = getFormData('signUpForm');
+
+      if (data) {
+        self.setProps({ isLoading: true });
+
+        try {
+          const response: any = await authApi.signup(data);
+
           sessionStorageAuth.login(response.data.accessToken, response.data.user.id);
           navigate('/chats');
-        } else {
+        } catch (error) {
+          console.error(error);
+
+          self.setProps({ isLoading: false });
+
           const errorElem = document.querySelector('.signup-error span') as HTMLElement;
           if (errorElem) {
             removeError(errorElem);
-            makeError(errorElem, response.data.message);
+            makeError(errorElem, error.message);
           }
         }
-      } catch (error) {
-        console.error(error);
       }
-    }
+    };
   }
 
   addListeners() {
-    this.getContent().querySelector('#signInForm')?.addEventListener('submit', this.handleSubmitSignInForm);
-    this.getContent().querySelector('#signUpForm')?.addEventListener('submit', this.handleSubmitSignUpForm);
+    this.getContent().querySelector('#signInForm')?.addEventListener('submit', this.handleSubmitSignInForm());
+    this.getContent().querySelector('#signUpForm')?.addEventListener('submit', this.handleSubmitSignUpForm());
 
     this.getContent().querySelectorAll('input').forEach((element: HTMLInputElement) => {
       element.addEventListener('focus', () => {
@@ -98,6 +115,7 @@ export default class SignPage extends Block {
   render() {
     return Handlebars.compile(template)({
       form: this.props?.form?.render(),
+      isLoading: this.props?.isLoading,
     });
   }
 }

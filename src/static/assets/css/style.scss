@@ -848,6 +848,10 @@ input.search__input {
 
 .busy {
   cursor: wait;
+
+  button, input, textarea {
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 600px) {

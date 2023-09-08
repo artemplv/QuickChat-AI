@@ -89,7 +89,7 @@ class EventBus {
 }
 ```
 
-## Block
+### Block
 
 `Block` class is a base class from which all components inherit. It's similar to React's Component class.  
 Here is an example of how some lifecycle methods are implemented.

@@ -1,31 +1,34 @@
-# Web messenger
+# Messenger Web App
 
-Web messenger SPA using NodeJS and TypeScript. No frameworks. Components lifecycle and routing are implemented using vanilla JS.
+The project is live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
 
-The stack uses HTML, SCSS and TypeScript.
+
+## Description
+
+A messaging application.
+
+## Technology
+
+It's a single-page application using no frameworks on the frontend. Component's lifecycle and routing are implemented using vanilla JS.
+
+The stack uses TypeScript, Node.js, Express.js, Handlebars, and SCSS.
 
 Jest and Sinon are used for testing.
 
-
-The whole project is live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev). It is equipped with live messages and a chatbot by OpenAI.
-
 Backend for the app is at [messenger-back](https://github.com/artemplv/messenger-back)
 
+## Features
 
-Getting started
----------------
+### User Authentication
 
-Firstly install required packages. Run in root directory:
-```
-npm install
-```
-Then
-```
-npm run start
-```
-The app will be running at [http://localhost:3000](http://localhost:3000).
+<img width="600" alt="user sign in view" src="https://github.com/artemplv/messenger-web-app/assets/48654322/f2e0ced4-f266-494b-9d0d-990f1c5d9e93">
 
-In order to launch tests:
-```
-npm run test
-```
+### Media in chats
+In live chats, users can send pictures from their desktops and mobiles.
+
+![media-chats](https://github.com/artemplv/messenger-web-app/assets/48654322/c5d94866-e727-4cde-8e71-8c2ee129a7bc)
+
+### AI chatbot
+Users can utilize a chatbot that is created using OpenAI API. In those chats, context is also used so users can have comprehensive conversations. Users can also reset the context.
+
+![ai-chat](https://github.com/artemplv/messenger-web-app/assets/48654322/b0c36b01-fdaa-4e90-8fe9-bf363d4052c3)

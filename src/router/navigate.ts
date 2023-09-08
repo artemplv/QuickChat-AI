@@ -9,7 +9,7 @@ export function navigate(path: string) { // eslint-disable-line import/prefer-de
 
 declare global {
   interface Window {
-    navigate: any;
+    navigate: typeof navigate;
   }
 }
 

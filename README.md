@@ -34,7 +34,7 @@ The AI chatbot is implemented using `OpenAI API`.
 
 ### AI chatbot
 Users can communicate with a chatbot that is created using OpenAI API. In those chats, context is also used, so users can have a comprehensive conversation experience. Users are able to reset the context.  
-**Note:** Chatbot "lives" in the app as another user and can be invited to any chat by its username (AI Friend).
+**Note:** Chatbot "lives" in the app as another user and can be invited to any chat by its username (ai_friend).
 
 ![ai-chat](https://github.com/artemplv/messenger-web-app/assets/48654322/b0c36b01-fdaa-4e90-8fe9-bf363d4052c3)
 

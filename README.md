@@ -2,10 +2,9 @@
 
 The project is live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
 
-
 ## Description
 
-A messaging application with real-time group chats and AI chatbot inside.
+A messaging application with real-time group chats and an AI chatbot inside.
 
 ## Technology
 
@@ -32,7 +31,7 @@ The AI chatbot is implemented using `OpenAI API`.
 ## Features
 
 ### AI chatbot
-Users can utilize a chatbot that is created using OpenAI API. In those chats, context is also used so users can have comprehensive conversations. However, users are able to reset the context.
+Users can communicate with a chatbot that is created using OpenAI API. In those chats, context is also used, so users can have comprehensive conversations. However, users are able to reset the context.
 
 ![ai-chat](https://github.com/artemplv/messenger-web-app/assets/48654322/b0c36b01-fdaa-4e90-8fe9-bf363d4052c3)
 

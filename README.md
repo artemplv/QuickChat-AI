@@ -5,7 +5,7 @@ The project is live and available at [messenger-app.artemplv.dev](https://messen
 
 ## Description
 
-A messaging application.
+A messaging application with an AI chatbot inside.
 
 ## Technology
 

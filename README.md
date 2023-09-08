@@ -17,7 +17,7 @@ It's a minimum-dependency single-page application using no framework on the fron
 `Handlebars` library is used for HTML templates and `Sass` preprocessor is used for styling.
 
 ### Node, Express, MongoDB
-`Express.js` is used to serve information to the frontend. Data is stored and manipulated with `MongoDB` and `Mongoose`.  
+`Express.js` is used to implement the API server. Data is stored and manipulated with `MongoDB` and `Mongoose`.  
 Cloudinary services are utilized to handle media attachments.
 
 The backend runs in `Node.js` environment, the source code is at [messenger-back](https://github.com/artemplv/messenger-back).

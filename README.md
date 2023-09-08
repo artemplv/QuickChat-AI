@@ -1,7 +1,6 @@
 # Messenger Web App
 
-This project is created for educational purposes, to better understand how JavaScript frontend frameworks work and how they are implemented under the hood.
-
+This project is created for educational purposes, to better understand how JavaScript frontend frameworks function and how they are implemented under the hood.
 
 It's live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
 
@@ -35,7 +34,7 @@ The AI chatbot is implemented using `OpenAI API`.
 
 ### AI chatbot
 Users can communicate with a chatbot that is created using OpenAI API. In those chats, context is also used, so users can have a comprehensive conversation experience. Users are able to reset the context.  
-Chatbot "lives" in the app as another user and can be invited to any chat by username (AI Friend).
+**Note:** Chatbot "lives" in the app as another user and can be invited to any chat by its username (AI Friend).
 
 ![ai-chat](https://github.com/artemplv/messenger-web-app/assets/48654322/b0c36b01-fdaa-4e90-8fe9-bf363d4052c3)
 
@@ -53,7 +52,7 @@ Users can sign up for an account that is secured with password encryption.
 
 ### Event Bus
 
-Here is how the `event bus` design pattern is implemented. It is then utilized to create a component's lifecycle.
+Here is how the `event bus` pattern is implemented. It is then utilized to create a component's lifecycle.
 
 ```TypeScript
 class EventBus {

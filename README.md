@@ -43,7 +43,12 @@ In live chats, users can send pictures from their desktops and mobiles.
 
 ![media-chats](https://github.com/artemplv/messenger-web-app/assets/48654322/c5d94866-e727-4cde-8e71-8c2ee129a7bc)
 
-### User Authentication
+### Full mobile support
+The app is seamlessly accessible and user-friendly on smartphones.
+
+![mobile](https://github.com/artemplv/messenger-web-app/assets/48654322/17b59d1f-5a34-48db-b983-ce2e23a4fe19)
+
+### User authentication
 Users can sign up for an account that is secured with password encryption.
 
 <img width="600" alt="user sign in view" src="https://github.com/artemplv/messenger-web-app/assets/48654322/f2e0ced4-f266-494b-9d0d-990f1c5d9e93">

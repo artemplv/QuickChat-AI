@@ -1,6 +1,9 @@
 # Messenger Web App
 
-The project is live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
+This project is created for educational purposes, to better understand how JavaScript frontend frameworks work and how they are implemented under the hood.
+
+
+It's live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
 
 ## Description
 

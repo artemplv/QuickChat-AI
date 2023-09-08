@@ -15,7 +15,7 @@ The stack uses TypeScript, Node.js, Express.js, Handlebars, and SCSS.
 
 Jest and Sinon are used for testing.
 
-Backend for the app is at [messenger-back](https://github.com/artemplv/messenger-back)
+Backend for the app is at [messenger-back](https://github.com/artemplv/messenger-back).
 
 ## Features
 

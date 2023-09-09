@@ -1,4 +1,4 @@
-# Messenger Web App
+# QuickChat AI
 
 This project is created for educational purposes, to get a deeper understanding of how JavaScript frontend frameworks function and how they are implemented under the hood.
 
@@ -6,7 +6,7 @@ It's live and available at [messenger-app.artemplv.dev](https://messenger-app.ar
 
 ## Description
 
-A messaging application with real-time group chats and an AI chatbot inside.
+QuickChat AI is a messaging application with real-time group chats and an AI chatbot inside.
 
 ## Technology
 

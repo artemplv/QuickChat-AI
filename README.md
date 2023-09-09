@@ -1,6 +1,6 @@
 # Messenger Web App
 
-This project is created for educational purposes, to better understand how JavaScript frontend frameworks function and how they are implemented under the hood.
+This project is created for educational purposes, to get a deeper understanding of how JavaScript frontend frameworks function and how they are implemented under the hood.
 
 It's live and available at [messenger-app.artemplv.dev](https://messenger-app.artemplv.dev).
 
@@ -34,12 +34,12 @@ The AI chatbot is implemented using `OpenAI API`.
 
 ### AI chatbot
 Users can communicate with a chatbot that is created using OpenAI API. In those chats, context is also used, so users can have a comprehensive conversation experience. Users are able to reset the context.  
-**Note:** Chatbot "lives" in the app as another user and can be invited to any chat by its username (ai_friend).
+**Note:** Chatbot "lives" in the app as another user and can be invited to any chat by its username.
 
 ![ai-chat](https://github.com/artemplv/messenger-web-app/assets/48654322/b0c36b01-fdaa-4e90-8fe9-bf363d4052c3)
 
 ### Media in chats
-In live chats, users can send pictures from their desktops and mobiles.
+Users can send pictures from their devices.
 
 ![media-chats](https://github.com/artemplv/messenger-web-app/assets/48654322/c5d94866-e727-4cde-8e71-8c2ee129a7bc)
 
@@ -139,7 +139,7 @@ class Block {
 
 ### Components
 
-This is an example of how lifecycle is used in components. Here's what happens:
+This is an example of how lifecycle methods are used in components. Here's what happens:
 - After `ChatsPage` component is mounted, it fetches chats information and establishes a websocket connection with a server.
 - After the component is rendered, event listeners are attached to specific elements.
 - When the component's props change, the `componentDidUpdate` method is triggered. In this case, it executes some logic when a user switches chats. It returns `true` to trigger the component to rerender after an update.

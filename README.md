@@ -99,7 +99,7 @@ class EventBus {
 
 ### Block
 
-`Block` class is a base class from which all components inherit. It's similar to React's Component class.  
+`Block` is a base class from which all components inherit. It's similar to React's Component class.  
 Here is an example of how some lifecycle methods are implemented.
 
 ```TypeScript
@@ -108,8 +108,8 @@ class Block {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_RENDER: 'flow:render',
-    FLOW_CDU: 'flow:component-did-update',
     FLOW_CDR: 'flow:component-did-render',
+    FLOW_CDU: 'flow:component-did-update',
   };
 
   ...
@@ -174,4 +174,32 @@ class ChatsPage extends Block {
     return true;
   }
   ...
+```
+
+### Router
+A custom client router is implemented in the app. For example, this is how route changes and redirections are handled.
+
+```TypeScript
+_onRoute(pathname: string) {
+  if (pathname === '/') {
+    return this.go('/chats');
+  }
+
+  const route = this.getRoute(pathname);
+
+  if (!route) {
+    return this.go('/404');
+  }
+
+  if (route.withAuth && !sessionStorage.getItem('token')) {
+    return this.go('/login');
+  }
+
+  if (this._currentRoute) {
+    this._currentRoute.leave();
+  }
+
+  this._currentRoute = route;
+  route.render();
+}
 ```

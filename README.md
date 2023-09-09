@@ -19,7 +19,7 @@ It's a minimum-dependency single-page application using no framework on the fron
 `Express.js` is used to implement the API server. Data is stored and manipulated with `MongoDB` and `Mongoose`.  
 Cloudinary services are utilized to handle media attachments.
 
-The backend runs in `Node.js` environment, the source code is at [messenger-back](https://github.com/artemplv/messenger-back).
+The backend runs in `Node.js` environment, the source code is at [quickchat-api](https://github.com/artemplv/quickchat-api).
 
 ### OpenAI API
 

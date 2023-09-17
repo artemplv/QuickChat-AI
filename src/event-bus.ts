@@ -15,7 +15,7 @@ export default class EventBus {
 
   off(event: string, callback: Function): void { // eslint-disable-line @typescript-eslint/ban-types
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      throw new Error(`Missing event: ${event}`);
     }
 
     this.listeners[event] = this.listeners[event].filter(
@@ -25,7 +25,7 @@ export default class EventBus {
 
   emit(event: string, ...args: any): void {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      throw new Error(`Missing event: ${event}`);
     }
 
     this.listeners[event].forEach((listener) => {

@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-len
-const moveArrayElement = (srcArray: any[], fromIndex: number, toIndex: number): any[] | undefined => {
+const moveArrayElement = (srcArray: any[], fromIndex: number, toIndex: number): any[] | null => {
   if (fromIndex < 0) {
-    return undefined;
+    return null;
   }
 
   const arrayCopy = [...srcArray];

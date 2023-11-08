@@ -1,4 +1,4 @@
-const githubLink = 'https://github.com/artemplv/messenger-web-app';
+const githubLink = 'https://github.com/artemplv/QuickChat-AI';
 const linkedinLink = 'https://www.linkedin.com/in/artemplv';
 
 export default `

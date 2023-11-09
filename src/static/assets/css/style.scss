@@ -238,6 +238,8 @@ body {
 
 
 .chats {
+  display: flex;
+  flex-direction: column;
   width: 310px;
   min-width: 310px;
   height: 100%;
@@ -296,7 +298,6 @@ input.search__input {
 .chats-container {
   width: 100%;
   height: auto;
-  max-height: calc(100% - 100px);
   overflow-y: auto;
 }
 

@@ -13,7 +13,7 @@ const RegisterForm = new Form({
   }).render(),
   buttonCancel: new Button({
     onClick: 'navigate(\'/login\')',
-    children: '<a class="button-link">Sign in</a>',
+    children: '<a class="button-link">Have an account?</a>',
     className: 'button_additional',
     htmlType: 'button',
   }).render(),

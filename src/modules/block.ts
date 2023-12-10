@@ -129,7 +129,9 @@ export default class Block {
   }
 
   _createDocumentElement(tagName: string): HTMLElement {
-    return document.createElement(tagName);
+    const element = document.createElement(tagName);
+    element.className = 'fragment';
+    return element;
   }
 
   show(): void {
